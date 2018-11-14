@@ -6,6 +6,11 @@ public class StageScene : SceneBase {
 
     public StageScene()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         Debug.Log("ステージシーン誕生！");
     }
 

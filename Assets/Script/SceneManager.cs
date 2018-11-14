@@ -6,6 +6,14 @@ public class SceneManager : MonoBehaviour {
 
     private SceneBase current_scene_;
 
+    public void Update()
+    {
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    NextScene(SceneList.StageScene,null);
+        //}
+    }
+
     private void Init()
     {
 
