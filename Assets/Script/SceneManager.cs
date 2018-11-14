@@ -11,19 +11,21 @@ public class SceneManager : MonoBehaviour {
 
     }
 
-    public void NextScene(string scene_name,object scene_params)
+    public void NextScene(string scene_name, object scene_params)
     {
-        return;
+        RemoveScene(current_scene_);
+        AddScene(scene_name, scene_params);
     }
 
     private void AddScene(string scene_name, object scene_params)
     {
-        return;
+        string className_ = scene_name;
+        System.Type type_ = System.Type.GetType(className_);
+        current_scene_ = (SceneBase)System.Activator.CreateInstance(type_);
     }
 
-    private void RemoveScene(string scene_name)
+    private void RemoveScene(SceneBase scene_)
     {
-        return;
+        current_scene_ = null;
     }
-
 }
