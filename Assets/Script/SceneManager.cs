@@ -12,6 +12,7 @@ public class SceneManager : MonoBehaviour {
 
     private void Start()
     {
+        //ディクショナリ登録
         scene_[SceneList.TitleScene] = title_scene;
         scene_[SceneList.StageSelectScene] = stage_scene;
         scene_[SceneList.StageScene] = stage_select_scene;
@@ -21,7 +22,7 @@ public class SceneManager : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            NextScene(SceneList.StageScene, null);
+            NextScene(SceneList.TitleScene, null);
         }
     }
 
