@@ -19,4 +19,11 @@ public class StateBase : MonoBehaviour {
     {
         Debug.Log(this + "が生成された");
     }
+
+    //フィニッシュステートでの処理時等にシーン遷移を実行
+    protected void ChangeScene(string scene_name)
+    {
+        scene_.scene_manager.NextScene(scene_name, null);
+        Destroy(this.gameObject);
+    }
 }

@@ -14,8 +14,11 @@ public class SceneManager : MonoBehaviour {
     {
         //ディクショナリ登録
         scene_[SceneList.TitleScene] = title_scene;
-        scene_[SceneList.StageSelectScene] = stage_scene;
-        scene_[SceneList.StageScene] = stage_select_scene;
+        scene_[SceneList.StageSelectScene] = stage_select_scene;
+        scene_[SceneList.StageScene] = stage_scene;
+        scene_[SceneList.TitleScene].scene_manager = this;
+        scene_[SceneList.StageSelectScene].scene_manager = this;
+        scene_[SceneList.StageScene].scene_manager = this;
     }
 
     public void Update()

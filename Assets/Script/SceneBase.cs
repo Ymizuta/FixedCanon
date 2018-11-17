@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SceneBase : MonoBehaviour {
 
+    public SceneManager scene_manager;
     protected Dictionary<string, StateBase> state_ = new Dictionary<string, StateBase>();
     private StateBase current_state_;
 
@@ -33,4 +34,5 @@ public class SceneBase : MonoBehaviour {
     {
 
     }
+
 }

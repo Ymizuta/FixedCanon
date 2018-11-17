@@ -51,3 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55805241f4205854a9607b2689c39b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene_manager: {fileID: 0}
+  stage_select_init_state_: {fileID: 114501277286370522, guid: dca32a04adb4faf4394a7bfe16f99771,
+    type: 2}
+  stage_select_main_state_: {fileID: 114280413245089638, guid: 23830a65ba6e5b348ad87d505fe60a0e,
+    type: 2}
+  stage_select_finish_state_: {fileID: 114606663871388516, guid: 7866ecaaf8756fd449272e85e7919c7a,
+    type: 2}
