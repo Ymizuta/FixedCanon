@@ -5,13 +5,16 @@ using UnityEngine;
 public abstract class SceneBase : MonoBehaviour {
 
     /// <summary>
-    /// ドライバモジュール
+    /// テスト用ドライバモジュール
     /// </summary>
 
-    private StateBase current_state_;
+    protected StateBase current_state_;
 
     private void Init()
     {
 
     }
+
+    public abstract void ChangeState();
+
 }

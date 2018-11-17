@@ -24,7 +24,10 @@ public class StageMainState : StateBase {
             shooter_.Shoot(player_params_.LoadedBullet);
             //弾数減少
             player_params_.ReduceBullet();
-            //弾数確認
+            //弾数カウント（UIへの反映）
+            Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
+                + player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
+            //ゲームオーバー判定（すべての残弾０）
             bullet_counter_.BulletCount(player_params_);
         }
 

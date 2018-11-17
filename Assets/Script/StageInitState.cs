@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class StageInitState : StateBase {
 
-    SceneBase scene_;
+    /// <summary>
+    /// テスト用スタブモジュール
+    /// </summary>
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            scene_.ChangeState();
+        }
+    }
 
 }
