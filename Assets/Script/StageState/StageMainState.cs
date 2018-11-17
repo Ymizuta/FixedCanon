@@ -6,11 +6,12 @@ public class StageMainState : StateBase {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Init();
+        scene_.ChangeState(StateList.StageFinishState);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

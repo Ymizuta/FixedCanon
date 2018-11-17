@@ -11,9 +11,17 @@ public class StageScene : SceneBase {
     /// [finish_state]クリア→次のステージへ　ゲームオーバー→リトライORステージセレクトへ　　
     /// </summary>
 
+    [SerializeField] StateBase stage_init_state_ = null;
+    [SerializeField] StateBase stage_main_state_ = null;
+    [SerializeField] StateBase stage_finish_state_ = null;
+
     private void Start()
     {
         Debug.Log("ステージシーンを生成");
+        state_[StateList.StageInitState] = stage_init_state_;
+        state_[StateList.StageMainState] = stage_main_state_;
+        state_[StateList.StageFinishState] = stage_finish_state_;
+        ChangeState(StateList.StageInitState);
     }
 
 

@@ -6,11 +6,12 @@ public class StageFinishState : StateBase {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        Init();
+        Debug.Log("最後の処理まで完了");
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
