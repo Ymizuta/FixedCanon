@@ -25,7 +25,7 @@ public class StageInitState : StateBase {
 
     private void ChangeState()
     {
-        scene_.ChangeState(StateList.StageMainState);
+        //scene_.ChangeState(StateList.StageMainState);
     }
 
 }

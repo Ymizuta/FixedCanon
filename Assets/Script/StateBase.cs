@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleScene : SceneBase {
+public class StateBase : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
