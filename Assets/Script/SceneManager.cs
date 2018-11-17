@@ -8,10 +8,10 @@ public class SceneManager : MonoBehaviour {
 
     public void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    NextScene(SceneList.StageScene,null);
-        //}
+        if (Input.GetMouseButtonDown(0))
+        {
+            NextScene(SceneList.StageScene, null);
+        }
     }
 
     private void Init()
