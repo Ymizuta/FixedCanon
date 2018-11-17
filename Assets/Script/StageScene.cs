@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class StageScene : SceneBase {
 
-    public StageScene()
+    private void Start()
     {
-        Init();
+        Debug.Log("ステージシーンを生成");
     }
 
-    private void Init()
-    {
-        Debug.Log("ステージシーン誕生！");
-    }
 
 }
