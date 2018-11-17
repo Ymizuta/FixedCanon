@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class StageMainState : StateBase {
 
-    [SerializeField] PlayerParams player_params_;
-    [SerializeField] Shooter shooter_;
-    [SerializeField] BulletChanger bullet_changer_;
-    [SerializeField] BulletCounter bullet_counter_;
-    [SerializeField] CanonMove canon_move_;
+    [SerializeField] GameObject player_ = null; 
+    [SerializeField] PlayerParams player_params_ = null;
+    [SerializeField] Shooter shooter_ = null;
+    [SerializeField] BulletChanger bullet_changer_ = null;
+    [SerializeField] BulletCounter bullet_counter_ = null;
+    [SerializeField] CanonMove canon_move_ = null;
+    private GameObject player_clone_;
 
     private void Start()
     {
+        //プレイヤー初期化
+        player_clone_ = Instantiate(player_);
+        player_params_ = player_clone_.GetComponent<PlayerParams>();
+        shooter_ = player_clone_.GetComponent<Shooter>();
+        bullet_changer_ = player_clone_.GetComponent<BulletChanger>();
+        bullet_counter_= player_clone_.GetComponent<BulletCounter>();
+        canon_move_ = player_clone_.GetComponent<CanonMove>();
     }
 
     private void Update()
@@ -31,6 +40,8 @@ public class StageMainState : StateBase {
             if (bullet_counter_.BulletCount(player_params_))
             {
                 Debug.Log("GameOver");
+                //ステート移行
+                scene_.ChangeState(StateList.StageFinishState);
             }
         }
 

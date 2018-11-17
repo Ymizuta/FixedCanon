@@ -8,23 +8,23 @@ public class StageScene : SceneBase {
     /// テスト用ドライバモジュール
     /// </summary>
 
-    [SerializeField] StateBase init_state_;
-    [SerializeField] StateBase main_state_;
-    [SerializeField] StateBase finish_state_;
+    /// <summary>
+    ///各ステートの役割は下記の通り。
+    /// [init_state]ゲームスタート表示・オブジェクトの設置（プレイヤー、ターゲット等）・各種パラメータ設定
+    /// [main_state]ゲームプレイ
+    /// [finish_state]クリア→次のステージへ　ゲームオーバー→リトライORステージセレクトへ　　
+    /// </summary>
+
+    [SerializeField] StateBase stage_init_state_ = null;
+    [SerializeField] StateBase stage_main_state_ = null;
+    [SerializeField] StateBase stage_finish_state_ = null;
 
     private void Start()
     {
-        current_state_ = Instantiate(init_state_);
-        //current_state_ = gameObject.AddComponent<StageInitState>();
-        current_state_.scene_ = this;
-    }
-
-    public override void ChangeState()
-    {
-        Debug.Log("チェンジ");
-        GameObject.Destroy(current_state_.gameObject);
-        current_state_ = null;
-        current_state_ = Instantiate(main_state_);
-        //current_state_ = gameObject.AddComponent<StageMainState>();
+        Debug.Log("ステージシーンを生成");
+        state_[StateList.StageInitState] = stage_init_state_;
+        state_[StateList.StageMainState] = stage_main_state_;
+        state_[StateList.StageFinishState] = stage_finish_state_;
+        ChangeState(StateList.StageInitState);
     }
 }

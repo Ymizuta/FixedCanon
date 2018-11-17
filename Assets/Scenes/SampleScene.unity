@@ -264,6 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1711516099}
+  - component: {fileID: 1711516100}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -284,51 +285,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1812533187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1812533189}
-  - component: {fileID: 1812533194}
-  m_Layer: 0
-  m_Name: StageScene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1812533189
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1812533187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1812533194
+--- !u!114 &1711516100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1812533187}
+  m_GameObject: {fileID: 1711516098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 858e4178ef92c5d47a6b293ad220c8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bd9f1230c39f6d4e895809c472040c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  init_state_: {fileID: 114323992126705586, guid: 4a0a37b272e0cfc448cd64b6626909b5,
+  title_scene: {fileID: 114217981484686740, guid: b799511f092287f42812906b22b90fc2,
     type: 2}
-  main_state_: {fileID: 114226710454275398, guid: 4ddc115c2be59fd41894fac686e9e5b5,
+  stage_scene: {fileID: 114773743353354486, guid: 300e4d556f7409743acc0e2685b69314,
     type: 2}
-  finish_state_: {fileID: 114640349977227434, guid: a1a7d1f4c936fc843a8607e485ecbe2e,
+  stage_select_scene: {fileID: 114574361885948770, guid: 8a362487abcfd954e89e96c1f1ba620f,
     type: 2}
 --- !u!1 &2022706421
 GameObject:

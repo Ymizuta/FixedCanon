@@ -4,11 +4,58 @@ using UnityEngine;
 
 public class SceneManager : MonoBehaviour {
 
-    SceneBase current_scene_;
-    [SerializeField] SceneBase stage_scene_ = null;
+    [SerializeField] SceneBase title_scene = null;
+    [SerializeField] SceneBase stage_scene = null;
+    [SerializeField] SceneBase stage_select_scene = null;
+    Dictionary<string, SceneBase> scene_ = new Dictionary<string, SceneBase>();
+    private SceneBase current_scene_;
 
-	// Use this for initialization
-	void Start () {
-        current_scene_ = Instantiate(stage_scene_);
-	}
+    private void Start()
+    {
+        //ディクショナリ登録
+        scene_[SceneList.TitleScene] = title_scene;
+        scene_[SceneList.StageSelectScene] = stage_select_scene;
+        scene_[SceneList.StageScene] = stage_scene;
+        scene_[SceneList.TitleScene].scene_manager = this;
+        scene_[SceneList.StageSelectScene].scene_manager = this;
+        scene_[SceneList.StageScene].scene_manager = this;
+
+        //テスト用にステージシーンから実行
+        NextScene(SceneList.StageScene,null);
+    }
+
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            NextScene(SceneList.TitleScene, null);
+        }
+    }
+
+    public void NextScene(string scene_name, object scene_params)
+    {
+        RemoveScene();
+        AddScene(scene_name, scene_params);
+    }
+
+    private void AddScene(string scene_name, object scene_params)
+    {
+        //string className_ = scene_name;
+        //System.Type type_ = System.Type.GetType(className_);
+        //current_scene_ = (SceneBase)System.Activator.CreateInstance(type_);
+        current_scene_ = Instantiate(scene_[scene_name]);
+    }
+
+    private void RemoveScene()
+    {
+        if (current_scene_ != null)
+        {
+            GameObject.Destroy(current_scene_.gameObject);
+            current_scene_ = null;
+        }
+    }
+    private void Init()
+    {
+
+    }
 }

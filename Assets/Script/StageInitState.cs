@@ -8,12 +8,8 @@ public class StageInitState : StateBase {
     /// テスト用スタブモジュール
     /// </summary>
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            scene_.ChangeState();
-        }
+        scene_.ChangeState(StateList.StageMainState);
     }
-
 }
