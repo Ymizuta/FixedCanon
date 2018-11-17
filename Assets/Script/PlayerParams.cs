@@ -31,7 +31,6 @@ public class PlayerParams : MonoBehaviour {
     {
         if (number_of_bullet_[bullet_index_] > 0)
         {number_of_bullet_[bullet_index_]--;}
-        Debug.Log(bullets_[bullet_index_] + "の弾数は" + number_of_bullet_[bullet_index_] + "発");
     }
 
     public void SetBullet()
