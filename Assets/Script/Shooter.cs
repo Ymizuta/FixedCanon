@@ -9,9 +9,10 @@ public class Shooter : MonoBehaviour {
     public void Shoot(BulletBase bullet)
     {
         Debug.Log(bullet + "を発射");
-        BulletBase bullet_clone = Instantiate(bullet);
-        bullet_clone.GetComponent<Rigidbody>().AddForce(muzzle_.transform.forward * bullet.shoot_power_);
-        Destroy(bullet_clone,2.0f);
+        BulletBase bullet_clone = Instantiate(bullet, muzzle_.transform.position, muzzle_.transform.rotation);
+        bullet_clone.GetComponent<Rigidbody>().AddForce(muzzle_.transform.forward * bullet.ShootPower);
+        Object.Destroy(bullet_clone.gameObject, 2.0f);
+        bullet_clone = null;
     }
 
 }

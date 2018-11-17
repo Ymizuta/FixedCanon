@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class NormalBullet : BulletBase {
 
+    public NormalBullet()
+    {
+        damage_ = 2;
+    }
 
 }
