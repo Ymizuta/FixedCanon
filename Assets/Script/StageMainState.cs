@@ -56,6 +56,7 @@ public class StageMainState : StateBase {
         //角度変更
         //ユーザ操作を受けて(UserOperationクラスで実装)
         canon_move_.HorizontalMove(Input.GetAxis("Horizontal"));
+        canon_move_.VerticalMove(Input.GetAxis("Vertical"));
 
         TouchInfo info = UserOperation.GetTouch();
         //canon_move_.Move(direction,speed)
