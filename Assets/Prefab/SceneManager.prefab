@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd469b7ed0d2f243bf4eb422466e3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title_scene: {fileID: 114063432845834592, guid: b799511f092287f42812906b22b90fc2,
+  title_scene_: {fileID: 114063432845834592, guid: b799511f092287f42812906b22b90fc2,
     type: 2}
-  stage_scene: {fileID: 114473942644778472, guid: 300e4d556f7409743acc0e2685b69314,
+  stage_scene_: {fileID: 114473942644778472, guid: 300e4d556f7409743acc0e2685b69314,
     type: 2}
   stage_select_scene: {fileID: 114731175432302390, guid: 8a362487abcfd954e89e96c1f1ba620f,
     type: 2}

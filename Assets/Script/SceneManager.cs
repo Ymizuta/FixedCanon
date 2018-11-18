@@ -2,53 +2,55 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour {
+public class SceneManager {
 
-    [SerializeField] SceneBase title_scene = null;
-    [SerializeField] SceneBase stage_scene = null;
-    [SerializeField] SceneBase stage_select_scene = null;
-    Dictionary<string, SceneBase> scene_ = new Dictionary<string, SceneBase>();
-    private SceneBase current_scene_;
+    //private GameObject title_scene_;
+    //private GameObject stage_scene_;
+    //private GameObject stage_select_scene_;
+    Dictionary<string, SceneBase> scene_dictionary 
+        = new Dictionary<string, SceneBase>();              //SceneListに登録している文字列をキーにしてシーンを登録するディクショナリ
+    private GameObject current_scene_obj_;                  //現在のシーンクラスを持つオブジェクト
+    private SceneBase current_scene_;                       //現在のシーン（シーン移行時に利用）
+    private static SceneManager instance_;                  //Singleton用のインスタンス
 
-    private void Start()
+    //Singleton
+    public static SceneManager getInstance()
     {
-        //ディクショナリ登録
-        scene_[SceneList.TitleScene] = title_scene;
-        scene_[SceneList.StageSelectScene] = stage_select_scene;
-        scene_[SceneList.StageScene] = stage_scene;
-        scene_[SceneList.TitleScene].scene_manager = this;
-        scene_[SceneList.StageSelectScene].scene_manager = this;
-        scene_[SceneList.StageScene].scene_manager = this;
-    }
-
-    public void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        if (instance_== null)
         {
-            NextScene(SceneList.TitleScene, null);
+            instance_ = new SceneManager();
         }
+        if (instance_ == null)
+        {
+            Debug.LogError("SceneManagerが存在しません。");
+        }
+        return instance_;
     }
 
     public void NextScene(string scene_name, object scene_params)
     {
         RemoveScene();
         AddScene(scene_name, scene_params);
+        //Debug.Log(scene_name);
+        current_scene_.Init();
     }
 
     private void AddScene(string scene_name, object scene_params)
     {
-        //string className_ = scene_name;
-        //System.Type type_ = System.Type.GetType(className_);
-        //current_scene_ = (SceneBase)System.Activator.CreateInstance(type_);
-        current_scene_ = Instantiate(scene_[scene_name]);
+        if (Resources.Load(scene_name) == null){
+            Debug.LogError("Resourcesにプレハブが存在しません");
+        }
+        current_scene_obj_ = (GameObject)Resources.Load(scene_name);
+        current_scene_ = (SceneBase)current_scene_obj_.GetComponent(System.Type.GetType(scene_name));
+        scene_dictionary[scene_name] = current_scene_;        
     }
 
     private void RemoveScene()
     {
         if(current_scene_ != null)
         {
-        GameObject.Destroy(current_scene_.gameObject);
-        current_scene_ = null;
+            current_scene_obj_ = null;
+            current_scene_ = null;
         }
     }
     private void Init()
@@ -56,3 +58,4 @@ public class SceneManager : MonoBehaviour {
 
     }
 }
+

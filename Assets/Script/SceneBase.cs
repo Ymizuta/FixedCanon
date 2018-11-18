@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneBase : MonoBehaviour {
+public abstract class SceneBase : MonoBehaviour {
 
-    public SceneManager scene_manager;
-    protected Dictionary<string, StateBase> state_ = new Dictionary<string, StateBase>();
+    protected Dictionary<string, StateBase> state_dictionary_ = new Dictionary<string, StateBase>();
     private StateBase current_state_;
 
     public void ChangeState(string state_name)
@@ -17,8 +16,7 @@ public class SceneBase : MonoBehaviour {
 
     private void AddState(string state_name)
     {
-        current_state_ = Instantiate(state_[state_name]);
-        //current_state_.scene_ = this;
+        current_state_ = Instantiate(state_dictionary_[state_name]);
     }
 
     private void RemoveState()
@@ -30,9 +28,5 @@ public class SceneBase : MonoBehaviour {
         }
     }
 
-    private void Init()
-    {
-
-    }
-
+    public abstract void Init();
 }

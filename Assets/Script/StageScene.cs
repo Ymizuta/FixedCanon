@@ -17,12 +17,15 @@ public class StageScene : SceneBase {
 
     private void Start()
     {
-        Debug.Log("ステージシーンを生成");
-        state_[StateList.StageInitState] = stage_init_state_;
-        state_[StateList.StageMainState] = stage_main_state_;
-        state_[StateList.StageFinishState] = stage_finish_state_;
-        ChangeState(StateList.StageInitState);
     }
 
-
+    public override void Init()
+    {
+        //throw new System.NotImplementedException();
+        Debug.Log("ステージシーンを生成");
+        state_dictionary_[StateList.StageInitState] = stage_init_state_;
+        state_dictionary_[StateList.StageMainState] = stage_main_state_;
+        state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
+        ChangeState(StateList.StageInitState);
+    }
 }

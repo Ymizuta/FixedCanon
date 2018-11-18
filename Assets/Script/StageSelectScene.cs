@@ -17,15 +17,19 @@ public class StageSelectScene : SceneBase {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("ステージセレクトシーン");
-        state_[StateList.StageSelectInitState] = stage_select_init_state_;
-        state_[StateList.StageSelectMainState] = stage_select_main_state_;
-        state_[StateList.StageSelectFinishState] = stage_select_finish_state_;
-        ChangeState(StateList.StageSelectInitState);
     }
 
     // Update is called once per frame
-    void Update () {
-		
+    void Update () {		
 	}
+
+    public override void Init()
+    {
+        //throw new System.NotImplementedException();
+        Debug.Log("ステージセレクトシーン生成");
+        state_dictionary_[StateList.StageSelectInitState] = stage_select_init_state_;
+        state_dictionary_[StateList.StageSelectMainState] = stage_select_main_state_;
+        state_dictionary_[StateList.StageSelectFinishState] = stage_select_finish_state_;
+        ChangeState(StateList.StageSelectInitState);
+    }
 }

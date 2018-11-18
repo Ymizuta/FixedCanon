@@ -17,15 +17,20 @@ public class TitleScene : SceneBase {
 
     // Use this for initialization
     void Start () {
-        Debug.Log("タイトルシーン生成");
-        state_[StateList.TitleInitState] = title_init_state_;
-        state_[StateList.TitleMainState] = title_main_state_;
-        state_[StateList.TitleFinishState] = title_finish_state_;
-        ChangeState(StateList.TitleInitState);
     }
 
     // Update is called once per frame
     void Update () {
 	}
-     
+
+    public override void Init()
+    {
+        //throw new System.NotImplementedException();
+        Debug.Log("タイトルシーン生成");
+        state_dictionary_[StateList.TitleInitState] = title_init_state_;
+        state_dictionary_[StateList.TitleMainState] = title_main_state_;
+        state_dictionary_[StateList.TitleFinishState] = title_finish_state_;
+        ChangeState(StateList.TitleInitState);
+    }
+
 }
