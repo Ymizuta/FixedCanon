@@ -22,7 +22,8 @@ public class StageMainState : StateBase
     private Vector3 touch_poz_;
     private Vector3 old_touch_poz_;
     private Vector3 new_touch_poz_;
-    private float horizontal_direction_;
+    private float horizontal_direction_;                    //CanonMoveの水平回転処理の引数
+    private float vertical_direction_;                      //CanonMoveの仰角調整処理の引数
 
     private void Start()
     {
@@ -74,11 +75,7 @@ public class StageMainState : StateBase
             bullet_changer_.ChangeBullet(player_params_);
         }
 
-        //角度変更
-        //テスト用処理
-        //canon_move_.HorizontalMove(Input.GetAxis("Horizontal"));
-        canon_move_.VerticalMove(Input.GetAxis("Vertical"));
-
+        //砲台・砲身の角度調整
         //ユーザ操作を受けて(UserOperationクラスで実装)
         TouchInfo info = UserOperation.GetTouch();
         if (info == TouchInfo.Began)
@@ -102,13 +99,14 @@ public class StageMainState : StateBase
             horizontal_direction_ = new_touch_poz_.x - old_touch_poz_.x;
             canon_move_.HorizontalMove(horizontal_direction_);
             //砲身の仰角調整処理
-
+            vertical_direction_ = -(new_touch_poz_.y - old_touch_poz_.y);
+            canon_move_.VerticalMove(vertical_direction_);
             //次フレームでの移動のため、old_player_pozに現フレームのnew_player_poz(タッチ位置)を格納
             old_touch_poz_ = new_touch_poz_;
         }
         else if (info == TouchInfo.Ended)
         {
-            //処理あれば
+            //必要な処理があれば追加
         }
     }
 

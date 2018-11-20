@@ -17,7 +17,7 @@ public class CanonMove : MonoBehaviour {
     private Vector3 canon_angle;                        //仰角度
     private float canon_evelation_angle;                //砲身の仰角値
     private float default_canon_evalation_angle;        //砲台の仰角の初期値
-    private float add_evelation_angle = -1f;            //仰角の係数(数値変更で回転速度調整)
+    private float add_evelation_angle = 30f;            //仰角の係数(数値変更で回転速度調整)
     const float MIN_ELEVATION_ANGLE = 180f;             //仰角範囲
     const float MAX_ELEVATION_ANGLE = 315f;             //仰角範囲
 
