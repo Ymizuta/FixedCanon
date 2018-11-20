@@ -15,8 +15,14 @@ public class StageMainState : StateBase
 
     //プレイヤークローンのオブジェクト検索用の文字列
     private readonly string mazzle_ = "Mazzle";
-    private readonly string canon_base = "CanonBase";
-    private readonly string barrel_base = "BarrelBase";
+    private readonly string canon_base_ = "CanonBase";
+    private readonly string barrel_base_ = "BarrelBase";
+
+    //タッチ操作関連
+    private Vector3 touch_poz_;
+    private Vector3 old_touch_poz_;
+    private Vector3 new_touch_poz_;
+    private float horizontal_direction_;
 
     private void Start()
     {
@@ -32,9 +38,10 @@ public class StageMainState : StateBase
         bullet_changer_ = this.GetComponent<BulletChanger>();
         bullet_counter_ = this.GetComponent<BulletCounter>();
         canon_move_ = this.GetComponent<CanonMove>();
+        //プレイヤーオブジェクトの検索・取得
         shooter_.Muzzle = GameObject.Find(mazzle_);
-        canon_move_.CanonBase = GameObject.Find(canon_base);
-        canon_move_.BarrelBase = GameObject.Find(barrel_base);
+        canon_move_.CanonBase = GameObject.Find(canon_base_);
+        canon_move_.BarrelBase = GameObject.Find(barrel_base_);
     }
 
     private void Update()
@@ -69,32 +76,41 @@ public class StageMainState : StateBase
 
         //角度変更
         //テスト用処理
-        canon_move_.HorizontalMove(Input.GetAxis("Horizontal"));
+        //canon_move_.HorizontalMove(Input.GetAxis("Horizontal"));
         canon_move_.VerticalMove(Input.GetAxis("Vertical"));
 
         //ユーザ操作を受けて(UserOperationクラスで実装)
         TouchInfo info = UserOperation.GetTouch();
-        //canon_move_.Move(direction,speed)
         if (info == TouchInfo.Began)
         {
-            //CanonMove.Move(vector3 ,speed );
+            touch_poz_ = UserOperation.GetTouchPosition();
+            //ScreenToWorldPointメソッドのバグ防止用にｚ座標を設定
+            touch_poz_.z = 1.0f;
+            old_touch_poz_ = Camera.main.ScreenToWorldPoint(touch_poz_);
+            //z座標を初期化
+            old_touch_poz_.z = 0f;
         }
         else if (info == TouchInfo.Moved)
         {
-            //CanonMove.Move(vector3 ,speed );
+            touch_poz_ = UserOperation.GetTouchPosition();
+            //ScreenToWorldPointメソッドのバグ防止用にｚ座標を設定
+            touch_poz_.z = 1.0f;
+            new_touch_poz_ = Camera.main.ScreenToWorldPoint(touch_poz_);
+            //z座標を初期化
+            new_touch_poz_.z = 0f;
+            //砲台の水平回転処理
+            horizontal_direction_ = new_touch_poz_.x - old_touch_poz_.x;
+            canon_move_.HorizontalMove(horizontal_direction_);
+            //砲身の仰角調整処理
+
+            //次フレームでの移動のため、old_player_pozに現フレームのnew_player_poz(タッチ位置)を格納
+            old_touch_poz_ = new_touch_poz_;
         }
         else if (info == TouchInfo.Ended)
         {
             //処理あれば
         }
     }
-
-    //private void CountBullet()
-    //{
-    //    //弾数カウント
-    //    //各弾数が０でかつ、
-    //    //ターゲット数が０でない場合コールバックしてゲームオーバー        
-    //}
 
     private void CountTarget()
     {

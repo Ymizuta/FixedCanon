@@ -16,7 +16,7 @@ public class StateBase : MonoBehaviour {
 
     protected void Init()
     {
-        Debug.Log(this + "が生成された");
+        //Debug.Log(this + "が生成された");
     }
 
     //フィニッシュステートでの処理時等にシーン遷移を実行

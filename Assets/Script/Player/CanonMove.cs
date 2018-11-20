@@ -5,27 +5,26 @@ using UnityEngine;
 public class CanonMove : MonoBehaviour {
 
     //砲台の水平角度
-    [SerializeField] GameObject canon_base_ = null; //砲台オブジェクト（エディターから登録）
-    private Vector3 canon_base_angle;               //砲台の角度
-    private float horizon_angle_value;              //砲台の水平角度の値
-    private float add_canon_base_angle = 1f;        //回転の係数(数値変更で回転速度調整)
-    const float max_horizontal_angle = 45f;         //回転範囲
-    const float min_horizontal_angle = -45f;        //回転範囲
+    [SerializeField] GameObject canon_base_ = null;     //砲台オブジェクト（エディターから登録）
+    private Vector3 canon_base_angle;                   //砲台の角度
+    private float horizon_angle_value;                  //砲台の水平角度の値
+    private float add_canon_base_angle = 30f;           //回転の係数(数値変更で回転速度調整)
+    const float MAX_HORIZONTAL_ANGLE = 45f;             //回転範囲
+    const float MIN_HORIZONTAL_ANGLE = -45f;            //回転範囲
 
     //砲台の仰角
-    [SerializeField] GameObject barrel_base_ = null;     //砲身オブジェクト（エディターから登録）
-    private Vector3 canon_angle;                    //仰角度
-    private float canon_evelation_angle;            //砲身の仰角値
-    private float default_canon_evalation_angle;    //砲台の仰角の初期値
-    private float add_evelation_angle = -1f;        //仰角の係数(数値変更で回転速度調整)
-    const float min_elevation_angle = 0f;           //仰角範囲
-    const float max_elevation_angle = 90f;          //仰角範囲
+    [SerializeField] GameObject barrel_base_ = null;    //砲身オブジェクト（エディターから登録）
+    private Vector3 canon_angle;                        //仰角度
+    private float canon_evelation_angle;                //砲身の仰角値
+    private float default_canon_evalation_angle;        //砲台の仰角の初期値
+    private float add_evelation_angle = -1f;            //仰角の係数(数値変更で回転速度調整)
+    const float MIN_ELEVATION_ANGLE = 180f;             //仰角範囲
+    const float MAX_ELEVATION_ANGLE = 315f;             //仰角範囲
 
     private void Start()
     {
         ////砲台の初期角度
         //canon_base_angle = canon_base_.transform.rotation.eulerAngles;
-
         ////砲身の初期仰角        
         //canon_angle = barrel_.transform.rotation.eulerAngles;
     }
@@ -36,14 +35,14 @@ public class CanonMove : MonoBehaviour {
         horizon_angle_value = canon_base_angle.y + (add_canon_base_angle * horizontal_direction);
 
         //砲台の角度制限
-        if (horizon_angle_value >= max_horizontal_angle)
+        if (horizon_angle_value >= MAX_HORIZONTAL_ANGLE)
         {
-            horizon_angle_value = max_horizontal_angle;
+            horizon_angle_value = MAX_HORIZONTAL_ANGLE;
         }
         else
-        if (horizon_angle_value <= min_horizontal_angle)
+        if (horizon_angle_value <= MIN_HORIZONTAL_ANGLE)
         {
-            horizon_angle_value = min_horizontal_angle;
+            horizon_angle_value = MIN_HORIZONTAL_ANGLE;
         }
 
         canon_base_angle.y = horizon_angle_value;
@@ -59,12 +58,12 @@ public class CanonMove : MonoBehaviour {
         canon_evelation_angle = canon_angle.x + (add_evelation_angle * vertical_direction);
 
         //仰角の角度制限
-        if (canon_evelation_angle <= 315f && canon_evelation_angle >= 180f)
+        if (canon_evelation_angle <= MAX_ELEVATION_ANGLE && canon_evelation_angle >= MIN_ELEVATION_ANGLE)
         {
-            canon_evelation_angle = 315f;
+            canon_evelation_angle = MAX_ELEVATION_ANGLE;
         }
         else
-        if (canon_evelation_angle < 180f && canon_evelation_angle >= 0f)
+        if (canon_evelation_angle < MIN_ELEVATION_ANGLE && canon_evelation_angle >= 0f)
         {
             canon_evelation_angle = 0f;
         }
