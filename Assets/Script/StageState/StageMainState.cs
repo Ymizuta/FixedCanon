@@ -13,15 +13,28 @@ public class StageMainState : StateBase
     [SerializeField] CanonMove canon_move_ = null;
     private GameObject player_clone_;
 
+    //プレイヤークローンのオブジェクト検索用の文字列
+    private readonly string mazzle_ = "Mazzle";
+    private readonly string canon_base = "CanonBase";
+    private readonly string barrel_base = "BarrelBase";
+
     private void Start()
     {
-        //プレイヤー初期化
+        //初期設定
         player_clone_ = Instantiate(player_);
-        player_params_ = player_clone_.GetComponent<PlayerParams>();
-        shooter_ = player_clone_.GetComponent<Shooter>();
-        bullet_changer_ = player_clone_.GetComponent<BulletChanger>();
-        bullet_counter_ = player_clone_.GetComponent<BulletCounter>();
-        canon_move_ = player_clone_.GetComponent<CanonMove>();
+        //player_params_ = player_clone_.GetComponent<PlayerParams>();
+        //shooter_ = player_clone_.GetComponent<Shooter>();
+        //bullet_changer_ = player_clone_.GetComponent<BulletChanger>();
+        //bullet_counter_ = player_clone_.GetComponent<BulletCounter>();
+        //canon_move_ = player_clone_.GetComponent<CanonMove>();
+        player_params_ = this.GetComponent<PlayerParams>();
+        shooter_ = this.GetComponent<Shooter>();
+        bullet_changer_ = this.GetComponent<BulletChanger>();
+        bullet_counter_ = this.GetComponent<BulletCounter>();
+        canon_move_ = this.GetComponent<CanonMove>();
+        shooter_.Muzzle = GameObject.Find(mazzle_);
+        canon_move_.CanonBase = GameObject.Find(canon_base);
+        canon_move_.BarrelBase = GameObject.Find(barrel_base);
     }
 
     private void Update()
@@ -55,6 +68,10 @@ public class StageMainState : StateBase
         }
 
         //角度変更
+        //テスト用処理
+        canon_move_.HorizontalMove(Input.GetAxis("Horizontal"));
+        canon_move_.VerticalMove(Input.GetAxis("Vertical"));
+
         //ユーザ操作を受けて(UserOperationクラスで実装)
         TouchInfo info = UserOperation.GetTouch();
         //canon_move_.Move(direction,speed)

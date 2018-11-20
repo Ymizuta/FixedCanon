@@ -22,9 +22,7 @@ public class PlayerParams : MonoBehaviour
         {
             number_of_bullet_[i] = 2;
         }
-
         //初期装備      
-        Debug.Log(bullet_index_);
         loadedbullet_ = bullets_[bullet_index_];
     }
 

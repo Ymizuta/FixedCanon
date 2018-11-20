@@ -13,7 +13,7 @@ public class CanonMove : MonoBehaviour {
     const float min_horizontal_angle = -45f;        //回転範囲
 
     //砲台の仰角
-    [SerializeField] GameObject barrel_ = null;     //砲身オブジェクト（エディターから登録）
+    [SerializeField] GameObject barrel_base_ = null;     //砲身オブジェクト（エディターから登録）
     private Vector3 canon_angle;                    //仰角度
     private float canon_evelation_angle;            //砲身の仰角値
     private float default_canon_evalation_angle;    //砲台の仰角の初期値
@@ -23,11 +23,11 @@ public class CanonMove : MonoBehaviour {
 
     private void Start()
     {
-        //砲台の初期角度
-        canon_base_angle = canon_base_.transform.rotation.eulerAngles;
+        ////砲台の初期角度
+        //canon_base_angle = canon_base_.transform.rotation.eulerAngles;
 
-        //砲身の初期仰角        
-        canon_angle = barrel_.transform.rotation.eulerAngles;
+        ////砲身の初期仰角        
+        //canon_angle = barrel_.transform.rotation.eulerAngles;
     }
 
     //砲台の左右回転
@@ -55,7 +55,7 @@ public class CanonMove : MonoBehaviour {
     //砲身の仰角調整
     public void VerticalMove(float vertical_direction)
     {
-        canon_angle = barrel_.transform.rotation.eulerAngles;
+        canon_angle = barrel_base_.transform.rotation.eulerAngles;
         canon_evelation_angle = canon_angle.x + (add_evelation_angle * vertical_direction);
 
         //仰角の角度制限
@@ -70,6 +70,28 @@ public class CanonMove : MonoBehaviour {
         }
         canon_angle.x = canon_evelation_angle;
         canon_angle.z = 0f;
-        barrel_.transform.rotation = Quaternion.Euler(canon_angle);
+        barrel_base_.transform.rotation = Quaternion.Euler(canon_angle);
     }
+
+    //メインステート初期化時に取得
+    public GameObject CanonBase
+    {
+        set
+        {
+            canon_base_ = value;
+            //砲台の初期角度
+            canon_base_angle = canon_base_.transform.rotation.eulerAngles;
+        }
+    }
+    //メインステート初期化時に取得
+    public GameObject BarrelBase
+    {
+        set
+        {
+            barrel_base_ = value;
+            //砲身の初期仰角        
+            canon_angle = barrel_base_.transform.rotation.eulerAngles;
+        }
+    }
+
 }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour {
 
-    [SerializeField] GameObject muzzle_;            //砲弾を生成・発射するオブジェクト（エディターから登録）
-    
+    //[SerializeField] GameObject muzzle_;       //砲弾を生成・発射するオブジェクト（エディターから登録）
+    [SerializeField] GameObject muzzle_ = null;       //砲弾を生成・発射するオブジェクト
+
     public void Shoot(BulletBase bullet)
     {
         Debug.Log(bullet + "を発射");
@@ -15,4 +16,12 @@ public class Shooter : MonoBehaviour {
         bullet_clone = null;
     }
 
+    //メインステート初期化時に取得
+    public GameObject Muzzle
+    {
+        set
+        {
+            muzzle_ = value;
+        }
+    }
 }

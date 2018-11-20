@@ -6,16 +6,12 @@ public class User : MonoBehaviour {
 
     private SceneManager instance_;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
-	void Update () {
-        if (Input.GetMouseButtonDown(0))
-        {
+	void Start () {
+        //if (Input.GetMouseButtonDown(0))
+        //{
             SceneManager.getInstance().NextScene(SceneList.TitleScene, null);
-        }
+            Destroy(this);
+        //}
 	}
 }
