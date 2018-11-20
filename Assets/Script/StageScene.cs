@@ -11,9 +11,10 @@ public class StageScene : SceneBase {
     /// [finish_state]クリア→次のステージへ　ゲームオーバー→リトライORステージセレクトへ　　
     /// </summary>
 
-    [SerializeField] StateBase stage_init_state_ = null;
-    [SerializeField] StateBase stage_main_state_ = null;
-    [SerializeField] StateBase stage_finish_state_ = null;
+    [SerializeField] StateBase stage_init_state_ = null;    //エディターから登録
+    [SerializeField] StateBase stage_main_state_ = null;    //エディターから登録
+    [SerializeField] StateBase stage_finish_state_ = null;  //エディターから登録
+    private ObjectParams obj_params;                        //ステージオブジェクトのプレハブ、クローンを管理
 
     private void Start()
     {
@@ -26,6 +27,15 @@ public class StageScene : SceneBase {
         state_dictionary_[StateList.StageInitState] = stage_init_state_;
         state_dictionary_[StateList.StageMainState] = stage_main_state_;
         state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
+        obj_params = this.GetComponent<ObjectParams>();
         ChangeState(StateList.StageInitState);
+    }
+
+    public ObjectParams ObjParams
+    {
+        get
+        {
+            return obj_params;
+        }
     }
 }
