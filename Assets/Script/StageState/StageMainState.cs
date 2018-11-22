@@ -60,7 +60,7 @@ public class StageMainState : StateBase
             if (IsRestOfBullets()) {
 
                 bullet_clone_ = bullet_clone_maker.BulletCloneMake(player_params_.LoadedBullet);
-                bullet_clone_.OnBulletDye += this.OnBulletDyeCallBack;
+                bullet_clone_.OnBulletDie += this.OnBulletDieCallBack;
                 shooter_.Shoot(bullet_clone_);
                 //shooter_.Shoot(player_params_.LoadedBullet);
                 //弾数減少
@@ -68,13 +68,6 @@ public class StageMainState : StateBase
                 //弾数カウント（UIへの反映）
                 Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
                     + player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
-                //ゲームオーバー判定（すべての残弾０）
-                if (bullet_counter_.BulletCount(player_params_))
-                {
-                    Debug.Log("GameOver");
-                    //ステート移行
-                    scene_.ChangeState(StateList.StageFinishState);
-                }
             }
         }
 
@@ -131,10 +124,18 @@ public class StageMainState : StateBase
         return false;
     }
 
-    private void OnBulletDyeCallBack()
+    private void OnBulletDieCallBack()
     {
         Debug.Log("コールバックされました");
         bullet_clone_ = null;
+
+        //ゲームオーバーか判定（すべての残弾０の場合）
+        if (bullet_counter_.BulletCount(player_params_))
+        {
+            Debug.Log("GameOver");
+            //ステート移行
+            scene_.ChangeState(StateList.StageFinishState);
+        }
     }
 
 }
