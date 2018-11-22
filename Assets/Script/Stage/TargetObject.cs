@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TargetObject : StageObject {
 
+    public System.Action OnTargetObjectDie;
+
     private void Start()
     {
         life_ = 2;
@@ -25,6 +27,10 @@ public class TargetObject : StageObject {
         if (life_ <= 0)
         {
             Destroy(this.gameObject);
+            if (OnTargetObjectDie != null)
+            {
+                OnTargetObjectDie();
+            }
         }
     }
 }

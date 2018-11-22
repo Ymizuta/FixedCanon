@@ -23,7 +23,7 @@ public class ObjectParams : MonoBehaviour {
         }
         for (int i = 0; i < target_object_.Count; i++)
         {
-            Debug.Log("インデックス番号"+i + "の" +target_object_[i]);
+            target_object_[i].GetComponent<TargetObject>().OnTargetObjectDie += OnTargetObjectDieCallBack;
         }
     }
 
@@ -34,6 +34,14 @@ public class ObjectParams : MonoBehaviour {
             return stage_object_;
         }
     }
+
+    //ターゲットオブジェクトが破壊された際に呼び出し
+    private void OnTargetObjectDieCallBack()
+    {
+        Debug.Log("ターゲットが一つ死亡");
+    } 
+
+
     //public GameObject StageObjectClone
     //{
     //    get
