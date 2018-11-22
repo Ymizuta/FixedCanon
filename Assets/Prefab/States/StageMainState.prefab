@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114447097629556814}
   - component: {fileID: 114240142624133768}
   - component: {fileID: 114075658583825646}
+  - component: {fileID: 114323150829407142}
   m_Layer: 0
   m_Name: StageMainState
   m_TagString: Untagged
@@ -57,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canon_base_: {fileID: 0}
-  barrel_: {fileID: 0}
+  barrel_base_: {fileID: 0}
 --- !u!114 &114214999610261642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,6 +84,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d665108ebf1b6c45ab81a0e5f37cb32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114323150829407142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1272130656961720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ecfc9ab8e539f42b1c34357a5c4090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  muzzle_: {fileID: 0}
 --- !u!114 &114447097629556814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,6 +122,7 @@ MonoBehaviour:
   player_: {fileID: 1437926661993746, guid: a3aaeb3ab2377b643a5f503808b03ac3, type: 2}
   player_params_: {fileID: 114214999610261642}
   shooter_: {fileID: 114893211477546274}
+  bullet_clone_maker: {fileID: 114323150829407142}
   bullet_changer_: {fileID: 114447097629556814}
   bullet_counter_: {fileID: 114240142624133768}
   canon_move_: {fileID: 114075658583825646}

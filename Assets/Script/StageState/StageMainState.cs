@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class StageMainState : StateBase
 {
-
     [SerializeField] GameObject player_ = null;
     [SerializeField] PlayerParams player_params_ = null;
     [SerializeField] Shooter shooter_ = null;
+    [SerializeField] BulletCloneMaker bullet_clone_maker = null;
     [SerializeField] BulletChanger bullet_changer_ = null;
     [SerializeField] BulletCounter bullet_counter_ = null;
     [SerializeField] CanonMove canon_move_ = null;
@@ -38,8 +38,10 @@ public class StageMainState : StateBase
         shooter_ = this.GetComponent<Shooter>();
         bullet_changer_ = this.GetComponent<BulletChanger>();
         bullet_counter_ = this.GetComponent<BulletCounter>();
+        bullet_clone_maker = this.GetComponent<BulletCloneMaker>();
         canon_move_ = this.GetComponent<CanonMove>();
         //プレイヤーオブジェクトの検索・取得
+        bullet_clone_maker.Muzzle = GameObject.Find(mazzle_);
         shooter_.Muzzle = GameObject.Find(mazzle_);
         canon_move_.CanonBase = GameObject.Find(canon_base_);
         canon_move_.BarrelBase = GameObject.Find(barrel_base_);
@@ -53,7 +55,11 @@ public class StageMainState : StateBase
         {
             //砲弾発射
             if (IsRestOfBullets()) {
-                shooter_.Shoot(player_params_.LoadedBullet);
+
+                BulletBase bullet_clone = bullet_clone_maker.BulletCloneMake(player_params_.LoadedBullet);
+                bullet_clone.OnBulletDye += this.OnBulletDyeCallBack;
+                shooter_.Shoot(bullet_clone);
+                //shooter_.Shoot(player_params_.LoadedBullet);
                 //弾数減少
                 player_params_.ReduceBullet();
                 //弾数カウント（UIへの反映）
@@ -122,9 +128,9 @@ public class StageMainState : StateBase
         return false;
     }
 
-    private void CountTarget()
+    private void OnBulletDyeCallBack()
     {
-        //ターゲット数カウント
-        //ターゲット数が０の場合コールバックしてクリア
+        Debug.Log("コールバックされました");        
     }
+
 }
