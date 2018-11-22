@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Bullet
   - NormalObject
-  - Target
+  - TargetObject
   layers:
   - Default
   - TransparentFX
