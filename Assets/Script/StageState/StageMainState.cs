@@ -25,6 +25,9 @@ public class StageMainState : StateBase
     private float horizontal_direction_;                    //CanonMoveの水平回転処理の引数
     private float vertical_direction_;                      //CanonMoveの仰角調整処理の引数
 
+    //砲弾
+    private BulletBase bullet_clone_;
+
     private void Start()
     {
         //初期設定
@@ -56,9 +59,9 @@ public class StageMainState : StateBase
             //砲弾発射
             if (IsRestOfBullets()) {
 
-                BulletBase bullet_clone = bullet_clone_maker.BulletCloneMake(player_params_.LoadedBullet);
-                bullet_clone.OnBulletDye += this.OnBulletDyeCallBack;
-                shooter_.Shoot(bullet_clone);
+                bullet_clone_ = bullet_clone_maker.BulletCloneMake(player_params_.LoadedBullet);
+                bullet_clone_.OnBulletDye += this.OnBulletDyeCallBack;
+                shooter_.Shoot(bullet_clone_);
                 //shooter_.Shoot(player_params_.LoadedBullet);
                 //弾数減少
                 player_params_.ReduceBullet();
@@ -118,7 +121,7 @@ public class StageMainState : StateBase
         }
     }
 
-    //残りの砲弾の有無を判定
+    //残りの砲弾の有無を判定(発射できるかできないかの判定)
     private bool IsRestOfBullets()
     {
         if (player_params_.NumberOfBullets[player_params_.BulletIndex] > 0){
@@ -130,7 +133,8 @@ public class StageMainState : StateBase
 
     private void OnBulletDyeCallBack()
     {
-        Debug.Log("コールバックされました");        
+        Debug.Log("コールバックされました");
+        bullet_clone_ = null;
     }
 
 }

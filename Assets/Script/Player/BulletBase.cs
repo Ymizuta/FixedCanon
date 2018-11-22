@@ -12,6 +12,18 @@ public abstract class BulletBase : MonoBehaviour {
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == StageObjectList.NormalObject)
+        {
+            Destroy(this.gameObject);
+        }
+        if (other.tag == StageObjectList.TargetObject)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     private void OnDestroy()
     {
         if (OnBulletDye != null)
