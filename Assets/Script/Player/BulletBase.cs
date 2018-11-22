@@ -5,10 +5,19 @@ using UnityEngine;
 public abstract class BulletBase : MonoBehaviour {
     protected float damage_;
     protected float shoot_power_ = 1000.0f;
+    public System.Action OnBulletDye;
 
     public void Init()
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        if (OnBulletDye != null)
+        {
+            OnBulletDye();
+        }
     }
 
     public float Damage
