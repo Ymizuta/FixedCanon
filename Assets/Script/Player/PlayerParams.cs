@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerParams : MonoBehaviour
 {
 
-    [SerializeField] BulletBase[] bullets_ = null;
-    private int[] number_of_bullet_;
-    private BulletBase loadedbullet_;
-    private int bullet_index_;
-    private int default_bullet_index_ = 0;
+    [SerializeField] BulletBase[] bullets_ = null;  //砲弾のプレハブ
+    private int[] number_of_bullet_;                //砲弾の弾数
+    private BulletBase loadedbullet_;               //現在装備している砲弾
+    private int bullet_index_;                      //砲弾のプレハブ/弾数のリストのインデックス
+    private int default_bullet_index_ = 0;          //初期のインデックス
 
     private void Start()
     {
@@ -22,16 +22,18 @@ public class PlayerParams : MonoBehaviour
         {
             number_of_bullet_[i] = 2;
         }
-        //初期装備      
+        //初期装備の弾を装備      
         loadedbullet_ = bullets_[bullet_index_];
     }
 
+    //装備中の砲弾の弾数を減少
     public void ReduceBullet()
     {
         if (number_of_bullet_[bullet_index_] > 0)
         { number_of_bullet_[bullet_index_]--; }
     }
 
+    //次のインデックス番号の砲弾を装備する
     public void SetBullet()
     {
         //配列のインデックスを１つ進める

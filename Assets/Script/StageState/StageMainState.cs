@@ -52,18 +52,20 @@ public class StageMainState : StateBase
         if (Input.GetMouseButtonDown(0))
         {
             //砲弾発射
-            shooter_.Shoot(player_params_.LoadedBullet);
-            //弾数減少
-            player_params_.ReduceBullet();
-            //弾数カウント（UIへの反映）
-            Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
-                + player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
-            //ゲームオーバー判定（すべての残弾０）
-            if (bullet_counter_.BulletCount(player_params_))
-            {
-                Debug.Log("GameOver");
-                //ステート移行
-                scene_.ChangeState(StateList.StageFinishState);
+            if (IsRestOfBullets()) {
+                shooter_.Shoot(player_params_.LoadedBullet);
+                //弾数減少
+                player_params_.ReduceBullet();
+                //弾数カウント（UIへの反映）
+                Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
+                    + player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
+                //ゲームオーバー判定（すべての残弾０）
+                if (bullet_counter_.BulletCount(player_params_))
+                {
+                    Debug.Log("GameOver");
+                    //ステート移行
+                    scene_.ChangeState(StateList.StageFinishState);
+                }
             }
         }
 
@@ -108,6 +110,16 @@ public class StageMainState : StateBase
         {
             //必要な処理があれば追加
         }
+    }
+
+    //残りの砲弾の有無を判定
+    private bool IsRestOfBullets()
+    {
+        if (player_params_.NumberOfBullets[player_params_.BulletIndex] > 0){
+            return true;
+        }else
+        //Debug.Log("弾が切れています");
+        return false;
     }
 
     private void CountTarget()

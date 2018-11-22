@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletCounter : MonoBehaviour {
 
-    //弾切れの場合、trueを返す。
+    //すべての弾種で弾切れの場合、trueを返す。
     public bool BulletCount(PlayerParams player_params)
     {
         int i;
