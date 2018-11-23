@@ -7,10 +7,11 @@ public class StageMainState : StateBase
     [SerializeField] GameObject player_ = null;
     [SerializeField] PlayerParams player_params_ = null;
     [SerializeField] Shooter shooter_ = null;
+    [SerializeField] CanonMove canon_move_ = null;
     [SerializeField] BulletCloneMaker bullet_clone_maker = null;
     [SerializeField] BulletChanger bullet_changer_ = null;
     [SerializeField] BulletCounter bullet_counter_ = null;
-    [SerializeField] CanonMove canon_move_ = null;
+    [SerializeField] TargetObjectCounter target_obj_counter = null;
     private GameObject player_clone_;
 
     //プレイヤークローンのオブジェクト検索用の文字列
@@ -25,8 +26,13 @@ public class StageMainState : StateBase
     private float horizontal_direction_;                    //CanonMoveの水平回転処理の引数
     private float vertical_direction_;                      //CanonMoveの仰角調整処理の引数
 
-    //砲弾
+    //砲弾クローン
     private BulletBase bullet_clone_;
+
+    //時間差でゲームオーバー/クリアを判定させる
+    private const float default_interval_time = 0;
+    private float interval_time = 0;
+    private float set_interval_time = 2f;
 
     private void Start()
     {
@@ -39,10 +45,11 @@ public class StageMainState : StateBase
         //canon_move_ = player_clone_.GetComponent<CanonMove>();
         player_params_ = this.GetComponent<PlayerParams>();
         shooter_ = this.GetComponent<Shooter>();
+        canon_move_ = this.GetComponent<CanonMove>();
         bullet_changer_ = this.GetComponent<BulletChanger>();
         bullet_counter_ = this.GetComponent<BulletCounter>();
         bullet_clone_maker = this.GetComponent<BulletCloneMaker>();
-        canon_move_ = this.GetComponent<CanonMove>();
+        target_obj_counter = this.GetComponent<TargetObjectCounter>();
         //プレイヤーオブジェクトの検索・取得
         bullet_clone_maker.Muzzle = GameObject.Find(mazzle_);
         shooter_.Muzzle = GameObject.Find(mazzle_);
@@ -112,6 +119,17 @@ public class StageMainState : StateBase
         {
             //必要な処理があれば追加
         }
+
+        //ゲームオーバー/クリアのチェックを行うまでのインターバルタイム設定
+        if(interval_time > default_interval_time)
+        {
+            interval_time -= Time.deltaTime;
+            if (interval_time <= default_interval_time)
+            {
+                interval_time = default_interval_time;
+                GameStatusCheck();
+            }
+        }
     }
 
     //残りの砲弾の有無を判定(発射できるかできないかの判定)
@@ -128,13 +146,25 @@ public class StageMainState : StateBase
     {
         //Debug.Log("コールバックされました");
         bullet_clone_ = null;
-        //ゲームオーバーか判定（すべての残弾０の場合）
-        if (bullet_counter_.BulletCount(player_params_))
-        {
-            Debug.Log("GameOver");
-            //ステート移行
-            scene_.ChangeState(StateList.StageFinishState);
-        }
+        interval_time = set_interval_time;
     }
 
+    private void GameStatusCheck()
+    {
+        if (!target_obj_counter.ExistTargetObjects(((StageScene)scene_).ObjParams.TargetObjectList))
+        {
+            Debug.Log("ターゲットが全滅");
+            return;
+        }
+        else
+        if (!bullet_counter_.ExistBullets(player_params_))
+        {
+            Debug.Log("ターゲットは生存・弾切れ");
+            return;
+            //ステート移行
+            //scene_.ChangeState(StateList.StageFinishState);
+        }else
+        Debug.Log("ターゲットは生存・残弾あり");
+        return;
+    }
 }
