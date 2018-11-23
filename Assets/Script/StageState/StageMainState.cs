@@ -154,16 +154,22 @@ public class StageMainState : StateBase
         if (!target_obj_counter.ExistTargetObjects(((StageScene)scene_).ObjParams.TargetObjectList))
         {
             Debug.Log("ターゲットが全滅");
+            //ステート移行
+            scene_.GetComponent<StageScene>().GameClearFlag = true;
+            scene_.ChangeState(StateList.StageFinishState,null);
             return;
         }
         else
         if (!bullet_counter_.ExistBullets(player_params_))
         {
             Debug.Log("ターゲットは生存・弾切れ");
-            return;
             //ステート移行
-            //scene_.ChangeState(StateList.StageFinishState);
-        }else
+            scene_.GetComponent<StageScene>().GameOverFlag = true;
+            bool game_over_flag = true;
+            scene_.ChangeState(StateList.StageFinishState,null);
+            return;
+        }
+        else
         Debug.Log("ターゲットは生存・残弾あり");
         return;
     }

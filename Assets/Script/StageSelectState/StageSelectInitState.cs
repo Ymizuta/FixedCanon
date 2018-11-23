@@ -7,7 +7,7 @@ public class StageSelectInitState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        scene_.ChangeState(StateList.StageSelectMainState);
+        scene_.ChangeState(StateList.StageSelectMainState,null);
     }
 
     // Update is called once per frame

@@ -11,6 +11,6 @@ public class TitleMainState : StateBase {
 	
 	// Update is called once per frame
 	void Update () {
-        scene_.ChangeState(StateList.TitleFinishState);
+        scene_.ChangeState(StateList.TitleFinishState,null);
     }
 }

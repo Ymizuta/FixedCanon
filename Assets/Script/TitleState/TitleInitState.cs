@@ -7,7 +7,7 @@ public class TitleInitState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        scene_.ChangeState(StateList.TitleMainState);
+        scene_.ChangeState(StateList.TitleMainState,null);
     }
 
     // Update is called once per frame

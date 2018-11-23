@@ -7,7 +7,17 @@ public class StageFinishState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        Debug.Log("最後の処理まで完了");
+        if (scene_.GetComponent<StageScene>().GameClearFlag)
+        {
+            Debug.Log("フィニッシュ：ゲームクリア！");
+            return;
+        }else
+        if (scene_.GetComponent<StageScene>().GameOverFlag)
+        {
+            Debug.Log("フィニッシュ：ゲームオーバー！");
+            return;
+        }
+        Debug.LogError("フラグが登録されていません。");
     }
 
     // Update is called once per frame

@@ -17,7 +17,7 @@ public class StageInitState : StateBase {
         GameObject stage_object_clone = object_creator_.CreateObject(((StageScene)scene_).ObjParams.StageObject);
         ((StageScene)scene_).ObjParams.Init(stage_object_clone);
 
-        scene_.ChangeState(StateList.StageMainState);
+        scene_.ChangeState(StateList.StageMainState,null);
     }    
 
 }

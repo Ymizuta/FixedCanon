@@ -15,10 +15,8 @@ public class StageScene : SceneBase {
     [SerializeField] StateBase stage_main_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_finish_state_ = null;  //エディターから登録
     private ObjectParams obj_params;                        //ステージオブジェクトのプレハブ、クローンを管理
-
-    private void Start()
-    {
-    }
+    private bool game_clear_flag = false;
+    private bool game_over_flag = false;
 
     public override void Init()
     {
@@ -28,7 +26,7 @@ public class StageScene : SceneBase {
         state_dictionary_[StateList.StageMainState] = stage_main_state_;
         state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
         obj_params = this.GetComponent<ObjectParams>();
-        ChangeState(StateList.StageInitState);
+        ChangeState(StateList.StageInitState,null);
     }
 
     public ObjectParams ObjParams
@@ -38,4 +36,29 @@ public class StageScene : SceneBase {
             return obj_params;
         }
     }
+
+    public bool GameClearFlag
+    {
+        get
+        {
+            return game_clear_flag;
+        }
+        set
+        {
+            game_clear_flag = value;
+        }
+    }
+
+    public bool GameOverFlag
+    {
+        get
+        {
+            return game_over_flag;
+        }
+        set
+        {
+            game_over_flag = value;
+        }
+    }
+
 }

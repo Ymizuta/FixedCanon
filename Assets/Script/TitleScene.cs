@@ -30,7 +30,7 @@ public class TitleScene : SceneBase {
         state_dictionary_[StateList.TitleInitState] = title_init_state_;
         state_dictionary_[StateList.TitleMainState] = title_main_state_;
         state_dictionary_[StateList.TitleFinishState] = title_finish_state_;
-        ChangeState(StateList.TitleInitState);
+        ChangeState(StateList.TitleInitState,null);
     }
 
 }

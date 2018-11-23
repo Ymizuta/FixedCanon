@@ -30,6 +30,6 @@ public class StageSelectScene : SceneBase {
         state_dictionary_[StateList.StageSelectInitState] = stage_select_init_state_;
         state_dictionary_[StateList.StageSelectMainState] = stage_select_main_state_;
         state_dictionary_[StateList.StageSelectFinishState] = stage_select_finish_state_;
-        ChangeState(StateList.StageSelectInitState);
+        ChangeState(StateList.StageSelectInitState,null);
     }
 }
