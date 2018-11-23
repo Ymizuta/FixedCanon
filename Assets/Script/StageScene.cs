@@ -15,9 +15,12 @@ public class StageScene : SceneBase {
     [SerializeField] StateBase stage_init_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_main_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_finish_state_ = null;  //エディターから登録
-    private ObjectParams obj_params;                        //ステージオブジェクトのプレハブ、クローンを管理
-    private bool game_clear_flag;
-    private bool game_over_flag;
+    private ObjectParams obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
+    private bool game_clear_flag_;                          //StageFinishStateでリザルトを判定するフラグ
+    private bool game_over_flag_;                           //StageFinishStateでリザルトを判定するフラグ
+
+    //Jsonファイルからデータを反映させるインスタンス
+    private StageInfo stage_info_ = new StageInfo();
 
     //文字列
     private readonly string JSON_PATH = "Assets\\Json\\stageinfo_";
@@ -29,9 +32,8 @@ public class StageScene : SceneBase {
         int stage_id = 1;   //本番ではステージセレクトシーンからステージIDを受け取る
         //PathからJsonファイルのデータを取得
         string json = File.ReadAllText(JSON_PATH + stage_id.ToString("00")+".json");
-        StageInfo stage_info = new StageInfo();
         //クラスにJsonデータを反映
-        JsonUtility.FromJsonOverwrite(json,stage_info);
+        JsonUtility.FromJsonOverwrite(json,stage_info_);
         //Debug.Log(stage_info.id.ToString("00"));
         //Debug.Log(stage_info.bullet_type[0]);
         //Debug.Log(stage_info.bullet_type[1]);
@@ -43,14 +45,15 @@ public class StageScene : SceneBase {
         state_dictionary_[StateList.StageInitState] = stage_init_state_;
         state_dictionary_[StateList.StageMainState] = stage_main_state_;
         state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
-        obj_params = this.GetComponent<ObjectParams>();
+        obj_params_ = this.GetComponent<ObjectParams>();
         
         //ステージオブジェクトをObjectParamsに登録
-        obj_params.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info.id.ToString("00")) as GameObject;
+        obj_params_.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info_.id.ToString("00")) as GameObject;
 
         //ゲームリザルトの判定に利用するフラグを設定
-        game_over_flag = false;
-        game_clear_flag = false;
+        game_over_flag_ = false;
+        game_clear_flag_ = false;
+
         //ステート移行
         ChangeState(StateList.StageInitState,null);
     }
@@ -60,7 +63,7 @@ public class StageScene : SceneBase {
     {
         get
         {
-            return obj_params;
+            return obj_params_;
         }
     }
 
@@ -69,11 +72,11 @@ public class StageScene : SceneBase {
     {
         get
         {
-            return game_clear_flag;
+            return game_clear_flag_;
         }
         set
         {
-            game_clear_flag = value;
+            game_clear_flag_ = value;
         }
     }
     //ゲームオーバーフラグ（StageFinishStateに渡す）
@@ -81,11 +84,19 @@ public class StageScene : SceneBase {
     {
         get
         {
-            return game_over_flag;
+            return game_over_flag_;
         }
         set
         {
-            game_over_flag = value;
+            game_over_flag_ = value;
+        }
+    }
+
+    public StageInfo StageInfo
+    {
+        get
+        {
+            return stage_info_;
         }
     }
 
