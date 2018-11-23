@@ -6,7 +6,7 @@ public class ObjectParams : MonoBehaviour {
 
     [SerializeField] GameObject stage_object_ = null;       //
     private GameObject stage_object_clone_ = null;          //
-    private List<GameObject> target_object_list_;            //
+    private List<GameObject> target_object_list_;           //
 
     public void Init(GameObject stage_object_clone)
     {
@@ -36,6 +36,10 @@ public class ObjectParams : MonoBehaviour {
         get
         {
             return stage_object_;
+        }
+        set
+        {
+            stage_object_ = value;
         }
     }
 

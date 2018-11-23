@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class StageScene : SceneBase {
 
@@ -18,19 +19,43 @@ public class StageScene : SceneBase {
     private bool game_clear_flag;
     private bool game_over_flag;
 
+    //文字列
+    private readonly string JSON_PATH = "Assets\\Json\\stageinfo_";
+    private readonly string STAGE_OBJ_STR = "StageObject";
+
     public override void Init()
     {
-        //throw new System.NotImplementedException();
+        //Jsonファイルのデータを反映
+        int stage_id = 1;   //本番ではステージセレクトシーンからステージIDを受け取る
+        //PathからJsonファイルのデータを取得
+        string json = File.ReadAllText(JSON_PATH + stage_id.ToString("00")+".json");
+        StageInfo stage_info = new StageInfo();
+        //クラスにJsonデータを反映
+        JsonUtility.FromJsonOverwrite(json,stage_info);
+        //Debug.Log(stage_info.id.ToString("00"));
+        //Debug.Log(stage_info.bullet_type[0]);
+        //Debug.Log(stage_info.bullet_type[1]);
+        //Debug.Log(stage_info.number_of_bullet[0]);
+        //Debug.Log(stage_info.number_of_bullet[1]);
+
+        //初期化
         Debug.Log("ステージシーンを生成");
         state_dictionary_[StateList.StageInitState] = stage_init_state_;
         state_dictionary_[StateList.StageMainState] = stage_main_state_;
         state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
         obj_params = this.GetComponent<ObjectParams>();
+        
+        //ステージオブジェクトをObjectParamsに登録
+        obj_params.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info.id.ToString("00")) as GameObject;
+
+        //ゲームリザルトの判定に利用するフラグを設定
         game_over_flag = false;
         game_clear_flag = false;
+        //ステート移行
         ChangeState(StateList.StageInitState,null);
     }
 
+    //ステートにObjectParamsを渡すためのプロパティ
     public ObjectParams ObjParams
     {
         get
@@ -39,6 +64,7 @@ public class StageScene : SceneBase {
         }
     }
 
+    //ゲームクリアーフラグ（StageFinishStateに渡す）
     public bool GameClearFlag
     {
         get
@@ -50,7 +76,7 @@ public class StageScene : SceneBase {
             game_clear_flag = value;
         }
     }
-
+    //ゲームオーバーフラグ（StageFinishStateに渡す）
     public bool GameOverFlag
     {
         get
