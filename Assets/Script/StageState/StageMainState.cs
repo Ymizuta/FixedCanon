@@ -32,7 +32,7 @@ public class StageMainState : StateBase
     //時間差でゲームオーバー/クリアを判定させる
     private const float default_interval_time = 0;
     private float interval_time = 0;
-    private float set_interval_time = 2f;
+    private float set_interval_time = 0.1f;
 
     private void Start()
     {
@@ -73,8 +73,8 @@ public class StageMainState : StateBase
                 //弾数減少
                 player_params_.ReduceBullet();
                 //弾数カウント（UIへの反映）
-                Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
-                    + player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
+                //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
+                    //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
             }
         }
 
@@ -165,12 +165,11 @@ public class StageMainState : StateBase
             Debug.Log("ターゲットは生存・弾切れ");
             //ステート移行
             scene_.GetComponent<StageScene>().GameOverFlag = true;
-            bool game_over_flag = true;
             scene_.ChangeState(StateList.StageFinishState,null);
             return;
         }
         else
-        Debug.Log("ターゲットは生存・残弾あり");
+        //Debug.Log("ターゲットは生存・残弾あり");
         return;
     }
 }
