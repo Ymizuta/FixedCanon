@@ -126,9 +126,8 @@ public class StageMainState : StateBase
 
     private void OnBulletDieCallBack()
     {
-        Debug.Log("コールバックされました");
+        //Debug.Log("コールバックされました");
         bullet_clone_ = null;
-
         //ゲームオーバーか判定（すべての残弾０の場合）
         if (bullet_counter_.BulletCount(player_params_))
         {
