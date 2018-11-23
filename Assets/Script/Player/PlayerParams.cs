@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class PlayerParams : MonoBehaviour
 {
-
-    [SerializeField] BulletBase[] bullets_ = null;  //砲弾のプレハブ
-    private int[] number_of_bullet_;                //砲弾の弾数
-    private BulletBase loadedbullet_;               //現在装備している砲弾
-    private int bullet_index_;                      //砲弾のプレハブ/弾数のリストのインデックス
-    private int default_bullet_index_ = 0;          //初期のインデックス
+    private GameObject[] bullets_obj_ = null;           //砲弾のプレハブオブジェクト
+    private BulletBase[] bullets_ = null;               //砲弾のインスタンス
+    private int[] number_of_bullet_;                    //砲弾の弾数
+    private BulletBase loadedbullet_;                   //現在装備している砲弾
+    private int bullet_index_;                          //砲弾のプレハブ/弾数のリストのインデックス
+    private int default_bullet_index_ = 0;              //初期のインデックス
+    private readonly string BULLET_PATH = "Bullet/";    //Resourcesフォルダ以下のパス
 
     private void Start()
     {
-        bullet_index_ = default_bullet_index_;
+        //bullet_index_ = default_bullet_index_;
 
-        //弾数初期設定
-        number_of_bullet_ = new int[bullets_.Length];
-        int i;
-        for (i = 0; i < number_of_bullet_.Length; i++)
-        {
-            number_of_bullet_[i] = 5;
-        }
-        //初期装備の弾を装備      
-        loadedbullet_ = bullets_[bullet_index_];
+        ////弾数初期設定
+        //number_of_bullet_ = new int[bullets_.Length];
+        //int i;
+        //for (i = 0; i < number_of_bullet_.Length; i++)
+        //{
+        //    number_of_bullet_[i] = 5;
+        //}
+        ////初期装備の弾を装備      
+        //loadedbullet_ = bullets_[bullet_index_];
     }
 
     //装備中の砲弾の弾数を減少
@@ -43,6 +44,30 @@ public class PlayerParams : MonoBehaviour
 
         loadedbullet_ = bullets_[bullet_index_];
         Debug.Log("現在の弾は" + loadedbullet_);
+    }
+
+    //パラメータの初期化
+    public void InitParams(StageInfo stage_info)
+    {
+        bullet_index_ = default_bullet_index_;
+
+        bullets_obj_ = new GameObject[stage_info.bullet_type.Length];
+        //ステージで利用可能な砲弾を取得
+        for(int bullet_i = 0; bullet_i < stage_info.bullet_type.Length; bullet_i++)
+        {
+            bullets_obj_[bullet_i] = Resources.Load(BULLET_PATH + stage_info.bullet_type[bullet_i]) as GameObject;
+            bullets_[bullet_i] = (BulletBase)bullets_obj_[bullet_i].GetComponent(System.Type.GetType(stage_info.bullet_type[bullet_i]));
+        }
+
+        //弾数初期設定
+        number_of_bullet_ = new int[bullets_.Length];
+        int i;
+        for (i = 0; i < number_of_bullet_.Length; i++)
+        {
+            number_of_bullet_[i] = 5;
+        }
+        //初期装備の弾を装備      
+        loadedbullet_ = bullets_[bullet_index_];
     }
 
     public BulletBase LoadedBullet
