@@ -6,7 +6,7 @@ public class NormalBullet : BulletBase {
 
     public NormalBullet()
     {
-        damage_ = 2;
+        damage_ = 5;
     }
 
 }

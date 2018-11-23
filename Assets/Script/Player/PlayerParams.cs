@@ -20,7 +20,7 @@ public class PlayerParams : MonoBehaviour
         int i;
         for (i = 0; i < number_of_bullet_.Length; i++)
         {
-            number_of_bullet_[i] = 2;
+            number_of_bullet_[i] = 5;
         }
         //初期装備の弾を装備      
         loadedbullet_ = bullets_[bullet_index_];

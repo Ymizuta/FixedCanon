@@ -5,14 +5,13 @@ using UnityEngine;
 public class BulletCounter : MonoBehaviour {
 
     //すべての弾種で弾切れの場合、trueを返す。
-    public bool BulletCount(PlayerParams player_params)
+    public bool ExistBullets(PlayerParams player_params)
     {
-        int i;
-        for(i = 0; i < player_params.NumberOfBullets.Length; i++)
+        for(int i = 0; i < player_params.NumberOfBullets.Length; i++)
         {
             if (player_params.NumberOfBullets[i] != 0)break;
-            if (i == player_params.NumberOfBullets.Length - 1)return true;
+            if (i == player_params.NumberOfBullets.Length - 1)return false;
         }
-        return false;
+        return true;
     }
 }

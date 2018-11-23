@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114240142624133768}
   - component: {fileID: 114075658583825646}
   - component: {fileID: 114323150829407142}
+  - component: {fileID: 114722967001575490}
   m_Layer: 0
   m_Name: StageMainState
   m_TagString: Untagged
@@ -122,10 +123,22 @@ MonoBehaviour:
   player_: {fileID: 1437926661993746, guid: a3aaeb3ab2377b643a5f503808b03ac3, type: 2}
   player_params_: {fileID: 114214999610261642}
   shooter_: {fileID: 114893211477546274}
+  canon_move_: {fileID: 114075658583825646}
   bullet_clone_maker: {fileID: 114323150829407142}
   bullet_changer_: {fileID: 114447097629556814}
   bullet_counter_: {fileID: 114240142624133768}
-  canon_move_: {fileID: 114075658583825646}
+  target_obj_counter: {fileID: 114722967001575490}
+--- !u!114 &114722967001575490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1272130656961720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf0863d04cca8c429d0f9aefd001d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114893211477546274
 MonoBehaviour:
   m_ObjectHideFlags: 1
