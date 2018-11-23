@@ -50,6 +50,8 @@ public class StageMainState : StateBase
         bullet_counter_ = this.GetComponent<BulletCounter>();
         bullet_clone_maker = this.GetComponent<BulletCloneMaker>();
         target_obj_counter = this.GetComponent<TargetObjectCounter>();
+        //パラムスの設定
+        player_params_.InitParams(((StageScene)scene_).StageInfo);
         //プレイヤーオブジェクトの検索・取得
         bullet_clone_maker.Muzzle = GameObject.Find(mazzle_);
         shooter_.Muzzle = GameObject.Find(mazzle_);
