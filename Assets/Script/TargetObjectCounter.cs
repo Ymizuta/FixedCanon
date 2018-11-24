@@ -10,12 +10,12 @@ public class TargetObjectCounter : MonoBehaviour {
         {
             if (target_object_list[i] != null)
             {
-                Debug.Log(target_object_list[i] + "が生きています");
-                Debug.Log("ターゲットは全滅していません");
+                //Debug.Log(target_object_list[i] + "が生きています");
+                //Debug.Log("ターゲットは全滅していません");
                 return true;
             }
         }
-        Debug.Log("ターゲットが全滅");
+        //Debug.Log("ターゲットが全滅");
         return false;
     }
 }

@@ -8,8 +8,8 @@ public class ObjectParams : MonoBehaviour {
     [SerializeField] GameObject stage_object_ = null;       //
     private GameObject stage_object_clone_ = null;          //
     private List<TargetObject> target_object_list_;         //
-    public System.Action OnAllTargetDie;
-    public System.Action OnNotAllTargetDie;
+    public System.Action OnAllTargetDie = null;             //ターゲット全滅時にコールバック
+    public System.Action OnNotAllTargetDie = null;          //ターゲット全滅していないときにコールバック
 
     public void Init(GameObject stage_object_clone)
     {
@@ -64,21 +64,18 @@ public class ObjectParams : MonoBehaviour {
         target_object_list_.Remove(target_obj);
         if (!target_obj_counter.ExistTargetObjects(TargetObjectList))
         {
-            //ターゲットが全滅している場合のコールバック
             //Debug.Log("ターゲットが全滅");
-            //ステート移行
-            //scene_.GetComponent<StageScene>().GameClearFlag = true;
-            //scene_.ChangeState(StateList.StageFinishState, null);
             if (OnAllTargetDie != null)
             {
+                //ターゲットが全滅している場合のコールバック
                 OnAllTargetDie();
             }
             return;
         }
-        //ターゲットが生き残っている場合のコールバック
         else
         if (OnAllTargetDie != null)
         {
+            //ターゲットが生き残っている場合のコールバック
             OnNotAllTargetDie();
         }return;        
     }

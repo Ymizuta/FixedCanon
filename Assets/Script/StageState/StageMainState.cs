@@ -57,7 +57,12 @@ public class StageMainState : StateBase
         shooter_.Muzzle = GameObject.Find(mazzle_);
         canon_move_.CanonBase = GameObject.Find(canon_base_);
         canon_move_.BarrelBase = GameObject.Find(barrel_base_);
+        //コールバック登録
+        ((StageScene)scene_).ObjParams.OnAllTargetDie += OnAllTargetDieCallBack;
+        ((StageScene)scene_).ObjParams.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
     }
+
+
 
     private void Update()
     {
@@ -142,6 +147,27 @@ public class StageMainState : StateBase
         }else
         //Debug.Log("弾が切れています");
         return false;
+    }
+    
+    private void OnAllTargetDieCallBack()
+    {
+        Debug.Log("敵全滅しています！");
+        scene_.GetComponent<StageScene>().GameClearFlag = true;
+        scene_.ChangeState(StateList.StageFinishState,null);
+        return;
+    }
+
+    private void OnNotAllTargetDieCallBack()
+    {
+        if (!bullet_counter_.ExistBullets(player_params_))
+        {
+            Debug.Log("敵全滅せず・弾切れです！");
+            scene_.GetComponent<StageScene>().GameOverFlag = true;
+            scene_.ChangeState(StateList.StageFinishState, null);
+        }
+        else
+            Debug.Log("続行ッ");
+            return;
     }
     
     //private void OnBulletDieCallBack()
