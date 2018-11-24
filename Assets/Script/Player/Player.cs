@@ -13,6 +13,30 @@ public class Player : MonoBehaviour {
     private readonly string canon_base_ = "CanonBase";
     private readonly string barrel_base_ = "BarrelBase";
 
+    public PlayerParams Params
+    {
+        get
+        {
+            return params_;
+        }
+    }
+
+    public CanonMove CanonMove
+    {
+        get
+        {
+            return canon_move_;
+        }
+    }
+
+    public Shooter Shooter
+    {
+        get
+        {
+            return shooter_;
+        }
+    }
+
     // Use this for initialization
     void Start () {
         //初期化
