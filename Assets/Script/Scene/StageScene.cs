@@ -18,8 +18,12 @@ public class StageScene : SceneBase {
     [SerializeField] StateBase stage_init_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_main_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_finish_state_ = null;  //エディターから登録
+
     private Player player_;
     private GameObject player_clone_;
+
+    private BulletManager bullet_manager_;
+
     private ObjectParams obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
     private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
@@ -52,6 +56,14 @@ public class StageScene : SceneBase {
         set
         {
             player_clone_ = value;
+        }
+    }
+
+    public BulletManager BulletManager
+    {
+        get
+        {
+            return bullet_manager_;
         }
     }
 
