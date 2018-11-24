@@ -19,8 +19,8 @@ public class StageScene : SceneBase {
     [SerializeField] StateBase stage_main_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_finish_state_ = null;  //エディターから登録
     private ObjectParams obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
-    private bool game_clear_flag_;                          //StageFinishStateでリザルトを判定するフラグ
-    private bool game_over_flag_;                           //StageFinishStateでリザルトを判定するフラグ
+    private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
+    private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
 
     //Jsonファイルからデータを反映させるインスタンス
     private StageInfo stage_info_ = new StageInfo();
@@ -62,8 +62,8 @@ public class StageScene : SceneBase {
         obj_params_.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info_.id.ToString("00")) as GameObject;
 
         //ゲームリザルトの判定に利用するフラグを設定
-        game_over_flag_ = false;
-        game_clear_flag_ = false;
+        is_game_over_ = false;
+        is_game_clear_ = false;
 
         //ステート移行
         ChangeState(StateList.StageInitState,null);
@@ -79,27 +79,27 @@ public class StageScene : SceneBase {
     }
 
     //ゲームクリアーフラグ（StageFinishStateに渡す）
-    public bool GameClearFlag
+    public bool IsGameClear
     {
         get
         {
-            return game_clear_flag_;
+            return is_game_clear_;
         }
         set
         {
-            game_clear_flag_ = value;
+            is_game_clear_ = value;
         }
     }
     //ゲームオーバーフラグ（StageFinishStateに渡す）
-    public bool GameOverFlag
+    public bool IsGameOver
     {
         get
         {
-            return game_over_flag_;
+            return is_game_over_;
         }
         set
         {
-            game_over_flag_ = value;
+            is_game_over_ = value;
         }
     }
 

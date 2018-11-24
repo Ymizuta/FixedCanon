@@ -7,12 +7,12 @@ public class StageFinishState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        if (scene_.GetComponent<StageScene>().GameClearFlag)
+        if (scene_.GetComponent<StageScene>().IsGameClear)
         {
             Debug.Log("フィニッシュ：ゲームクリア！");
             return;
         }else
-        if (scene_.GetComponent<StageScene>().GameOverFlag)
+        if (scene_.GetComponent<StageScene>().IsGameOver)
         {
             Debug.Log("フィニッシュ：ゲームオーバー！");
             return;

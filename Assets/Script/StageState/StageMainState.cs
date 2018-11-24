@@ -150,7 +150,7 @@ public class StageMainState : StateBase
     private void OnAllTargetDieCallBack()
     {
         Debug.Log("敵全滅しています！");
-        scene_.GetComponent<StageScene>().GameClearFlag = true;
+        scene_.GetComponent<StageScene>().IsGameClear = true;
         scene_.ChangeState(StateList.StageFinishState,null);
         return;
     }
@@ -160,7 +160,7 @@ public class StageMainState : StateBase
         if (!bullet_counter_.ExistBullets(player_params_))
         {
             Debug.Log("敵全滅せず・弾切れです！");
-            scene_.GetComponent<StageScene>().GameOverFlag = true;
+            scene_.GetComponent<StageScene>().IsGameOver = true;
             scene_.ChangeState(StateList.StageFinishState, null);
         }
         else
