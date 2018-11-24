@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BulletBase : MonoBehaviour {
     protected float damage_;
     protected float shoot_power_ = 1000.0f;
-    public System.Action OnBulletDie;
+    //public System.Action OnBulletDie;
 
     public void Init()
     {
@@ -24,13 +24,13 @@ public abstract class BulletBase : MonoBehaviour {
         }
     }
 
-    private void OnDestroy()
-    {
-        if (OnBulletDie != null)
-        {
-            OnBulletDie();
-        }
-    }
+    //private void OnDestroy()
+    //{
+    //    if (OnBulletDie != null)
+    //    {
+    //        OnBulletDie();
+    //    }
+    //}
 
     public float Damage
     {

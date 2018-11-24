@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NormalObject : StageObject {
 
+    public System.Action OnHitNormalObject;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Bullet")
@@ -16,6 +18,10 @@ public class NormalObject : StageObject {
 
     protected override void HitReaction(float damage)
     {
+        if (OnHitNormalObject != null)
+        {
+            OnHitNormalObject();
+        }
         return;
     }
 }

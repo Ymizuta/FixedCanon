@@ -8,34 +8,18 @@ public class ObjectParams : MonoBehaviour {
     [SerializeField] GameObject stage_object_ = null;       //
     private GameObject stage_object_clone_ = null;          //
     private List<TargetObject> target_object_list_;         //
+    private List<NormalObject> normal_object_list;          //
     public System.Action OnAllTargetDie = null;             //ターゲット全滅時にコールバック
     public System.Action OnNotAllTargetDie = null;          //ターゲット全滅していないときにコールバック
 
     public void Init(GameObject stage_object_clone)
     {
         target_obj_counter = this.GetComponent<TargetObjectCounter>();
-
         stage_object_clone_ = stage_object_clone;
-
-        target_object_list_ = new List<TargetObject>();
-        //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
-        foreach (Transform child in stage_object_clone_.transform)
-        {
-            //TargetObjectのタグが付いているものだけ取得
-            if (child.tag == StageObjectList.TargetObject)
-            {
-                TargetObject target_obj_compenent = child.GetComponent<TargetObject>();
-                target_object_list_.Add(target_obj_compenent);
-                //Debug.Log(child.gameObject);
-            }
-        }
-        //ターゲットオブジェクトにコールバック関数を登録
-        for (int i = 0; i < target_object_list_.Count; i++)
-        {
-            //Debug.Log(i + "番目は"+target_object_list[i]);
-            target_object_list_[i].OnTargetObjectDie += OnTargetObjectDieCallBack;
-        }
+        InitTargetObj();
+        InitNormalObj();
     }
+
 
     public GameObject StageObject
     {
@@ -57,6 +41,51 @@ public class ObjectParams : MonoBehaviour {
         }
     }
 
+    //ターゲットオブジェクトの初期化
+    private void InitTargetObj()
+    {
+        target_object_list_ = new List<TargetObject>();
+        //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
+        foreach (Transform child in stage_object_clone_.transform)
+        {
+            if (child.tag == "Untagged") { Debug.LogWarning("タグのないオブジェクトが存在します：" + child); }
+            //TargetObjectのタグが付いているものだけ取得
+            if (child.tag == StageObjectList.TargetObject)
+            {
+                TargetObject target_obj_compenent = child.GetComponent<TargetObject>();
+                if (target_obj_compenent == null) { Debug.LogWarning("コンポーネントがアタッチされてません："+ child); }
+                target_object_list_.Add(target_obj_compenent);
+            }
+        }
+        //ターゲットオブジェクトにコールバック関数を登録
+        for (int i = 0; i < target_object_list_.Count; i++)
+        {
+            target_object_list_[i].OnTargetObjectDie += OnTargetObjectDieCallBack;
+        }
+    }
+
+    private void InitNormalObj()
+    {
+        normal_object_list = new List<NormalObject>();
+        //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
+        foreach (Transform child in stage_object_clone_.transform)
+        {
+            if (child.tag == "Untagged") { Debug.LogWarning("タグのないオブジェクトが存在します：" + child); }
+            //NormalObjectのタグが付いているものだけ取得
+            if (child.tag == StageObjectList.NormalObject)
+            {
+                NormalObject normal_obj_component = child.GetComponent<NormalObject>();
+                if (normal_obj_component == null) { Debug.LogWarning("コンポーネントがアタッチされていません：" + child); }
+                normal_object_list.Add(normal_obj_component);
+            }
+        }
+        //ノーマルオブジェクトにコールバック関数を登録
+        for (int i = 0; i < normal_object_list.Count; i++)
+        {
+            normal_object_list[i].OnHitNormalObject += OnHitoNormalObjCallBack;
+        }
+    }
+
     //ターゲットオブジェクトが破壊された際に呼び出し
     private void OnTargetObjectDieCallBack(TargetObject target_obj)
     {
@@ -73,10 +102,21 @@ public class ObjectParams : MonoBehaviour {
             return;
         }
         else
-        if (OnAllTargetDie != null)
+        if (OnNotAllTargetDie != null)
         {
             //ターゲットが生き残っている場合のコールバック
             OnNotAllTargetDie();
         }return;        
+    }
+
+    private void OnHitoNormalObjCallBack()
+    {
+        //Debug.Log("ノーマルオブジェクトにヒット");
+        if (OnNotAllTargetDie != null)
+        {
+            //ターゲットが生き残っている場合のコールバック
+            OnNotAllTargetDie();
+        }
+        return;
     }
 }

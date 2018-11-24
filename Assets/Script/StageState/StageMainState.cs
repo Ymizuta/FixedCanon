@@ -62,8 +62,6 @@ public class StageMainState : StateBase
         ((StageScene)scene_).ObjParams.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
     }
 
-
-
     private void Update()
     {
         //砲弾発射
