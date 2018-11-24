@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetObject : StageObject {
 
-    public System.Action OnTargetObjectDie;
+    public System.Action<TargetObject> OnTargetObjectDie;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class TargetObject : StageObject {
             Destroy(this.gameObject);
             if (OnTargetObjectDie != null)
             {
-                OnTargetObjectDie();
+                OnTargetObjectDie(this);
             }
         }
     }

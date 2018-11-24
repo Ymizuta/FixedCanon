@@ -6,29 +6,30 @@ public class ObjectParams : MonoBehaviour {
 
     [SerializeField] GameObject stage_object_ = null;       //
     private GameObject stage_object_clone_ = null;          //
-    private List<GameObject> target_object_list_;           //
+    private List<TargetObject> target_object_list_;           //
 
     public void Init(GameObject stage_object_clone)
     {
         stage_object_clone_ = stage_object_clone;
 
-        target_object_list_ = new List<GameObject>();
+        target_object_list_ = new List<TargetObject>();
         //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
         foreach (Transform child in stage_object_clone_.transform)
         {
             //TargetObjectのタグが付いているものだけ取得
             if (child.tag == StageObjectList.TargetObject)
             {
-                target_object_list_.Add(child.gameObject);
+                TargetObject target_obj_compenent = child.GetComponent<TargetObject>();
+                target_object_list_.Add(target_obj_compenent);
                 //Debug.Log(child.gameObject);
             }
         }
-        ////ターゲットオブジェクトにコールバック関数を登録
-        //for (int i = 0; i < target_object_list_.Count; i++)
-        //{
-        //    //Debug.Log(i + "番目は"+target_object_list[i]);
-        //    target_object_list_[i].GetComponent<TargetObject>().OnTargetObjectDie += OnTargetObjectDieCallBack;
-        //}
+        //ターゲットオブジェクトにコールバック関数を登録
+        for (int i = 0; i < target_object_list_.Count; i++)
+        {
+            //Debug.Log(i + "番目は"+target_object_list[i]);
+            target_object_list_[i].OnTargetObjectDie += OnTargetObjectDieCallBack;
+        }
     }
 
     public GameObject StageObject
@@ -43,7 +44,7 @@ public class ObjectParams : MonoBehaviour {
         }
     }
 
-    public List<GameObject> TargetObjectList
+    public List<TargetObject> TargetObjectList
     {
         get
         {
@@ -52,8 +53,11 @@ public class ObjectParams : MonoBehaviour {
     }
 
     //ターゲットオブジェクトが破壊された際に呼び出し
-    private void OnTargetObjectDieCallBack()
+    private void OnTargetObjectDieCallBack(TargetObject target_obj)
     {
+        Debug.Log(target_obj);
+        target_object_list_.Remove(target_obj);
+    
         //for (int i = 0; i < target_object_list.Count; i++)
         //{
         //    if (target_object_list[i] == null)
@@ -62,6 +66,7 @@ public class ObjectParams : MonoBehaviour {
         //    }
         //}
     } 
+
     //public GameObject StageObjectClone
     //{
     //    get

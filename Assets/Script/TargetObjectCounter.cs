@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TargetObjectCounter : MonoBehaviour {
 
-    public bool ExistTargetObjects(List<GameObject> target_object_list)
+    public bool ExistTargetObjects(List<TargetObject> target_object_list)
     {
         for (int i = 0; i < target_object_list.Count; i++)
         {
