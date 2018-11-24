@@ -28,5 +28,11 @@ public abstract class SceneBase : MonoBehaviour {
         }
     }
 
+    protected StateBase GetState(string resource_path,string state_name)
+    {
+        GameObject state_obj = Resources.Load(resource_path + state_name) as GameObject;
+        return ((StateBase)state_obj.GetComponent(System.Type.GetType(state_name)));
+    }
+
     public abstract void Init();
 }

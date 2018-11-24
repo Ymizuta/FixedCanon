@@ -15,15 +15,13 @@ public class StageScene : SceneBase {
     /// [finish_state]クリア→次のステージへ　ゲームオーバー→リトライORステージセレクトへ　　
     /// </summary>
 
-    [SerializeField] StateBase stage_init_state_ = null;    //エディターから登録
-    [SerializeField] StateBase stage_main_state_ = null;    //エディターから登録
-    [SerializeField] StateBase stage_finish_state_ = null;  //エディターから登録
+    private StateBase stage_init_state_ = null;    
+    private StateBase stage_main_state_ = null;  
+    private StateBase stage_finish_state_ = null;
 
     private Player player_;
     private GameObject player_clone_;
-
     private BulletManager bullet_manager_;
-
     private ObjectParams obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
     private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
@@ -32,6 +30,7 @@ public class StageScene : SceneBase {
     private StageInfo stage_info_ = new StageInfo();
 
     //文字列
+    private readonly string STATE_PATH = "State\\";
     private readonly string JSON_PATH = "Assets\\Json\\stageinfo_";
     private readonly string STAGE_OBJ_STR = "StageObject";
 
@@ -73,6 +72,17 @@ public class StageScene : SceneBase {
 
     public override void Init()
     {
+        //配下のステートを取得
+        stage_init_state_ = GetState(STATE_PATH, StateList.StageInitState);
+        stage_main_state_ = GetState(STATE_PATH, StateList.StageMainState);
+        stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
+
+        //GameObject stage_init_state_obj = Resources.Load(STATE_PATH + StateList.StageInitState) as GameObject;
+        //stage_init_state_ = stage_init_state_obj.GetComponent<StageInitState>();
+        //GameObject stage_main_state_obj = Resources.Load(STATE_PATH + StateList.StageMainState) as GameObject;
+        //stage_main_state_ = stage_main_state_obj.GetComponent<StageMainState>();
+        //GameObject stage_finish_state_obj = Resources.Load(STATE_PATH + StateList.StageFinishState) as GameObject;
+        //stage_finish_state_ = stage_finish_state_obj.GetComponent<StageFinishState>();
 
         //テストスクリプト
         //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
