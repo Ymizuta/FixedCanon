@@ -1,14 +1,16 @@
-var stageinfo = [
-		{
-			"id": 1,		
-			"bullet_type":["NormalBullet","SpecialBullet"],
-			"number_of_bullet":[3,1]
-		}
-		,
-		{
-			"id": 2,		
-			"bullet_type":["NormalBullet","SpecialBullet"],
-			"number_of_bullet":[5,2]
-		}
-	]
+{
+	"stage_info_data":{
+		"stage_i":[
+			{
+				"s_id":1,
+				"bullet":"Normal",
+				"restbullet":3
+			},
+			{
+				"s_id":2,
+				"bullet":"Special",
+				"restbullet":5
+			}
+		]
+	}
 }

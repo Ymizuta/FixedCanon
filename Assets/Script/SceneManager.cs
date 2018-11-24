@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManager {
+public class SceneManager{
 
     //private GameObject title_scene_;
     //private GameObject stage_scene_;

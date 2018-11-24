@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
+using System.Runtime.Serialization;
+using System.Text;
 
 public class StageScene : SceneBase {
 
@@ -28,6 +31,14 @@ public class StageScene : SceneBase {
 
     public override void Init()
     {
+        //テストスクリプト
+        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        //Stage stage = new Stage();
+        //JsonUtility.FromJsonOverwrite(tmp_json, stage);
+        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        //var stream = new FileStream("Assets\\Json\\stageinfo.json",FileM);
+        //var serializer = new DataContractSerializer(typeof(Stage));
+
         //Jsonファイルのデータを反映
         int stage_id = 1;   //本番ではステージセレクトシーンからステージIDを受け取る
         //PathからJsonファイルのデータを取得
