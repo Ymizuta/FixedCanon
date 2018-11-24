@@ -143,7 +143,7 @@ public class StageMainState : StateBase
         //Debug.Log("弾が切れています");
         return false;
     }
-
+    
     //private void OnBulletDieCallBack()
     //{
     //    //Debug.Log("コールバックされました");

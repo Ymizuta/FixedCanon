@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class ObjectParams : MonoBehaviour {
 
+    private TargetObjectCounter target_obj_counter;
     [SerializeField] GameObject stage_object_ = null;       //
     private GameObject stage_object_clone_ = null;          //
-    private List<TargetObject> target_object_list_;           //
+    private List<TargetObject> target_object_list_;         //
+    public System.Action OnAllTargetDie;
+    public System.Action OnNotAllTargetDie;
 
     public void Init(GameObject stage_object_clone)
     {
+        target_obj_counter = this.GetComponent<TargetObjectCounter>();
+
         stage_object_clone_ = stage_object_clone;
 
         target_object_list_ = new List<TargetObject>();
@@ -56,6 +61,25 @@ public class ObjectParams : MonoBehaviour {
     private void OnTargetObjectDieCallBack(TargetObject target_obj)
     {
         //コールバックしたTargetObjectをリストから除外
-        target_object_list_.Remove(target_obj);            
-    } 
+        target_object_list_.Remove(target_obj);
+        if (!target_obj_counter.ExistTargetObjects(TargetObjectList))
+        {
+            //ターゲットが全滅している場合のコールバック
+            //Debug.Log("ターゲットが全滅");
+            //ステート移行
+            //scene_.GetComponent<StageScene>().GameClearFlag = true;
+            //scene_.ChangeState(StateList.StageFinishState, null);
+            if (OnAllTargetDie != null)
+            {
+                OnAllTargetDie();
+            }
+            return;
+        }
+        //ターゲットが生き残っている場合のコールバック
+        else
+        if (OnAllTargetDie != null)
+        {
+            OnNotAllTargetDie();
+        }return;        
+    }
 }
