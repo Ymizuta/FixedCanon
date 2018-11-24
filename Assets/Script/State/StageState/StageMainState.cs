@@ -29,15 +29,15 @@ public class StageMainState : StateBase
     //砲弾クローン
     private BulletBase bullet_clone_;
 
-    //時間差でゲームオーバー/クリアを判定させる
-    private const float default_interval_time = 0;
-    private float interval_time = 0;
-    private float set_interval_time = 0.1f;
+    ////時間差でゲームオーバー/クリアを判定させる
+    //private const float default_interval_time = 0;
+    //private float interval_time = 0;
+    //private float set_interval_time = 0.1f;
 
     private void Start()
     {
         //初期設定
-        player_clone_ = Instantiate(player_);
+        //player_clone_ = Instantiate(player_);
         //player_params_ = player_clone_.GetComponent<PlayerParams>();
         //shooter_ = player_clone_.GetComponent<Shooter>();
         //bullet_changer_ = player_clone_.GetComponent<BulletChanger>();

@@ -18,6 +18,8 @@ public class StageScene : SceneBase {
     [SerializeField] StateBase stage_init_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_main_state_ = null;    //エディターから登録
     [SerializeField] StateBase stage_finish_state_ = null;  //エディターから登録
+    private Player player_;
+    private GameObject player_clone_;
     private ObjectParams obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
     private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
@@ -29,8 +31,33 @@ public class StageScene : SceneBase {
     private readonly string JSON_PATH = "Assets\\Json\\stageinfo_";
     private readonly string STAGE_OBJ_STR = "StageObject";
 
+    public Player Player
+    {
+        get
+        {
+            return player_;
+        }
+        set
+        {
+            player_ = value;
+        }
+    }
+
+    public GameObject PlyerClone
+    {
+        get
+        {
+            return player_clone_;
+        }
+        set
+        {
+            player_clone_ = value;
+        }
+    }
+
     public override void Init()
     {
+
         //テストスクリプト
         //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
         //Stage stage = new Stage();
