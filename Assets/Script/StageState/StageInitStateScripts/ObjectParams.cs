@@ -55,27 +55,7 @@ public class ObjectParams : MonoBehaviour {
     //ターゲットオブジェクトが破壊された際に呼び出し
     private void OnTargetObjectDieCallBack(TargetObject target_obj)
     {
-        Debug.Log(target_obj);
-        target_object_list_.Remove(target_obj);
-    
-        //for (int i = 0; i < target_object_list.Count; i++)
-        //{
-        //    if (target_object_list[i] == null)
-        //    {
-        //        Debug.Log(i + "番目は破壊されています");
-        //    }
-        //}
+        //コールバックしたTargetObjectをリストから除外
+        target_object_list_.Remove(target_obj);            
     } 
-
-    //public GameObject StageObjectClone
-    //{
-    //    get
-    //    {
-    //        return stage_object_clone_;
-    //    }
-    //    set
-    //    {
-    //        stage_object_clone_ = value;
-    //    }
-    //}
 }

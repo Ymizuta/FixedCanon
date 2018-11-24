@@ -69,7 +69,7 @@ public class StageMainState : StateBase
             if (IsRestOfBullets()) {
 
                 bullet_clone_ = bullet_clone_maker.BulletCloneMake(player_params_.LoadedBullet);
-                bullet_clone_.OnBulletDie += this.OnBulletDieCallBack;
+                //bullet_clone_.OnBulletDie += this.OnBulletDieCallBack;
                 shooter_.Shoot(bullet_clone_);
                 //shooter_.Shoot(player_params_.LoadedBullet);
                 //弾数減少
@@ -122,16 +122,16 @@ public class StageMainState : StateBase
             //必要な処理があれば追加
         }
 
-        //ゲームオーバー/クリアのチェックを行うまでのインターバルタイム設定
-        if(interval_time > default_interval_time)
-        {
-            interval_time -= Time.deltaTime;
-            if (interval_time <= default_interval_time)
-            {
-                interval_time = default_interval_time;
-                GameStatusCheck();
-            }
-        }
+        ////ゲームオーバー/クリアのチェックを行うまでのインターバルタイム設定
+        //if(interval_time > default_interval_time)
+        //{
+        //    interval_time -= Time.deltaTime;
+        //    if (interval_time <= default_interval_time)
+        //    {
+        //        interval_time = default_interval_time;
+        //        GameStatusCheck();
+        //    }
+        //}
     }
 
     //残りの砲弾の有無を判定(発射できるかできないかの判定)
@@ -144,34 +144,34 @@ public class StageMainState : StateBase
         return false;
     }
 
-    private void OnBulletDieCallBack()
-    {
-        //Debug.Log("コールバックされました");
-        bullet_clone_ = null;
-        interval_time = set_interval_time;
-    }
+    //private void OnBulletDieCallBack()
+    //{
+    //    //Debug.Log("コールバックされました");
+    //    bullet_clone_ = null;
+    //    interval_time = set_interval_time;
+    //}
 
-    private void GameStatusCheck()
-    {
-        if (!target_obj_counter.ExistTargetObjects(((StageScene)scene_).ObjParams.TargetObjectList))
-        {
-            Debug.Log("ターゲットが全滅");
-            //ステート移行
-            scene_.GetComponent<StageScene>().GameClearFlag = true;
-            scene_.ChangeState(StateList.StageFinishState,null);
-            return;
-        }
-        else
-        if (!bullet_counter_.ExistBullets(player_params_))
-        {
-            Debug.Log("ターゲットは生存・弾切れ");
-            //ステート移行
-            scene_.GetComponent<StageScene>().GameOverFlag = true;
-            scene_.ChangeState(StateList.StageFinishState,null);
-            return;
-        }
-        else
-        //Debug.Log("ターゲットは生存・残弾あり");
-        return;
-    }
+    //private void GameStatusCheck()
+    //{
+    //    if (!target_obj_counter.ExistTargetObjects(((StageScene)scene_).ObjParams.TargetObjectList))
+    //    {
+    //        Debug.Log("ターゲットが全滅");
+    //        //ステート移行
+    //        scene_.GetComponent<StageScene>().GameClearFlag = true;
+    //        scene_.ChangeState(StateList.StageFinishState,null);
+    //        return;
+    //    }
+    //    else
+    //    if (!bullet_counter_.ExistBullets(player_params_))
+    //    {
+    //        Debug.Log("ターゲットは生存・弾切れ");
+    //        //ステート移行
+    //        scene_.GetComponent<StageScene>().GameOverFlag = true;
+    //        scene_.ChangeState(StateList.StageFinishState,null);
+    //        return;
+    //    }
+    //    else
+    //    //Debug.Log("ターゲットは生存・残弾あり");
+    //    return;
+    //}
 }
