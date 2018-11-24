@@ -22,6 +22,10 @@ public class StageInitState : StateBase {
         stage_scene.PlyerClone = player_clone;
         stage_scene.Player = player;
 
+        //Bulletマネージャー初期化
+        stage_scene.BulletManager = stage_scene.GetComponent<BulletManager>();
+        stage_scene.BulletManager.SetUp();
+
         //ステート移行
         scene_.ChangeState(StateList.StageMainState,null);
     }    

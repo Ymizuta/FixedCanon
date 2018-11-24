@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class StageMainState : StateBase
 {
-    [SerializeField] BulletCloneMaker bullet_clone_maker = null;
-    [SerializeField] BulletChanger bullet_changer_ = null;
-    [SerializeField] BulletCounter bullet_counter_ = null;
+    //[SerializeField] BulletCloneMaker bullet_clone_maker = null;
+    //[SerializeField] BulletChanger bullet_changer_ = null;
+    //[SerializeField] BulletCounter bullet_counter_ = null;
     [SerializeField] TargetObjectCounter target_obj_counter = null;
 
     private Player player_;
     private StageScene stage_scene_;
+    private BulletManager bullet_manager_;
 
     //プレイヤークローンのオブジェクト検索用の文字列
     private readonly string mazzle_ = "Mazzle";
-    private readonly string canon_base_ = "CanonBase";
-    private readonly string barrel_base_ = "BarrelBase";
 
     //タッチ操作関連
     private Vector3 touch_poz_;
@@ -32,15 +31,16 @@ public class StageMainState : StateBase
         //初期設定
         stage_scene_ = ((StageScene)scene_);
         player_ = stage_scene_.Player;
+        bullet_manager_ = stage_scene_.BulletManager;
 
-        bullet_changer_ = this.GetComponent<BulletChanger>();
-        bullet_counter_ = this.GetComponent<BulletCounter>();
-        bullet_clone_maker = this.GetComponent<BulletCloneMaker>();
         target_obj_counter = this.GetComponent<TargetObjectCounter>();
+
         //パラムスの設定
-        player_.Params.InitParams(((StageScene)scene_).StageInfo);
+        bullet_manager_.Params.InitParams(stage_scene_.StageInfo);
+
         //プレイヤーオブジェクトの検索・取得
-        bullet_clone_maker.Muzzle = GameObject.Find(mazzle_);
+        bullet_manager_.BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
+        
         //コールバック登録
         ((StageScene)scene_).ObjParams.OnAllTargetDie += OnAllTargetDieCallBack;
         ((StageScene)scene_).ObjParams.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
@@ -54,10 +54,10 @@ public class StageMainState : StateBase
         {
             //砲弾発射
             if (IsRestOfBullets()) {
-                bullet_clone_ = bullet_clone_maker.BulletCloneMake(player_.Params.LoadedBullet);
+                bullet_clone_ = bullet_manager_.BulletClonMaker.BulletCloneMake(bullet_manager_.Params.LoadedBullet);
                 player_.Shooter.Shoot(bullet_clone_);
                 //弾数減少
-                player_.Params.ReduceBullet();
+                bullet_manager_.Params.ReduceBullet();
                 //弾数カウント（UIへの反映）
                 //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
                     //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
@@ -69,7 +69,7 @@ public class StageMainState : StateBase
         if (Input.GetMouseButtonDown(1))
         {
             //砲弾の種類変更
-            bullet_changer_.ChangeBullet(player_.Params);
+            bullet_manager_.BulletChanger.ChangeBullet(bullet_manager_.Params);
         }
 
         //砲台・砲身の角度調整
@@ -110,7 +110,7 @@ public class StageMainState : StateBase
     //残りの砲弾の有無を判定(発射できるかできないかの判定)
     private bool IsRestOfBullets()
     {
-        if (player_.Params.NumberOfBullets[player_.Params.BulletIndex] > 0){
+        if (bullet_manager_.Params.NumberOfBullets[bullet_manager_.Params.BulletIndex] > 0){
             return true;
         }else
         //Debug.Log("弾が切れています");
@@ -127,7 +127,7 @@ public class StageMainState : StateBase
 
     private void OnNotAllTargetDieCallBack()
     {
-        if (!bullet_counter_.ExistBullets(player_.Params))
+        if (!bullet_manager_.BulletCounter.ExistBullets(bullet_manager_.Params))
         {
             Debug.Log("敵全滅せず・弾切れです！");
             scene_.GetComponent<StageScene>().IsGameOver = true;

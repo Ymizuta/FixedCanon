@@ -9,13 +9,14 @@ public class BulletManager : MonoBehaviour {
     private BulletCloneMaker bullet_clone_maker_;
     private BulletCounter bullet_counter_;
 
-	// Use this for initialization
-	void Start () {
+    //初期化
+    public void SetUp()
+    {
         params_ = this.GetComponent<BulletParams>();
         bullet_changer_ = this.GetComponent<BulletChanger>();
         bullet_clone_maker_ = this.GetComponent<BulletCloneMaker>();
         bullet_counter_ = this.GetComponent<BulletCounter>();
-	}	
+    }
 
     public BulletParams Params
     {

@@ -65,6 +65,10 @@ public class StageScene : SceneBase {
         {
             return bullet_manager_;
         }
+        set
+        {
+            bullet_manager_ = value;
+        }
     }
 
     public override void Init()

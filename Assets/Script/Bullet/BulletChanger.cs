@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BulletChanger : MonoBehaviour {
 
-    public void ChangeBullet(PlayerParams player_params)
+    public void ChangeBullet(BulletParams bullet_params)
     {
-        player_params.SetBullet();
+        bullet_params.SetBullet();
     }
 }
