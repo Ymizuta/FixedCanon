@@ -22,7 +22,7 @@ public class StageScene : SceneBase {
     private Player player_;
     private GameObject player_clone_;
     private BulletManager bullet_manager_;
-    private StageObjectParams stage_obj_params_;          //ステージオブジェクトのプレハブ、クローンを管理
+    private StageObjectManager stage_obj_manager;
     private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
 
@@ -32,7 +32,7 @@ public class StageScene : SceneBase {
     //文字列
     private readonly string STATE_PATH = "State\\";
     private readonly string JSON_PATH = "Assets\\Json\\stageinfo_";
-    private readonly string STAGE_OBJ_STR = "StageObject";
+    //private readonly string STAGE_OBJ_STR = "StageObject";
 
     public Player Player
     {
@@ -70,57 +70,15 @@ public class StageScene : SceneBase {
         }
     }
 
-    public override void Init()
-    {
-        //配下のステートを取得
-        stage_init_state_ = GetState(STATE_PATH, StateList.StageInitState);
-        stage_main_state_ = GetState(STATE_PATH, StateList.StageMainState);
-        stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
-
-        //テストスクリプト
-        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
-        //Stage stage = new Stage();
-        //JsonUtility.FromJsonOverwrite(tmp_json, stage);
-        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
-        //var stream = new FileStream("Assets\\Json\\stageinfo.json",FileM);
-        //var serializer = new DataContractSerializer(typeof(Stage));
-
-        //Jsonファイルのデータを反映
-        int stage_id = 1;   //本番ではステージセレクトシーンからステージIDを受け取る
-        //PathからJsonファイルのデータを取得
-        string json = File.ReadAllText(JSON_PATH + stage_id.ToString("00")+".json");
-        //クラスにJsonデータを反映
-        JsonUtility.FromJsonOverwrite(json,stage_info_);
-        //Debug.Log(stage_info.id.ToString("00"));
-        //Debug.Log(stage_info.bullet_type[0]);
-        //Debug.Log(stage_info.bullet_type[1]);
-        //Debug.Log(stage_info.number_of_bullet[0]);
-        //Debug.Log(stage_info.number_of_bullet[1]);
-
-        //初期化
-        Debug.Log("ステージシーンを生成");
-        state_dictionary_[StateList.StageInitState] = stage_init_state_;
-        state_dictionary_[StateList.StageMainState] = stage_main_state_;
-        state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
-        stage_obj_params_ = this.GetComponent<StageObjectParams>();
-        
-        //ステージオブジェクトをObjectParamsに登録
-        stage_obj_params_.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info_.id.ToString("00")) as GameObject;
-
-        //ゲームリザルトの判定に利用するフラグを設定
-        is_game_over_ = false;
-        is_game_clear_ = false;
-
-        //ステート移行
-        ChangeState(StateList.StageInitState,null);
-    }
-
-    //ステートにObjectParamsを渡すためのプロパティ
-    public StageObjectParams ObjParams
+    public StageObjectManager StageObjectManager
     {
         get
         {
-            return stage_obj_params_;
+            return stage_obj_manager;
+        }
+        set
+        {
+            stage_obj_manager = value;
         }
     }
 
@@ -157,6 +115,50 @@ public class StageScene : SceneBase {
         }
     }
 
+    public override void Init()
+    {
+        //配下のステートを取得
+        stage_init_state_ = GetState(STATE_PATH, StateList.StageInitState);
+        stage_main_state_ = GetState(STATE_PATH, StateList.StageMainState);
+        stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
+
+        //テストスクリプト
+        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        //Stage stage = new Stage();
+        //JsonUtility.FromJsonOverwrite(tmp_json, stage);
+        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        //var stream = new FileStream("Assets\\Json\\stageinfo.json",FileM);
+        //var serializer = new DataContractSerializer(typeof(Stage));
+
+        //Jsonファイルのデータを反映
+        int stage_id = 1;   //本番ではステージセレクトシーンからステージIDを受け取る
+        //PathからJsonファイルのデータを取得
+        string json = File.ReadAllText(JSON_PATH + stage_id.ToString("00")+".json");
+        //クラスにJsonデータを反映
+        JsonUtility.FromJsonOverwrite(json,stage_info_);
+        //Debug.Log(stage_info.id.ToString("00"));
+        //Debug.Log(stage_info.bullet_type[0]);
+        //Debug.Log(stage_info.bullet_type[1]);
+        //Debug.Log(stage_info.number_of_bullet[0]);
+        //Debug.Log(stage_info.number_of_bullet[1]);
+
+        //初期化
+        Debug.Log("ステージシーンを生成");
+        state_dictionary_[StateList.StageInitState] = stage_init_state_;
+        state_dictionary_[StateList.StageMainState] = stage_main_state_;
+        state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
+        
+        //ステージオブジェクトをObjectParamsに登録
+        //stage_obj_manager.Params.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info_.id.ToString("00")) as GameObject;
+
+        //ゲームリザルトの判定に利用するフラグを設定
+        is_game_over_ = false;
+        is_game_clear_ = false;
+
+        //ステート移行
+        ChangeState(StateList.StageInitState,null);
+    }
+
     private void OnDestroy()
     {
         stage_init_state_ = null;
@@ -165,7 +167,7 @@ public class StageScene : SceneBase {
         player_ = null;
         player_clone_ = null;
         bullet_manager_ = null;
-        stage_obj_params_ = null;
+        stage_obj_manager = null;
         stage_info_ = null;
     }
 }

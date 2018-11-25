@@ -5,12 +5,12 @@ using UnityEngine;
 public class StageObjectManager : MonoBehaviour {
 
     private StageObjectParams params_;
-    private TargetObjectCounter target_obj_counter;
+    private TargetObjectCounter target_obj_counter_;
 
     public void Setup()
     {
         params_ = this.GetComponent<StageObjectParams>();
-        target_obj_counter = this.GetComponent<TargetObjectCounter>();
+        target_obj_counter_ = this.GetComponent<TargetObjectCounter>();
     }
 	
     public StageObjectParams Params
@@ -25,13 +25,13 @@ public class StageObjectManager : MonoBehaviour {
     {
         get
         {
-            return target_obj_counter;
+            return target_obj_counter_;
         }
     }
 
     private void OnDestroy()
     {
         params_ = null;
-        target_obj_counter = null;
+        target_obj_counter_ = null;
     }
 }

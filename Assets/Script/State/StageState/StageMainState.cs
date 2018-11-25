@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class StageMainState : StateBase
 {
-    //[SerializeField] TargetObjectCounter target_obj_counter = null;
-
-    private Player player_;
+    //StageSceneのメンバ
     private StageScene stage_scene_;
-    private BulletManager bullet_manager_;
+    private StageObjectManager stage_obj_manager;
+    private Player player_;
+    private BulletManager bullet_manager_;    
+    //砲弾クローン
+    private BulletBase bullet_clone_;
 
     //プレイヤークローンのオブジェクト検索用の文字列
     private readonly string mazzle_ = "Mazzle";
@@ -20,27 +22,20 @@ public class StageMainState : StateBase
     private float horizontal_direction_;                    //CanonMoveの水平回転処理の引数
     private float vertical_direction_;                      //CanonMoveの仰角調整処理の引数
 
-    //砲弾クローン
-    private BulletBase bullet_clone_;
-
     private void Start()
     {
         //初期設定
         stage_scene_ = ((StageScene)scene_);
+        stage_obj_manager = stage_scene_.StageObjectManager;
         player_ = stage_scene_.Player;
         bullet_manager_ = stage_scene_.BulletManager;
-
-        //target_obj_counter = this.GetComponent<TargetObjectCounter>();
-
-        //パラムスの設定
-        bullet_manager_.Params.InitParams(stage_scene_.StageInfo);
 
         //プレイヤーオブジェクトの検索・取得
         bullet_manager_.BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
         
         //コールバック登録
-        ((StageScene)scene_).ObjParams.OnAllTargetDie += OnAllTargetDieCallBack;
-        ((StageScene)scene_).ObjParams.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
+        stage_obj_manager.Params.OnAllTargetDie += OnAllTargetDieCallBack;
+        stage_obj_manager.Params.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
     }
 
     private void Update()
@@ -138,9 +133,10 @@ public class StageMainState : StateBase
     private void OnDestroy()
     {
         scene_ = null;
-        player_ = null;
         stage_scene_ = null;
+        stage_obj_manager = null;
+        player_ = null;
         bullet_manager_ = null;
+        bullet_clone_ = null;
     }
-
 }
