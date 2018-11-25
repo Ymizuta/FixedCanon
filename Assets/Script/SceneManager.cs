@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SceneManager{
 
-    //private GameObject title_scene_;
-    //private GameObject stage_scene_;
-    //private GameObject stage_select_scene_;
     Dictionary<string, SceneBase> scene_dictionary 
         = new Dictionary<string, SceneBase>();              //SceneListに登録している文字列をキーにしてシーンを登録するディクショナリ
     private GameObject current_scene_obj_;                  //現在のシーンクラスを持つオブジェクト

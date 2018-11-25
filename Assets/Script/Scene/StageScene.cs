@@ -22,7 +22,7 @@ public class StageScene : SceneBase {
     private Player player_;
     private GameObject player_clone_;
     private BulletManager bullet_manager_;
-    private ObjectParams obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
+    private StageObjectParams stage_obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
     private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
 
@@ -109,10 +109,10 @@ public class StageScene : SceneBase {
         state_dictionary_[StateList.StageInitState] = stage_init_state_;
         state_dictionary_[StateList.StageMainState] = stage_main_state_;
         state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
-        obj_params_ = this.GetComponent<ObjectParams>();
+        stage_obj_params_ = this.GetComponent<StageObjectParams>();
         
         //ステージオブジェクトをObjectParamsに登録
-        obj_params_.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info_.id.ToString("00")) as GameObject;
+        stage_obj_params_.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info_.id.ToString("00")) as GameObject;
 
         //ゲームリザルトの判定に利用するフラグを設定
         is_game_over_ = false;
@@ -123,11 +123,11 @@ public class StageScene : SceneBase {
     }
 
     //ステートにObjectParamsを渡すためのプロパティ
-    public ObjectParams ObjParams
+    public StageObjectParams ObjParams
     {
         get
         {
-            return obj_params_;
+            return stage_obj_params_;
         }
     }
 

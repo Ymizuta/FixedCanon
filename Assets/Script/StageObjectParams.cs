@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectParams : MonoBehaviour {
+public class StageObjectParams : MonoBehaviour {
 
     private TargetObjectCounter target_obj_counter;
     [SerializeField] GameObject stage_object_ = null;       //

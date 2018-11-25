@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class StageMainState : StateBase
 {
-    //[SerializeField] BulletCloneMaker bullet_clone_maker = null;
-    //[SerializeField] BulletChanger bullet_changer_ = null;
-    //[SerializeField] BulletCounter bullet_counter_ = null;
     [SerializeField] TargetObjectCounter target_obj_counter = null;
 
     private Player player_;
