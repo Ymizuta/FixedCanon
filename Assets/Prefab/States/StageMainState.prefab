@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4139702323652264}
   - component: {fileID: 114649632683369890}
-  - component: {fileID: 114722967001575490}
   m_Layer: 0
   m_Name: StageMainState
   m_TagString: Untagged
@@ -53,15 +52,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene_: {fileID: 0}
-  target_obj_counter: {fileID: 114722967001575490}
---- !u!114 &114722967001575490
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1272130656961720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cf0863d04cca8c429d0f9aefd001d3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

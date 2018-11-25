@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageMainState : StateBase
 {
-    [SerializeField] TargetObjectCounter target_obj_counter = null;
+    //[SerializeField] TargetObjectCounter target_obj_counter = null;
 
     private Player player_;
     private StageScene stage_scene_;
@@ -30,7 +30,7 @@ public class StageMainState : StateBase
         player_ = stage_scene_.Player;
         bullet_manager_ = stage_scene_.BulletManager;
 
-        target_obj_counter = this.GetComponent<TargetObjectCounter>();
+        //target_obj_counter = this.GetComponent<TargetObjectCounter>();
 
         //パラムスの設定
         bullet_manager_.Params.InitParams(stage_scene_.StageInfo);
