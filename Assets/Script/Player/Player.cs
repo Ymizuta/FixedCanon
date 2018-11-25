@@ -48,4 +48,11 @@ public class Player : MonoBehaviour {
         canon_move_.CanonBase = GameObject.Find(canon_base_);
         canon_move_.BarrelBase = GameObject.Find(barrel_base_);
     }
+
+    private void OnDestroy()
+    {
+        params_ = null;
+        canon_move_ = null;
+        shooter_ = null;
+    }
 }

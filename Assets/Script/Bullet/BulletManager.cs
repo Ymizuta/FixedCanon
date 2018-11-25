@@ -49,4 +49,12 @@ public class BulletManager : MonoBehaviour {
             return bullet_counter_;
         }
     }
+
+    private void OnDestroy()
+    {
+        params_ = null;
+        bullet_changer_ = null;
+        bullet_clone_maker_ = null;
+        bullet_counter_ = null;
+    }
 }

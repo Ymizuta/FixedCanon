@@ -22,7 +22,7 @@ public class StageScene : SceneBase {
     private Player player_;
     private GameObject player_clone_;
     private BulletManager bullet_manager_;
-    private StageObjectParams stage_obj_params_;                       //ステージオブジェクトのプレハブ、クローンを管理
+    private StageObjectParams stage_obj_params_;          //ステージオブジェクトのプレハブ、クローンを管理
     private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
 
@@ -76,13 +76,6 @@ public class StageScene : SceneBase {
         stage_init_state_ = GetState(STATE_PATH, StateList.StageInitState);
         stage_main_state_ = GetState(STATE_PATH, StateList.StageMainState);
         stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
-
-        //GameObject stage_init_state_obj = Resources.Load(STATE_PATH + StateList.StageInitState) as GameObject;
-        //stage_init_state_ = stage_init_state_obj.GetComponent<StageInitState>();
-        //GameObject stage_main_state_obj = Resources.Load(STATE_PATH + StateList.StageMainState) as GameObject;
-        //stage_main_state_ = stage_main_state_obj.GetComponent<StageMainState>();
-        //GameObject stage_finish_state_obj = Resources.Load(STATE_PATH + StateList.StageFinishState) as GameObject;
-        //stage_finish_state_ = stage_finish_state_obj.GetComponent<StageFinishState>();
 
         //テストスクリプト
         //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
@@ -164,4 +157,15 @@ public class StageScene : SceneBase {
         }
     }
 
+    private void OnDestroy()
+    {
+        stage_init_state_ = null;
+        stage_main_state_ = null;
+        stage_finish_state_ = null;
+        player_ = null;
+        player_clone_ = null;
+        bullet_manager_ = null;
+        stage_obj_params_ = null;
+        stage_info_ = null;
+    }
 }

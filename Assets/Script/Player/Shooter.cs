@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour {
 
-    //[SerializeField] GameObject muzzle_;       //砲弾を生成・発射するオブジェクト（エディターから登録）
-    [SerializeField] GameObject muzzle_ = null;       //砲弾を生成・発射するオブジェクト
+    private GameObject muzzle_ = null;       //砲弾を生成・発射するオブジェクト
     public System.Action OnBulletDye;
 
     public void Shoot(BulletBase bullet_clone)
@@ -24,5 +23,11 @@ public class Shooter : MonoBehaviour {
         {
             muzzle_ = value;
         }
+    }
+
+    private void OnDestroy()
+    {
+        muzzle_ = null;
+        OnBulletDye = null;
     }
 }

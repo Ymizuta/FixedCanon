@@ -134,4 +134,13 @@ public class StageMainState : StateBase
             Debug.Log("続行ッ");
             return;
     }
+
+    private void OnDestroy()
+    {
+        scene_ = null;
+        player_ = null;
+        stage_scene_ = null;
+        bullet_manager_ = null;
+    }
+
 }

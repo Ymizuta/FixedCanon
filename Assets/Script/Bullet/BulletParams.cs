@@ -82,4 +82,12 @@ public class BulletParams : MonoBehaviour {
             return bullet_index_;
         }
     }
+
+    private void OnDestroy()
+    {
+        bullets_obj_ = null;
+        bullets_ = null;
+        number_of_bullet_ = null;
+        loadedbullet_ = null;
+    }
 }

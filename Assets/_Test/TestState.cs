@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class TestState : MonoBehaviour {
 
-	// Use this for initialization
+    private TestComponent test_comp;
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("サーイエッサー！");
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Debug.Log("サーイエッサー！");
+        //    test_comp = ((TestComponent)gameObject.AddComponent(System.Type.GetType("TestComponent")));
+        //}
 	}
 }
