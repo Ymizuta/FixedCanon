@@ -60,6 +60,7 @@ public class StageMainState : StateBase
         //ユーザ操作を受けて(UserOperationクラスで実装)
         if (Input.GetMouseButtonDown(1))
         {
+            Debug.Log(GameObject.FindGameObjectsWithTag(StageObjectList.TargetObject));
             //砲弾の種類変更
             bullet_manager_.BulletChanger.ChangeBullet(bullet_manager_.Params);
         }

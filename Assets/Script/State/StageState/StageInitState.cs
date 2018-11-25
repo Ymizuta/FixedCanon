@@ -27,7 +27,7 @@ public class StageInitState : StateBase {
         //初期化処理：要修正
         string STAGE_OBJ_STR = "StageObject";
         stage_scene.StageObjectManager.Params.StageObject
-            = Resources.Load(STAGE_OBJ_STR + stage_scene.StageInfo.id.ToString("00")) as GameObject;
+            = Resources.Load(STAGE_OBJ_STR + stage_scene.StageInfo.StageID.ToString("00")) as GameObject;
  
         //オブジェクトパラムスにステージオブジェクトのクローンを渡す
         GameObject stage_object_clone

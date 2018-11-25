@@ -34,22 +34,23 @@ public class BulletParams : MonoBehaviour {
     //パラメータの初期化
     public void InitParams(StageInfo stage_info)
     {
-        bullets_obj_ = new GameObject[stage_info.bullet_type.Length];
+        //配列を初期化
+        bullets_obj_ = new GameObject[stage_info.UsableBullets.Length];
         bullets_ = new BulletBase[bullets_obj_.Length];
         number_of_bullet_ = new int[bullets_.Length];
         //ステージで利用可能な砲弾を取得
-        for (int i = 0; i < stage_info.bullet_type.Length; i++)
+        for (int i = 0; i < stage_info.UsableBullets.Length; i++)
         {
             //Bulletのプレハブオブジェクトを取得
-            bullets_obj_[i] = Resources.Load(BULLET_PATH + stage_info.bullet_type[i]) as GameObject;
+            bullets_obj_[i] = Resources.Load(BULLET_PATH + stage_info.UsableBullets[i]) as GameObject;
             //Bulletの種類ごとのコンポーネントを取得
-            bullets_[i] = (BulletBase)bullets_obj_[i].GetComponent(System.Type.GetType(stage_info.bullet_type[i]));
+            bullets_[i] = (BulletBase)bullets_obj_[i].GetComponent(System.Type.GetType(stage_info.UsableBullets[i]));
             //各砲弾の弾数設定
-            number_of_bullet_[i] = stage_info.number_of_bullet[i];
+            number_of_bullet_[i] = stage_info.NumberObBullets[i];
         }
         //初期装備の弾を装備      
         bullet_index_ = default_bullet_index_;
-        loadedbullet_ = bullets_[bullet_index_];
+        loadedbullet_ = bullets_[bullet_index_];        
     }
 
     public BulletBase LoadedBullet

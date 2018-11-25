@@ -26,8 +26,8 @@ GameObject:
   - component: {fileID: 114489870344620692}
   - component: {fileID: 114456744818516636}
   - component: {fileID: 114264828300031918}
-  - component: {fileID: 114971542505890518}
   - component: {fileID: 114017532383429100}
+  - component: {fileID: 114971542505890518}
   m_Layer: 0
   m_Name: StageScene
   m_TagString: Untagged

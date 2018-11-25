@@ -122,25 +122,13 @@ public class StageScene : SceneBase {
         stage_main_state_ = GetState(STATE_PATH, StateList.StageMainState);
         stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
 
-        //テストスクリプト
-        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
-        //Stage stage = new Stage();
-        //JsonUtility.FromJsonOverwrite(tmp_json, stage);
-        //string tmp_json = File.ReadAllText("Assets\\Json\\stageinfo.json");
-        //var stream = new FileStream("Assets\\Json\\stageinfo.json",FileM);
-        //var serializer = new DataContractSerializer(typeof(Stage));
-
-        //Jsonファイルのデータを反映
-        int stage_id = 1;   //本番ではステージセレクトシーンからステージIDを受け取る
-        //PathからJsonファイルのデータを取得
-        string json = File.ReadAllText(JSON_PATH + stage_id.ToString("00")+".json");
-        //クラスにJsonデータを反映
-        JsonUtility.FromJsonOverwrite(json,stage_info_);
-        //Debug.Log(stage_info.id.ToString("00"));
-        //Debug.Log(stage_info.bullet_type[0]);
-        //Debug.Log(stage_info.bullet_type[1]);
-        //Debug.Log(stage_info.number_of_bullet[0]);
-        //Debug.Log(stage_info.number_of_bullet[1]);
+        //ステージ情報取得
+        int selected_stage_id = 2;
+        string json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        StageInfoTable stage_info_table = new StageInfoTable();
+        stage_info_table.stage_info_list_ = new List<StageInfo>();
+        stage_info_table = JsonUtility.FromJson<StageInfoTable>(json);
+        stage_info_ = stage_info_table.stage_info_list_[selected_stage_id - 1];
 
         //初期化
         Debug.Log("ステージシーンを生成");

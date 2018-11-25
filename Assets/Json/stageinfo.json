@@ -1,16 +1,16 @@
 {
-	"stage_info_data":{
-		"stage_i":[
-			{
-				"s_id":1,
-				"bullet":"Normal",
-				"restbullet":3
-			},
-			{
-				"s_id":2,
-				"bullet":"Special",
-				"restbullet":5
-			}
-		]
-	}
+"stage_info_list_":[
+		{"stage_id_":1,
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[3]
+		 },
+		{"stage_id_":2,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[5,2]
+		 },
+		{"stage_id_":3,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[3,3]
+		 }
+	]
 }
