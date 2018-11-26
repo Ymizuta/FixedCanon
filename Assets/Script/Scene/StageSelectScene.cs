@@ -15,17 +15,26 @@ public class StageSelectScene : SceneBase {
     private StateBase stage_select_main_state_ = null;
     private StateBase stage_select_finish_state_ = null;
     private readonly string STATE_PATH = "State\\";
-    private StageSelectUIController stage_select_ui;
+    private StageSelectUIController stage_select_ui_;
+    private StageSelectUIMethod stage_select_ui_method_;
 
     public StageSelectUIController StageSelectUIController
     {
         get
         {
-            return stage_select_ui;
+            return stage_select_ui_;
         }
         set
         {
-            stage_select_ui = value;
+            stage_select_ui_ = value;
+        }
+    }
+
+    public StageSelectUIMethod StageSelectUIMethod
+    {
+        get
+        {
+            return stage_select_ui_method_;
         }
     }
 
@@ -42,7 +51,8 @@ public class StageSelectScene : SceneBase {
         state_dictionary_[StateList.StageSelectMainState] = stage_select_main_state_;
         state_dictionary_[StateList.StageSelectFinishState] = stage_select_finish_state_;
 
-        stage_select_ui = this.GetComponent<StageSelectUIController>();
+        stage_select_ui_ = this.GetComponent<StageSelectUIController>();
+        stage_select_ui_method_ = this.GetComponent<StageSelectUIMethod>();
         ChangeState(StateList.StageSelectInitState,null);
     }
 }

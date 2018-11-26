@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4066156498831884}
   - component: {fileID: 114731175432302390}
   - component: {fileID: 114872191113278782}
+  - component: {fileID: 114324130400652504}
   m_Layer: 0
   m_Name: StageSelectScene
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114324130400652504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1754113585295512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4dacca2b1580347bb3d12e78a5ee71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114731175432302390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,12 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55805241f4205854a9607b2689c39b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage_select_init_state_: {fileID: 114501277286370522, guid: dca32a04adb4faf4394a7bfe16f99771,
-    type: 2}
-  stage_select_main_state_: {fileID: 114280413245089638, guid: 23830a65ba6e5b348ad87d505fe60a0e,
-    type: 2}
-  stage_select_finish_state_: {fileID: 114606663871388516, guid: 7866ecaaf8756fd449272e85e7919c7a,
-    type: 2}
 --- !u!114 &114872191113278782
 MonoBehaviour:
   m_ObjectHideFlags: 1
