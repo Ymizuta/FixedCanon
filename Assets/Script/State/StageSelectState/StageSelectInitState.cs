@@ -16,7 +16,7 @@ public class StageSelectInitState : StateBase {
         ui_controller.NextButton = GameObject.Find("NextButton").gameObject;
         ui_controller.BackButton = GameObject.Find("BackButton").gameObject;
         //ステート移行
-        //scene_.ChangeState(StateList.StageSelectMainState,null);
+        scene_.ChangeState(StateList.StageSelectMainState, null);
     }
 
     // Update is called once per frame
