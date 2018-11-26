@@ -7,7 +7,7 @@ public class StageSelectFinishState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        ChangeScene(SceneList.StageScene);
+        //ChangeScene(SceneList.StageScene);
     }
 
     // Update is called once per frame

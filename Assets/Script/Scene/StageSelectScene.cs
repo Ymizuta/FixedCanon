@@ -14,14 +14,19 @@ public class StageSelectScene : SceneBase {
     [SerializeField] StateBase stage_select_init_state_ = null;
     [SerializeField] StateBase stage_select_main_state_ = null;
     [SerializeField] StateBase stage_select_finish_state_ = null;
+    private StageSelectUIController stage_select_ui;
 
-    // Use this for initialization
-    void Start () {
+    public StageSelectUIController StageSelectUIController
+    {
+        get
+        {
+            return stage_select_ui;
+        }
+        set
+        {
+            stage_select_ui = value;
+        }
     }
-
-    // Update is called once per frame
-    void Update () {		
-	}
 
     public override void Init()
     {
@@ -30,6 +35,7 @@ public class StageSelectScene : SceneBase {
         state_dictionary_[StateList.StageSelectInitState] = stage_select_init_state_;
         state_dictionary_[StateList.StageSelectMainState] = stage_select_main_state_;
         state_dictionary_[StateList.StageSelectFinishState] = stage_select_finish_state_;
+        stage_select_ui = this.GetComponent<StageSelectUIController>();
         ChangeState(StateList.StageSelectInitState,null);
     }
 }

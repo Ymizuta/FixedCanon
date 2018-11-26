@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4066156498831884}
   - component: {fileID: 114731175432302390}
+  - component: {fileID: 114872191113278782}
   m_Layer: 0
   m_Name: StageSelectScene
   m_TagString: Untagged
@@ -57,3 +58,14 @@ MonoBehaviour:
     type: 2}
   stage_select_finish_state_: {fileID: 114606663871388516, guid: 7866ecaaf8756fd449272e85e7919c7a,
     type: 2}
+--- !u!114 &114872191113278782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1754113585295512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0d6dd7026f2be45aa5adfde3ef01c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
