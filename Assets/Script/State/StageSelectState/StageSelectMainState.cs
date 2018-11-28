@@ -7,11 +7,13 @@ public class StageSelectMainState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
+        ((StageSelectScene)scene_).StageSelectUIMethod.OnPshuSelectButton += OnPshuSelectButtonCallBack;
         //scene_.ChangeState(StateList.StageSelectFinishState,null);
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    private void OnPshuSelectButtonCallBack()
+    {
+        scene_.ChangeState(StateList.StageSelectFinishState, null);
+    }
+
 }

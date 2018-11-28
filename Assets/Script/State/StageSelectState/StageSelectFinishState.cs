@@ -7,11 +7,14 @@ public class StageSelectFinishState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        //ChangeScene(SceneList.StageScene);
+        Debug.Log("ステージシーンへ移行します");
+        RemoveUi();
+        ChangeScene(SceneList.StageScene);
     }
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    private void RemoveUi()
+    {
+        //UIオブジェクトをシーンから削除
+        Destroy(((StageSelectScene)scene_).StageSelectUIController.StageSelectUI.gameObject);
+    }
 }
