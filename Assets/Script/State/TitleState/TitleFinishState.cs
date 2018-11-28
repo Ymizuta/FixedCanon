@@ -7,7 +7,7 @@ public class TitleFinishState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        ChangeScene(SceneList.StageSelectScene);
+        ChangeScene(SceneList.StageSelectScene,null);
     }
 	
 	// Update is called once per frame

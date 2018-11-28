@@ -47,7 +47,7 @@ public class StageSelectScene : SceneBase {
         }
     }
 
-    public override void Init()
+    public override void Init(object scene_params)
     {
         //throw new System.NotImplementedException();
         Debug.Log("ステージセレクトシーン生成");

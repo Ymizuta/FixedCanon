@@ -23,7 +23,7 @@ public class TitleScene : SceneBase {
     void Update () {
 	}
 
-    public override void Init()
+    public override void Init(object scene_params)
     {
         //throw new System.NotImplementedException();
         Debug.Log("タイトルシーン生成");

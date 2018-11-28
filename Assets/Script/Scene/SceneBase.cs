@@ -34,5 +34,5 @@ public abstract class SceneBase : MonoBehaviour {
         return ((StateBase)state_obj.GetComponent(System.Type.GetType(state_name)));
     }
 
-    public abstract void Init();
+    public abstract void Init(object scene_params);
 }

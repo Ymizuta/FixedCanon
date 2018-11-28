@@ -29,7 +29,7 @@ public class SceneManager{
         RemoveScene();
         AddScene(scene_name, scene_params);
         //Debug.Log(scene_name);
-        current_scene_.Init();
+        current_scene_.Init(scene_params);
     }
 
     private void AddScene(string scene_name, object scene_params)

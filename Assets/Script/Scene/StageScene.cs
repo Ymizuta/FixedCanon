@@ -115,7 +115,7 @@ public class StageScene : SceneBase {
         }
     }
 
-    public override void Init()
+    public override void Init(object scene_params)
     {
         //配下のステートを取得
         stage_init_state_ = GetState(STATE_PATH, StateList.StageInitState);
@@ -123,12 +123,12 @@ public class StageScene : SceneBase {
         stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
 
         //ステージ情報取得
-        int selected_stage_id = 2;
+        int selected_stage_id = (int)scene_params;
         string json = File.ReadAllText("Assets\\Json\\stageinfo.json");
         StageInfoTable stage_info_table = new StageInfoTable();
         stage_info_table.stage_info_list_ = new List<StageInfo>();
         stage_info_table = JsonUtility.FromJson<StageInfoTable>(json);
-        stage_info_ = stage_info_table.stage_info_list_[selected_stage_id - 1];
+        stage_info_ = stage_info_table.stage_info_list_[selected_stage_id - 1];     //後ほど処理を見直し
 
         //初期化
         Debug.Log("ステージシーンを生成");

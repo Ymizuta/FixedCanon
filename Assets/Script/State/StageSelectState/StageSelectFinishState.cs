@@ -7,9 +7,9 @@ public class StageSelectFinishState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        Debug.Log("ステージシーンへ移行します");
+        //Debug.Log("ステージシーンへ移行します");
         RemoveUi();
-        ChangeScene(SceneList.StageScene);
+        ChangeScene(SceneList.StageScene,((StageSelectScene)scene_).StageSelectUIController.StageId);
     }
 
     private void RemoveUi()
