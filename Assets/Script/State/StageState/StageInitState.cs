@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageInitState : StateBase {
 
@@ -12,8 +13,9 @@ public class StageInitState : StateBase {
         SetUpStageObjectManager(stage_scene);
         SetUpPlayer(stage_scene);
         SetUpBulletManager(stage_scene);
-        //UIオブジェクトを生成
+        //UIオブジェクトを初期化
         stage_scene.StageUi = Instantiate(Resources.Load("UI/StageUI")) as GameObject;
+        stage_scene.FireButton = GameObject.Find(UiList.FireButton).gameObject;
 
         //ステート移行
         scene_.ChangeState(StateList.StageMainState,null);

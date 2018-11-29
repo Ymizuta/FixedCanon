@@ -10,4 +10,5 @@ public class UiList{
     public static readonly string BackButton = "BackButton";
     public static readonly string TextObj = "TextObj";
     public static readonly string SelectButtonText = "SelectButtonText";
+    public static readonly string FireButton = "FireButton";
 }

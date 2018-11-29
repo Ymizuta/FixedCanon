@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class StageMainState : StateBase
 {
@@ -29,6 +31,8 @@ public class StageMainState : StateBase
         stage_obj_manager = stage_scene_.StageObjectManager;
         player_ = stage_scene_.Player;
         bullet_manager_ = stage_scene_.BulletManager;
+        //発射ボタンのメソッドを登録
+        stage_scene_.FireButton.GetComponent<Button>().onClick.AddListener(this.Shoot);        
 
         //プレイヤーオブジェクトの検索・取得
         bullet_manager_.BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
@@ -44,16 +48,16 @@ public class StageMainState : StateBase
         //ユーザ操作を受けて(UserOperationクラスで実装)
         if (Input.GetMouseButtonDown(0))
         {
-            //砲弾発射
-            if (IsRestOfBullets()) {
-                bullet_clone_ = bullet_manager_.BulletClonMaker.BulletCloneMake(bullet_manager_.Params.LoadedBullet);
-                player_.Shooter.Shoot(bullet_clone_);
-                //弾数減少
-                bullet_manager_.Params.ReduceBullet();
-                //弾数カウント（UIへの反映）
-                //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
-                    //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
-            }
+            ////砲弾発射
+            //if (IsRestOfBullets()) {
+            //    bullet_clone_ = bullet_manager_.BulletClonMaker.BulletCloneMake(bullet_manager_.Params.LoadedBullet);
+            //    player_.Shooter.Shoot(bullet_clone_);
+            //    //弾数減少
+            //    bullet_manager_.Params.ReduceBullet();
+            //    //弾数カウント（UIへの反映）
+            //    //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
+            //        //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
+            //}
         }
 
         //砲弾変更
@@ -96,6 +100,20 @@ public class StageMainState : StateBase
         else if (info == TouchInfo.Ended)
         {
             //必要な処理があれば追加
+        }
+    }
+
+    private void Shoot()
+    {
+        if (IsRestOfBullets())
+        {
+            bullet_clone_ = bullet_manager_.BulletClonMaker.BulletCloneMake(bullet_manager_.Params.LoadedBullet);
+            player_.Shooter.Shoot(bullet_clone_);
+            //弾数減少
+            bullet_manager_.Params.ReduceBullet();
+            //弾数カウント（UIへの反映）
+            //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
+            //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
         }
     }
 
