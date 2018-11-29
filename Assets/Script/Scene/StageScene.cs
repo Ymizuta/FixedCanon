@@ -23,6 +23,8 @@ public class StageScene : SceneBase {
     private GameObject player_clone_;
     private BulletManager bullet_manager_;
     private StageObjectManager stage_obj_manager;
+    private GameObject stage_ui_;
+    private GameObject fire_button_;
     private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
 
@@ -79,6 +81,30 @@ public class StageScene : SceneBase {
         set
         {
             stage_obj_manager = value;
+        }
+    }
+
+    public GameObject StageUi
+    {
+        get
+        {
+            return stage_ui_;
+        }
+        set
+        {
+            stage_ui_ = value;
+        }
+    }
+
+    public GameObject FireButton
+    {
+        get
+        {
+            return fire_button_;        
+        }
+        set
+        {
+            fire_button_ = value;
         }
     }
 

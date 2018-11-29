@@ -8,10 +8,12 @@ public class StageInitState : StateBase {
 	void Start () {
         Init();
         StageScene stage_scene = ((StageScene)scene_);
-
+        
         SetUpStageObjectManager(stage_scene);
         SetUpPlayer(stage_scene);
         SetUpBulletManager(stage_scene);
+        //UIオブジェクトを生成
+        stage_scene.StageUi = Instantiate(Resources.Load("UI/StageUI")) as GameObject;
 
         //ステート移行
         scene_.ChangeState(StateList.StageMainState,null);
