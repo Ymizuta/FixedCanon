@@ -10,9 +10,11 @@ public class StageInitState : StateBase {
         Init();
         StageScene stage_scene = ((StageScene)scene_);
         
+        //StageScene配下のクラスを初期化
         SetUpStageObjectManager(stage_scene);
         SetUpPlayer(stage_scene);
         SetUpBulletManager(stage_scene);
+
         //UIオブジェクトを初期化
         stage_scene.StageUi = Instantiate(Resources.Load("UI/StageUI")) as GameObject;
         stage_scene.FireButton = GameObject.Find(UiList.FireButton).gameObject;

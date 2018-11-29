@@ -8,6 +8,7 @@ public class BulletManager : MonoBehaviour {
     private BulletChanger bullet_changer_;
     private BulletCloneMaker bullet_clone_maker_;
     private BulletCounter bullet_counter_;
+    private readonly string mazzle_ = "Mazzle";
 
     //初期化
     public void SetUp()
@@ -16,6 +17,8 @@ public class BulletManager : MonoBehaviour {
         bullet_changer_ = this.GetComponent<BulletChanger>();
         bullet_clone_maker_ = this.GetComponent<BulletCloneMaker>();
         bullet_counter_ = this.GetComponent<BulletCounter>();
+        BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
+
     }
 
     public BulletParams Params

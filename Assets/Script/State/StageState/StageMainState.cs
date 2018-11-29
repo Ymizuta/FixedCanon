@@ -15,7 +15,7 @@ public class StageMainState : StateBase
     private BulletBase bullet_clone_;
 
     //プレイヤークローンのオブジェクト検索用の文字列
-    private readonly string mazzle_ = "Mazzle";
+    //private readonly string mazzle_ = "Mazzle";
 
     //タッチ操作関連
     private Vector3 touch_poz_;
@@ -32,7 +32,7 @@ public class StageMainState : StateBase
         bullet_manager_ = stage_scene_.BulletManager;
 
         //プレイヤーオブジェクトの検索・取得
-        bullet_manager_.BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
+        //bullet_manager_.BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
 
         //発射ボタンのメソッドを登録
         stage_scene_.FireButton.GetComponent<Button>().onClick.AddListener(this.Shoot);
@@ -46,33 +46,14 @@ public class StageMainState : StateBase
     private void Update()
     {
         //砲台・砲身の角度調整
-        //ユーザ操作を受けて(UserOperationクラスで実装)
         TouchInfo info = UserOperation.GetTouch();
         if (info == TouchInfo.Began)
         {
-            touch_poz_ = UserOperation.GetTouchPosition();
-            //ScreenToWorldPointメソッドのバグ防止用にｚ座標を設定
-            touch_poz_.z = 1.0f;
-            old_touch_poz_ = Camera.main.ScreenToWorldPoint(touch_poz_);
-            //z座標を初期化
-            old_touch_poz_.z = 0f;
+            TouchBegan();
         }
         else if (info == TouchInfo.Moved)
         {
-            touch_poz_ = UserOperation.GetTouchPosition();
-            //ScreenToWorldPointメソッドのバグ防止用にｚ座標を設定
-            touch_poz_.z = 1.0f;
-            new_touch_poz_ = Camera.main.ScreenToWorldPoint(touch_poz_);
-            //z座標を初期化
-            new_touch_poz_.z = 0f;
-            //砲台の水平回転処理
-            horizontal_direction_ = new_touch_poz_.x - old_touch_poz_.x;
-            player_.CanonMove.HorizontalMove(horizontal_direction_);
-            //砲身の仰角調整処理
-            vertical_direction_ = -(new_touch_poz_.y - old_touch_poz_.y);
-            player_.CanonMove.VerticalMove(vertical_direction_);
-            //次フレームでの移動のため、old_player_pozに現フレームのnew_player_poz(タッチ位置)を格納
-            old_touch_poz_ = new_touch_poz_;
+            TouchMoved();
         }
         else if (info == TouchInfo.Ended)
         {
@@ -80,6 +61,35 @@ public class StageMainState : StateBase
         }
     }
 
+    private void TouchBegan()
+    {
+        touch_poz_ = UserOperation.GetTouchPosition();
+        //ScreenToWorldPointメソッドのバグ防止用にｚ座標を設定
+        touch_poz_.z = 1.0f;
+        old_touch_poz_ = Camera.main.ScreenToWorldPoint(touch_poz_);
+        //z座標を初期化
+        old_touch_poz_.z = 0f;
+    }
+
+    private void TouchMoved()
+    {
+        touch_poz_ = UserOperation.GetTouchPosition();
+        //ScreenToWorldPointメソッドのバグ防止用にｚ座標を設定
+        touch_poz_.z = 1.0f;
+        new_touch_poz_ = Camera.main.ScreenToWorldPoint(touch_poz_);
+        //z座標を初期化
+        new_touch_poz_.z = 0f;
+        //砲台の水平回転処理
+        horizontal_direction_ = new_touch_poz_.x - old_touch_poz_.x;
+        player_.CanonMove.HorizontalMove(horizontal_direction_);
+        //砲身の仰角調整処理
+        vertical_direction_ = -(new_touch_poz_.y - old_touch_poz_.y);
+        player_.CanonMove.VerticalMove(vertical_direction_);
+        //次フレームでの移動のため、old_player_pozに現フレームのnew_player_poz(タッチ位置)を格納
+        old_touch_poz_ = new_touch_poz_;
+    }
+
+    //砲弾発射（発射ボタンから呼び出し）
     private void Shoot()
     {
         if (IsRestOfBullets())
@@ -94,6 +104,7 @@ public class StageMainState : StateBase
         }
     }
 
+    //砲弾種類変更（砲弾変更ボタンから呼び出し）
     private void ChangeBullet()
     {
         bullet_manager_.BulletChanger.ChangeBullet(bullet_manager_.Params);

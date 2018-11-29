@@ -175,9 +175,6 @@ public class StageScene : SceneBase {
         state_dictionary_[StateList.StageMainState] = stage_main_state_;
         state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
         
-        //ステージオブジェクトをObjectParamsに登録
-        //stage_obj_manager.Params.StageObject = Resources.Load(STAGE_OBJ_STR + stage_info_.id.ToString("00")) as GameObject;
-
         //ゲームリザルトの判定に利用するフラグを設定
         is_game_over_ = false;
         is_game_clear_ = false;
