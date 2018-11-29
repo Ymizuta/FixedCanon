@@ -26,16 +26,17 @@ public class StageMainState : StateBase
 
     private void Start()
     {
-        //初期設定
         stage_scene_ = ((StageScene)scene_);
         stage_obj_manager = stage_scene_.StageObjectManager;
         player_ = stage_scene_.Player;
         bullet_manager_ = stage_scene_.BulletManager;
-        //発射ボタンのメソッドを登録
-        stage_scene_.FireButton.GetComponent<Button>().onClick.AddListener(this.Shoot);        
 
         //プレイヤーオブジェクトの検索・取得
         bullet_manager_.BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
+
+        //発射ボタンのメソッドを登録
+        stage_scene_.FireButton.GetComponent<Button>().onClick.AddListener(this.Shoot);
+        stage_scene_.ChangeButton.GetComponent<Button>().onClick.AddListener(this.ChangeBullet);
         
         //コールバック登録
         stage_obj_manager.Params.OnAllTargetDie += OnAllTargetDieCallBack;
@@ -44,21 +45,6 @@ public class StageMainState : StateBase
 
     private void Update()
     {
-        //砲弾発射
-        //ユーザ操作を受けて(UserOperationクラスで実装)
-        if (Input.GetMouseButtonDown(0))
-        {
-            ////砲弾発射
-            //if (IsRestOfBullets()) {
-            //    bullet_clone_ = bullet_manager_.BulletClonMaker.BulletCloneMake(bullet_manager_.Params.LoadedBullet);
-            //    player_.Shooter.Shoot(bullet_clone_);
-            //    //弾数減少
-            //    bullet_manager_.Params.ReduceBullet();
-            //    //弾数カウント（UIへの反映）
-            //    //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
-            //        //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
-            //}
-        }
 
         //砲弾変更
         //ユーザ操作を受けて(UserOperationクラスで実装)
@@ -115,6 +101,11 @@ public class StageMainState : StateBase
             //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
             //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
         }
+    }
+
+    private void ChangeBullet()
+    {
+
     }
 
     //残りの砲弾の有無を判定(発射できるかできないかの判定)

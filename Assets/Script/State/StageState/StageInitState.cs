@@ -16,6 +16,7 @@ public class StageInitState : StateBase {
         //UIオブジェクトを初期化
         stage_scene.StageUi = Instantiate(Resources.Load("UI/StageUI")) as GameObject;
         stage_scene.FireButton = GameObject.Find(UiList.FireButton).gameObject;
+        stage_scene.ChangeButton = GameObject.Find(UiList.ChangeButton).gameObject;
 
         //ステート移行
         scene_.ChangeState(StateList.StageMainState,null);

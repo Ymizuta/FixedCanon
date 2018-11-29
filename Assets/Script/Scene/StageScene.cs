@@ -23,10 +23,11 @@ public class StageScene : SceneBase {
     private GameObject player_clone_;
     private BulletManager bullet_manager_;
     private StageObjectManager stage_obj_manager;
-    private GameObject stage_ui_;
-    private GameObject fire_button_;
-    private bool is_game_clear_;                          //StageFinishStateでリザルトを判定するフラグ
-    private bool is_game_over_;                           //StageFinishStateでリザルトを判定するフラグ
+    private GameObject stage_ui_;                   //ステージシーンのUIオブジェクトを持つ空オブジェクト
+    private GameObject fire_button_;                //発射ボタンオブジェクト
+    private GameObject change_button_;              //砲弾変更ボタンオブジェクト
+    private bool is_game_clear_;                    //StageFinishStateでリザルトを判定するフラグ
+    private bool is_game_over_;                     //StageFinishStateでリザルトを判定するフラグ
 
     //Jsonファイルからデータを反映させるインスタンス
     private StageInfo stage_info_ = new StageInfo();
@@ -105,6 +106,18 @@ public class StageScene : SceneBase {
         set
         {
             fire_button_ = value;
+        }
+    }
+
+    public GameObject ChangeButton
+    {
+        get
+        {
+            return change_button_;
+        }
+        set
+        {
+            change_button_ = value;
         }
     }
 
