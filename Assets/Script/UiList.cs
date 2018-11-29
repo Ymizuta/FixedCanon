@@ -11,5 +11,5 @@ public class UiList{
     public static readonly string TextObj = "TextObj";
     public static readonly string SelectButtonText = "SelectButtonText";
     public static readonly string FireButton = "FireButton";
-    public static readonly string ChangeButton = "ChangeButton";
+    public static readonly string ChangeButton = "ChangeBulletButton";
 }

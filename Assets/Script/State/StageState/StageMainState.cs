@@ -45,15 +45,6 @@ public class StageMainState : StateBase
 
     private void Update()
     {
-
-        //砲弾変更
-        //ユーザ操作を受けて(UserOperationクラスで実装)
-        if (Input.GetMouseButtonDown(1))
-        {
-            //砲弾の種類変更
-            bullet_manager_.BulletChanger.ChangeBullet(bullet_manager_.Params);
-        }
-
         //砲台・砲身の角度調整
         //ユーザ操作を受けて(UserOperationクラスで実装)
         TouchInfo info = UserOperation.GetTouch();
@@ -105,7 +96,7 @@ public class StageMainState : StateBase
 
     private void ChangeBullet()
     {
-
+        bullet_manager_.BulletChanger.ChangeBullet(bullet_manager_.Params);
     }
 
     //残りの砲弾の有無を判定(発射できるかできないかの判定)
