@@ -11,10 +11,16 @@ public class BulletCounter : MonoBehaviour {
         {
             if (bullet_params.NumberOfBullets[i] != 0)break;
             //滞空中の砲弾がないかを調べる
-            GameObject[] array_ = GameObject.FindGameObjectsWithTag("Bullet");
-            if (array_.Length > 1)return true;
+            if (ExistBulletInGameView())return true;
             if (i == bullet_params.NumberOfBullets.Length - 1)return false;
         }
         return true;
+    }
+
+    private bool ExistBulletInGameView()
+    {
+        GameObject[] array = GameObject.FindGameObjectsWithTag("Bullet");
+        if (array.Length > 1) return true;
+        else return false;
     }
 }
