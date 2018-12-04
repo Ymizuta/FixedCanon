@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UiList{
 
+    //TitleScene
+    public static readonly string StartButton = "StartButton";
+
     //StageSelectScene
     public static readonly string SelectButton = "SelectButton";
     public static readonly string NextButton = "NextButton";

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4284592359165494}
   - component: {fileID: 114063432845834592}
+  - component: {fileID: 114126031888055960}
   m_Layer: 0
   m_Name: TitleScene
   m_TagString: Untagged
@@ -51,9 +52,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54a25e53778ec44daf4e4ae201bbc5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title_init_state_: {fileID: 114529845732341876, guid: fbd127496e01523449694d15c14ece7f,
-    type: 2}
-  title_main_state_: {fileID: 114162655402605802, guid: 48ad8544f7492e147afbb674c15fa832,
-    type: 2}
-  title_finish_state_: {fileID: 114789081680689158, guid: 4375c3fb031f1054d80b731b794fb576,
-    type: 2}
+--- !u!114 &114126031888055960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1048428545142324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ce9ec50528be642a8be3e87af3f916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

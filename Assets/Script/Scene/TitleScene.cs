@@ -7,6 +7,7 @@ public class TitleScene : SceneBase {
     private StateBase title_init_state_ = null;
     private StateBase title_main_state_ = null;
     private StateBase title_finish_state_ = null;
+    private TitleUi title_ui_;
 
     //文字列
     private readonly string STATE_PATH = "State\\";
@@ -18,25 +19,29 @@ public class TitleScene : SceneBase {
     /// [finish_state]ボタン押下を受けてシーン遷移をトリガー
     /// </summary>
 
-    // Use this for initialization
-    void Start () {
+    public TitleUi TitleUi
+    {
+        get
+        {
+            return title_ui_;
+        }
     }
-
-    // Update is called once per frame
-    void Update () {
-	}
 
     public override void Init(object scene_params)
     {
+        Debug.Log("タイトルシーン生成");
+
         //配下のステートを取得
         title_init_state_ = GetState(STATE_PATH, StateList.TitleInitState);
         title_main_state_ = GetState(STATE_PATH, StateList.TitleMainState);
         title_finish_state_ = GetState(STATE_PATH, StateList.TitleFinishState);
-
-        Debug.Log("タイトルシーン生成");
+        //ディクショナリ登録
         state_dictionary_[StateList.TitleInitState] = title_init_state_;
         state_dictionary_[StateList.TitleMainState] = title_main_state_;
         state_dictionary_[StateList.TitleFinishState] = title_finish_state_;
+        //TitleUiクラスを取得
+        title_ui_ = this.GetComponent<TitleUi>();
+        //初期化ステートへ遷移
         ChangeState(StateList.TitleInitState,null);
     }
 

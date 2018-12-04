@@ -7,11 +7,15 @@ public class TitleFinishState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        ChangeScene(SceneList.StageSelectScene,null);
+        RemoveUi();
+        ChangeScene(SceneList.StageSelectScene, null);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    /**
+     * @brief   全UIオブジェクトをシーンから削除
+    */
+    private void RemoveUi()
+    {
+        Destroy(((TitleScene)scene_).TitleUi.TitleUiObj.gameObject);
+    }
 }

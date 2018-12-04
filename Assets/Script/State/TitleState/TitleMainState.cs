@@ -7,10 +7,15 @@ public class TitleMainState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
+        //スタートボタン押下時にTitleUiクラスからコールバックされる処理を登録
+        ((TitleScene)scene_).TitleUi.OnPushStartButton += OnpushStartButtonCallBack;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        scene_.ChangeState(StateList.TitleFinishState,null);
+
+    /**
+     * @brief   スタートボタン押下時に実行される処理
+     */ 
+    private void OnpushStartButtonCallBack()
+    {
+        scene_.ChangeState(StateList.TitleFinishState, null);
     }
 }

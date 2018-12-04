@@ -45,7 +45,7 @@ public class TitleUi : MonoBehaviour {
     /**
     * @brief   STARTボタン押下時の処理実行。TitleSceneへコールバック。
     */
-    private void PushStartButton()
+    public void PushStartButton()
     {
         if (OnPushStartButton != null)
         {
