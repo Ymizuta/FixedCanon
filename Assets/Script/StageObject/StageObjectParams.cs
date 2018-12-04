@@ -99,14 +99,13 @@ public class StageObjectParams : MonoBehaviour {
                 //ターゲットが全滅している場合のコールバック
                 OnAllTargetDie();
             }
-            return;
         }
         else
         if (OnNotAllTargetDie != null)
         {
             //ターゲットが生き残っている場合のコールバック
             OnNotAllTargetDie();
-        }return;        
+        }
     }
 
     private void OnHitoNormalObjCallBack()
@@ -117,6 +116,5 @@ public class StageObjectParams : MonoBehaviour {
             //ターゲットが生き残っている場合のコールバック
             OnNotAllTargetDie();
         }
-        return;
     }
 }

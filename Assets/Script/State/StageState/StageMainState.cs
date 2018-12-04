@@ -8,15 +8,11 @@ public class StageMainState : StateBase
 {
     //StageSceneのメンバ
     private StageScene stage_scene_;
-    private StageObjectManager stage_obj_manager;
+    private StageObjectManager stage_obj_manager_;
     private Player player_;
     private BulletManager bullet_manager_;    
     //砲弾クローン
     private BulletBase bullet_clone_;
-
-    //プレイヤークローンのオブジェクト検索用の文字列
-    //private readonly string mazzle_ = "Mazzle";
-
     //タッチ操作関連
     private Vector3 touch_poz_;
     private Vector3 old_touch_poz_;
@@ -27,20 +23,17 @@ public class StageMainState : StateBase
     private void Start()
     {
         stage_scene_ = ((StageScene)scene_);
-        stage_obj_manager = stage_scene_.StageObjectManager;
+        stage_obj_manager_ = stage_scene_.StageObjectManager;
         player_ = stage_scene_.Player;
         bullet_manager_ = stage_scene_.BulletManager;
-
-        //プレイヤーオブジェクトの検索・取得
-        //bullet_manager_.BulletClonMaker.Muzzle = GameObject.Find(mazzle_);
 
         //発射ボタンのメソッドを登録
         stage_scene_.FireButton.GetComponent<Button>().onClick.AddListener(this.Shoot);
         stage_scene_.ChangeButton.GetComponent<Button>().onClick.AddListener(this.ChangeBullet);
         
         //コールバック登録
-        stage_obj_manager.Params.OnAllTargetDie += OnAllTargetDieCallBack;
-        stage_obj_manager.Params.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
+        stage_obj_manager_.Params.OnAllTargetDie += OnAllTargetDieCallBack;
+        stage_obj_manager_.Params.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
     }
 
     private void Update()
@@ -130,6 +123,9 @@ public class StageMainState : StateBase
 
     private void OnNotAllTargetDieCallBack()
     {
+        //StageMainStateの有無をチェック(FinishStateに遷移していれば処理中断)    
+        if (this == null)return;
+
         if (!bullet_manager_.BulletCounter.ExistBullets(bullet_manager_.Params))
         {
             Debug.Log("敵全滅せず・弾切れです！");
@@ -145,7 +141,7 @@ public class StageMainState : StateBase
     {
         scene_ = null;
         stage_scene_ = null;
-        stage_obj_manager = null;
+        stage_obj_manager_ = null;
         player_ = null;
         bullet_manager_ = null;
         bullet_clone_ = null;

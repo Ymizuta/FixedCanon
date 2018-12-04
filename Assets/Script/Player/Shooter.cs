@@ -13,7 +13,6 @@ public class Shooter : MonoBehaviour {
         //BulletBase bullet_clone = Instantiate(bullet, muzzle_.transform.position, muzzle_.transform.rotation);
         bullet_clone.GetComponent<Rigidbody>().AddForce(muzzle_.transform.forward * bullet_clone.ShootPower);
         //Object.Destroy(bullet_clone.gameObject, 2.0f);
-        bullet_clone = null;
     }
 
     //メインステート初期化時に取得

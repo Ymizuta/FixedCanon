@@ -10,8 +10,6 @@ public class BulletCounter : MonoBehaviour {
         for (int i = 0; i < bullet_params.NumberOfBullets.Length; i++)
         {
             if (bullet_params.NumberOfBullets[i] != 0)break;
-            //滞空中の砲弾がないかを調べる
-            if (ExistBulletInGameView())return true;
             if (i == bullet_params.NumberOfBullets.Length - 1)return false;
         }
         return true;

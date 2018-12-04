@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TargetObjectCounter : MonoBehaviour {
 
+    //ゲーム中にターゲットが生き残っているかを判定
+    //引数：StageObjectParamsで保有するステージオブジェクトのリスト
     public bool ExistTargetObjects(List<TargetObject> target_object_list)
     {
         for (int i = 0; i < target_object_list.Count; i++)
