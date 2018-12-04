@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class TitleScene : SceneBase {
 
-    [SerializeField] StateBase title_init_state_ = null;
-    [SerializeField] StateBase title_main_state_ = null;
-    [SerializeField] StateBase title_finish_state_ = null;
+    private StateBase title_init_state_ = null;
+    private StateBase title_main_state_ = null;
+    private StateBase title_finish_state_ = null;
+
+    //文字列
+    private readonly string STATE_PATH = "State\\";
 
     /// <summary>
     /// 各ステートの役割は下記の通り。
@@ -25,7 +28,11 @@ public class TitleScene : SceneBase {
 
     public override void Init(object scene_params)
     {
-        //throw new System.NotImplementedException();
+        //配下のステートを取得
+        title_init_state_ = GetState(STATE_PATH, StateList.TitleInitState);
+        title_main_state_ = GetState(STATE_PATH, StateList.TitleMainState);
+        title_finish_state_ = GetState(STATE_PATH, StateList.TitleFinishState);
+
         Debug.Log("タイトルシーン生成");
         state_dictionary_[StateList.TitleInitState] = title_init_state_;
         state_dictionary_[StateList.TitleMainState] = title_main_state_;
