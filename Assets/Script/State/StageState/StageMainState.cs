@@ -139,11 +139,6 @@ public class StageMainState : StateBase
 
     private void OnDestroy()
     {
-        scene_ = null;
-        stage_scene_ = null;
-        stage_obj_manager_ = null;
-        player_ = null;
-        bullet_manager_ = null;
         bullet_clone_ = null;
     }
 }

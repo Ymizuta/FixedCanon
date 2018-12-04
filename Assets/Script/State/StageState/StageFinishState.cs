@@ -19,9 +19,4 @@ public class StageFinishState : StateBase {
         }
         Debug.LogError("フラグが登録されていません。");
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
