@@ -7,13 +7,14 @@ public class StageSelectMainState : StateBase {
 	// Use this for initialization
 	void Start () {
         Init();
-        ((StageSelectScene)scene_).StageSelectUIMethod.OnPshuSelectButton += OnPshuSelectButtonCallBack;
-        //scene_.ChangeState(StateList.StageSelectFinishState,null);
+        ((StageSelectScene)scene_).StageSelectUi.OnPshuSelectButton += OnPshuSelectButtonCallBack;
     }
 
+    /**
+     * @brief   ユーザが選択ボタンUIを押下した際に呼び出される処理。次Stateへの遷移を実行。
+     */
     private void OnPshuSelectButtonCallBack()
     {
         scene_.ChangeState(StateList.StageSelectFinishState, null);
     }
-
 }

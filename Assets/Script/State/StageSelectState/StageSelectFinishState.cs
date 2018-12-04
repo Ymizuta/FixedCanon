@@ -9,12 +9,14 @@ public class StageSelectFinishState : StateBase {
         Init();
         //Debug.Log("ステージシーンへ移行します");
         RemoveUi();
-        ChangeScene(SceneList.StageScene,((StageSelectScene)scene_).StageSelectUIController.StageId);
+        ChangeScene(SceneList.StageScene,((StageSelectScene)scene_).StageSelectUi.StageId);
     }
 
+    /**
+     * @brief   全UIオブジェクトをシーンから削除
+     */
     private void RemoveUi()
-    {
-        //UIオブジェクトをシーンから削除
-        Destroy(((StageSelectScene)scene_).StageSelectUIController.StageSelectUI.gameObject);
+    {        
+        Destroy(((StageSelectScene)scene_).StageSelectUi.StageSelectUiObj.gameObject);
     }
 }

@@ -15,19 +15,9 @@ public class StageSelectScene : SceneBase {
     private StateBase stage_select_main_state_ = null;
     private StateBase stage_select_finish_state_ = null;
     private readonly string STATE_PATH = "State\\";
-    private StageSelectUIController stage_select_ui_;
-    private StageSelectUIMethod stage_select_ui_method_;
+    private StageSelectUi stage_select_ui_;
 
-    private void OnDestroy()
-    {
-        stage_select_init_state_ = null;
-        stage_select_main_state_ = null;
-        stage_select_finish_state_ = null;
-        stage_select_ui_ = null;
-        stage_select_ui_method_ = null;                    
-    }
-
-    public StageSelectUIController StageSelectUIController
+    public StageSelectUi StageSelectUi
     {
         get
         {
@@ -39,17 +29,8 @@ public class StageSelectScene : SceneBase {
         }
     }
 
-    public StageSelectUIMethod StageSelectUIMethod
-    {
-        get
-        {
-            return stage_select_ui_method_;
-        }
-    }
-
     public override void Init(object scene_params)
     {
-        //throw new System.NotImplementedException();
         Debug.Log("ステージセレクトシーン生成");
         //配下のステートを取得
         stage_select_init_state_ = GetState(STATE_PATH, StateList.StageSelectInitState);
@@ -60,10 +41,16 @@ public class StageSelectScene : SceneBase {
         state_dictionary_[StateList.StageSelectMainState] = stage_select_main_state_;
         state_dictionary_[StateList.StageSelectFinishState] = stage_select_finish_state_;
         //クラス取得
-        stage_select_ui_ = this.GetComponent<StageSelectUIController>();
-        stage_select_ui_method_ = this.GetComponent<StageSelectUIMethod>();
+        stage_select_ui_ = this.GetComponent<StageSelectUi>();
         //ステート移行
         ChangeState(StateList.StageSelectInitState,null);
     }
 
+    private void OnDestroy()
+    {
+        stage_select_init_state_ = null;
+        stage_select_main_state_ = null;
+        stage_select_finish_state_ = null;
+        stage_select_ui_ = null;
+    }
 }
