@@ -10,26 +10,50 @@ public class StageFinishState : StateBase {
 	void Start () {
         Init();
         ((StageScene)scene_).StageResultUi = ((StageScene)scene_).GetComponent<StageResultUi>();
+
         if (scene_.GetComponent<StageScene>().IsGameClear)
         {
             Debug.Log("フィニッシュ：ゲームクリア！");
-            //ステージUIのゲームオブジェクトを取得
-            ((StageScene)scene_).StageResultUi.ClearUiObj = GetResouceInstance("UI/ClearUi");
-            ((StageScene)scene_).StageResultUi.NextStageButton = GameObject.Find("NextStageButton");
-            ((StageScene)scene_).StageResultUi.ToStageSelectButton = GameObject.Find("ToStageSelectButton");
-            ((StageScene)scene_).StageResultUi.RetryButton = GameObject.Find("RetryButton");
-            //UIボタンに関数を登録
-            ((StageScene)scene_).StageResultUi.NextStageButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushNextStageButton);
-            ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
-            ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
+            CreateClearUi();
         }
         else
         if (scene_.GetComponent<StageScene>().IsGameOver)
         {
             Debug.Log("フィニッシュ：ゲームオーバー！");
+            CreateGameOverUi();
         }
         else
         Debug.LogError("フラグが登録されていません。");
+    }
+
+    /**
+     * @brief   ゲームクリア時のリザルト画面の表示 
+     */
+    private void CreateClearUi()
+    {
+        //ステージUIのゲームオブジェクトを取得
+        ((StageScene)scene_).StageResultUi.ClearUiObj = GetResouceInstance("UI/ClearUi");
+        ((StageScene)scene_).StageResultUi.NextStageButton = GameObject.Find("NextStageButton");
+        ((StageScene)scene_).StageResultUi.ToStageSelectButton = GameObject.Find("ToStageSelectButton");
+        ((StageScene)scene_).StageResultUi.RetryButton = GameObject.Find("RetryButton");
+        //UIボタンに関数を登録
+        ((StageScene)scene_).StageResultUi.NextStageButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushNextStageButton);
+        ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
+        ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
+    }
+
+    /**
+     * @brief   ゲームオーバー時のリザルト画面の表示 
+     */
+    private void CreateGameOverUi()
+    {
+        //ステージUIのゲームオブジェクトを取得
+        ((StageScene)scene_).StageResultUi. GameOverUiObj = GetResouceInstance("UI/GameOverUi");
+        ((StageScene)scene_).StageResultUi.ToStageSelectButton = GameObject.Find("ToStageSelectButton");
+        ((StageScene)scene_).StageResultUi.RetryButton = GameObject.Find("RetryButton");
+        //UIボタンに関数を登録
+        ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
+        ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
     }
 
     /**
