@@ -29,6 +29,8 @@ public class StageScene : SceneBase {
     private bool is_game_clear_;                    //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                     //StageFinishStateでリザルトを判定するフラグ
 
+    private StageResultUi stage_result_ui_;
+
     //Jsonファイルからデータを反映させるインスタンス
     private StageInfo stage_info_ = new StageInfo();
 
@@ -151,6 +153,18 @@ public class StageScene : SceneBase {
         get
         {
             return stage_info_;
+        }
+    }
+
+    public StageResultUi StageResultUi
+    {
+        get
+        {
+            return stage_result_ui_;
+        }
+        set
+        {
+            stage_result_ui_ = value;
         }
     }
 

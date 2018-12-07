@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114264828300031918}
   - component: {fileID: 114017532383429100}
   - component: {fileID: 114971542505890518}
+  - component: {fileID: 114441619412752484}
   m_Layer: 0
   m_Name: StageScene
   m_TagString: Untagged
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9904a5ba413f4b440851a3bf1b6e37fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage_object_: {fileID: 1249535916108100, guid: 6cec13a5da03d92409f2ce02a3dd2a99,
+  stage_object_: {fileID: 1249535916108100, guid: 302bc1fbf2cce474dbc9a709ca8767a0,
     type: 2}
 --- !u!114 &114206544976969414
 MonoBehaviour:
@@ -81,6 +82,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f25d24799b0b82748ad95b19a2c9880d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114441619412752484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1386757389383170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898e22ccc923b944b8173091f983297f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114456744818516636

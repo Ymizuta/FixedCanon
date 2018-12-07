@@ -2,35 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageUi : MonoBehaviour {
+public class StageResultUi : MonoBehaviour {
 
-    private GameObject clear_ui_;
-    private GameObject game_over_ui_;    
+    private GameObject clear_ui_obj_;
+    private GameObject game_over_ui_obj_;
     private GameObject next_stage_button_;
     private GameObject to_stage_select_button_;
     private GameObject retry_button_;
     
-    public GameObject ClearUi
+    public GameObject ClearUiObj
     {
         get
         {
-            return clear_ui_;
+            return clear_ui_obj_;
         }
         set
         {
-            clear_ui_ = value;
+            clear_ui_obj_ = value;
         }
     }
 
-    public GameObject GameOverUi
+    public GameObject GameOverUiObj
     {
         get
         {
-            return game_over_ui_;
+            return game_over_ui_obj_;
         }
         set
         {
-            game_over_ui_ = value;
+            game_over_ui_obj_ = value;
         }
     }
 
@@ -72,16 +72,16 @@ public class StageUi : MonoBehaviour {
 
     public void PushNextStageButton()
     {
-
+        Debug.Log("ネクストステージ！");
     }
 
     public void PushToStageSelectButton()
     {
-
+        Debug.Log("ステージセレクト！");
     }
 
     public void PushRetryButton()
     {
-
+        Debug.Log("リトライ！");
     }
 }
