@@ -9,6 +9,7 @@ public class StageSelectFinishState : StateBase {
         Init();
         RemoveUi();
         ChangeScene(SceneList.StageScene,((StageSelectScene)scene_).StageSelectUi.StageId);
+        Destroy(scene_.CurrentState.gameObject);
     }
 
     /**

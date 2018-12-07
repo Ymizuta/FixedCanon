@@ -197,15 +197,23 @@ public class StageScene : SceneBase {
         ChangeState(StateList.StageInitState,null);
     }
 
-    private void OnDestroy()
+    public void ResetScene()
     {
+        Debug.Log("呼ばれた！");
         stage_init_state_ = null;
         stage_main_state_ = null;
         stage_finish_state_ = null;
-        player_ = null;
+        Destroy(player_clone_.gameObject);
         player_clone_ = null;
+        player_ = null;
         bullet_manager_ = null;
+        Destroy(stage_obj_manager.Params.StageObjClone);
+        stage_obj_manager.Params.StageObjClone = null;
         stage_obj_manager = null;
+        Destroy(stage_ui_.gameObject);
+        stage_ui_ = null;
         stage_info_ = null;
+        stage_result_ui_.RemoveStageResultUi();
+        stage_result_ui_ = null;
     }
 }

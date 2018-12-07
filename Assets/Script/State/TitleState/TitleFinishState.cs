@@ -9,6 +9,7 @@ public class TitleFinishState : StateBase {
         Init();
         RemoveUi();
         ChangeScene(SceneList.StageSelectScene, null);
+        Destroy(scene_.CurrentState.gameObject);
     }
 
     /**

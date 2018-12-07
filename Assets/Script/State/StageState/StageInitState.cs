@@ -45,12 +45,9 @@ public class StageInitState : StateBase {
     //プレイヤー初期化
     private void SetUpPlayer(StageScene stage_scene)
     {
-        GameObject player_prefab = Resources.Load("Player") as GameObject;
-        GameObject player_clone = Instantiate(player_prefab);
-        Player player = player_clone.GetComponent<Player>();
         //Playerクラスのメンバ変数に登録
-        stage_scene.PlyerClone = player_clone;
-        stage_scene.Player = player;
+        stage_scene.PlyerClone = GetPlayerClone();
+        stage_scene.Player = stage_scene.PlyerClone.GetComponent<Player>();
     }
 
     //Bulletマネージャー初期化
@@ -60,5 +57,11 @@ public class StageInitState : StateBase {
         stage_scene.BulletManager.SetUp();
         //要修正
         stage_scene.BulletManager.Params.InitParams(stage_scene.StageInfo);
+    }
+    
+    private GameObject GetPlayerClone()
+    {
+        GameObject player_prefab = Resources.Load("Player") as GameObject;
+        return Instantiate(player_prefab);
     }
 }

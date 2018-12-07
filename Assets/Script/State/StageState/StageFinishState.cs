@@ -40,6 +40,10 @@ public class StageFinishState : StateBase {
         ((StageScene)scene_).StageResultUi.NextStageButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushNextStageButton);
         ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
         ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
+        //コールバック関数を登録
+        //((StageScene)scene_).StageResultUi.OnpushNextStageButton
+        ((StageScene)scene_).StageResultUi.OnPushStageSelectButton += OnPushStageSelectButtonCallBack;
+        //((StageScene)scene_).StageResultUi.OnpushNextStageButton
     }
 
     /**
@@ -64,5 +68,22 @@ public class StageFinishState : StateBase {
     {
         GameObject clear_ui_prefab = Resources.Load(resource_path) as GameObject;
         return Instantiate(clear_ui_prefab);
+    }
+
+    private void OnPushNextStageButtonCallBack()
+    {
+
+    }
+
+    private void OnPushStageSelectButtonCallBack()
+    {
+        ChangeScene(SceneList.StageSelectScene,null);
+        ((StageScene)scene_).ResetScene();
+        Destroy(scene_.CurrentState.gameObject);
+    }
+
+    private void OnPushRetryButtonCallBack()
+    {
+
     }
 }

@@ -20,6 +20,17 @@ public class StageObjectParams : MonoBehaviour {
         InitNormalObj();
     }
 
+    public GameObject StageObjClone
+    {
+        get
+        {
+            return stage_object_clone_;
+        }
+        set
+        {
+            stage_object_clone_ = value;
+        }
+    }
 
     public GameObject StageObject
     {

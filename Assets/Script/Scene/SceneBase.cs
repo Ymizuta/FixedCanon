@@ -7,6 +7,18 @@ public abstract class SceneBase : MonoBehaviour {
     protected Dictionary<string, StateBase> state_dictionary_ = new Dictionary<string, StateBase>();
     private StateBase current_state_;
 
+    public StateBase CurrentState
+    {
+        get
+        {
+            return current_state_;
+        }
+        set
+        {
+            current_state_ = value;
+        }
+    }
+
     public void ChangeState(string state_name,object parm)
     {
         RemoveState();

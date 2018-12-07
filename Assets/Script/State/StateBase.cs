@@ -15,6 +15,6 @@ public class StateBase : MonoBehaviour {
     protected void ChangeScene(string scene_name,object scene_params)
     {
         SceneManager.getInstance().NextScene(scene_name, scene_params);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 }
