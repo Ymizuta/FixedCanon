@@ -11,6 +11,8 @@ public class StateBase : MonoBehaviour {
         //Debug.Log(this + "が生成された");
     }
 
+    public virtual void SetUp(){}
+
     //フィニッシュステートでの処理時等にシーン遷移を実行
     protected void ChangeScene(string scene_name,object scene_params)
     {

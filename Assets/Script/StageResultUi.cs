@@ -85,7 +85,6 @@ public class StageResultUi : MonoBehaviour {
 
     public void PushToStageSelectButton()
     {
-        Debug.Log("ステージセレクト！");
         if (OnPushStageSelectButton != null)
         {
             OnPushStageSelectButton();

@@ -24,6 +24,7 @@ public abstract class SceneBase : MonoBehaviour {
         RemoveState();
         AddState(state_name);
         current_state_.scene_ = this;
+        current_state_.SetUp();
     }
 
     private void AddState(string state_name)

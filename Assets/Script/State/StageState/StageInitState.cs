@@ -2,14 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System;
+using System.Text;
+
 
 public class StageInitState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
+	public override void SetUp() {
+        Debug.Log("セットアップが呼ばれました");
+
         StageScene stage_scene = ((StageScene)scene_);
-        
+
+        //ステージ情報取得
+        string json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        StageInfoTable stage_info_table = new StageInfoTable();
+        stage_info_table.stage_info_list_ = new List<StageInfo>();
+        stage_info_table = JsonUtility.FromJson<StageInfoTable>(json);
+        ((StageScene)scene_).StageInfo = stage_info_table.stage_info_list_[((StageScene)scene_).StageId - 1];     //後ほど処理を見直し
+
         //StageScene配下のクラスを初期化
         SetUpStageObjectManager(stage_scene);
         SetUpPlayer(stage_scene);
@@ -48,6 +60,7 @@ public class StageInitState : StateBase {
         //Playerクラスのメンバ変数に登録
         stage_scene.PlyerClone = GetPlayerClone();
         stage_scene.Player = stage_scene.PlyerClone.GetComponent<Player>();
+        stage_scene.Player.SetUp();
     }
 
     //Bulletマネージャー初期化

@@ -38,8 +38,9 @@ public class Player : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    public void SetUp () {
         //初期化
+        Debug.Log("プレイヤーセットアップ");
         params_ = this.GetComponent<PlayerParams>();
         shooter_ = this.GetComponent<Shooter>();
         canon_move_ = this.GetComponent<CanonMove>();

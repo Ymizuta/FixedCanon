@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
-using System.Runtime.Serialization;
 using System.Text;
 
 public class StageScene : SceneBase {
@@ -29,6 +28,7 @@ public class StageScene : SceneBase {
     private bool is_game_clear_;                    //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                     //StageFinishStateでリザルトを判定するフラグ
 
+    private int stage_id_;
     private StageResultUi stage_result_ui_;
 
     //Jsonファイルからデータを反映させるインスタンス
@@ -154,6 +154,22 @@ public class StageScene : SceneBase {
         {
             return stage_info_;
         }
+        set
+        {
+            stage_info_ = value;
+        }
+    }
+
+    public int StageId
+    {
+        get
+        {
+            return stage_id_;
+        }
+        set
+        {
+            stage_id_ = value;
+        }
     }
 
     public StageResultUi StageResultUi
@@ -176,12 +192,12 @@ public class StageScene : SceneBase {
         stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
 
         //ステージ情報取得
-        int selected_stage_id = (int)scene_params;
-        string json = File.ReadAllText("Assets\\Json\\stageinfo.json");
-        StageInfoTable stage_info_table = new StageInfoTable();
-        stage_info_table.stage_info_list_ = new List<StageInfo>();
-        stage_info_table = JsonUtility.FromJson<StageInfoTable>(json);
-        stage_info_ = stage_info_table.stage_info_list_[selected_stage_id - 1];     //後ほど処理を見直し
+        stage_id_ = (int)scene_params;
+        //string json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        //StageInfoTable stage_info_table = new StageInfoTable();
+        //stage_info_table.stage_info_list_ = new List<StageInfo>();
+        //stage_info_table = JsonUtility.FromJson<StageInfoTable>(json);
+        //stage_info_ = stage_info_table.stage_info_list_[stage_id_ - 1];     //後ほど処理を見直し
 
         //初期化
         Debug.Log("ステージシーンを生成");
@@ -199,7 +215,6 @@ public class StageScene : SceneBase {
 
     public void ResetScene()
     {
-        Debug.Log("呼ばれた！");
         stage_init_state_ = null;
         stage_main_state_ = null;
         stage_finish_state_ = null;

@@ -41,7 +41,7 @@ public class StageFinishState : StateBase {
         ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
         ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
         //コールバック関数を登録
-        //((StageScene)scene_).StageResultUi.OnpushNextStageButton
+        ((StageScene)scene_).StageResultUi.OnpushNextStageButton += OnPushNextStageButtonCallBack;
         ((StageScene)scene_).StageResultUi.OnPushStageSelectButton += OnPushStageSelectButtonCallBack;
         //((StageScene)scene_).StageResultUi.OnpushNextStageButton
     }
@@ -72,12 +72,31 @@ public class StageFinishState : StateBase {
 
     private void OnPushNextStageButtonCallBack()
     {
+        //プレイヤー初期化
+        Destroy(((StageScene)scene_).PlyerClone.gameObject);
+        ((StageScene)scene_).PlyerClone = null;
+        ((StageScene)scene_).Player = null;
+
+        //((StageScene)scene_).BulletManager = null;
+        Destroy(((StageScene)scene_).StageObjectManager.Params.StageObjClone);
+        ((StageScene)scene_).StageObjectManager.Params.StageObjClone = null;
+        //((StageScene)scene_).StageObjectManager = null;
+        Destroy(((StageScene)scene_).StageUi.gameObject);
+        ((StageScene)scene_).StageUi = null;
+        ((StageScene)scene_).StageInfo = null;
+        ((StageScene)scene_).StageResultUi.RemoveStageResultUi();
+        ((StageScene)scene_).StageResultUi = null;
+
+        //((StageScene)scene_).ResetScene();
+        ((StageScene)scene_).StageId++;
+        scene_.ChangeState(StateList.StageInitState, null);
 
     }
 
     private void OnPushStageSelectButtonCallBack()
     {
         ChangeScene(SceneList.StageSelectScene,null);
+        //処理の呼び方・内容については要検討
         ((StageScene)scene_).ResetScene();
         Destroy(scene_.CurrentState.gameObject);
     }
