@@ -65,6 +65,7 @@ public class StageInitState : StateBase {
         }
         stage_scene.Player.SetUp();
 
+        //後で削除
         stage_scene.Player.id = stage_scene.StageId;
         Debug.Log("IDは" + stage_scene.Player.id);
         Debug.Log(stage_scene.Player.CanonMove.CanonBase);

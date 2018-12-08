@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class StageFinishState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
+	public override void SetUp () {
         ((StageScene)scene_).StageResultUi = ((StageScene)scene_).GetComponent<StageResultUi>();
 
         if (scene_.GetComponent<StageScene>().IsGameClear)

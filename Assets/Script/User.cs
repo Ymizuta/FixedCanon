@@ -8,10 +8,18 @@ public class User : MonoBehaviour {
 
 	// Update is called once per frame
 	void Start () {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-            SceneManager.getInstance().NextScene(SceneList.TitleScene, null);
-            Destroy(this);
-        //}
-	}
+        SceneManager.getInstance().NextScene(SceneList.TitleScene, null);
+        Destroy(this);
+
+        //GlobalCoroutine.Go(MyCoroutine());
+    }
+
+    //private IEnumerator MyCoroutine()
+    //{
+    //    while (true)
+    //    {
+    //    Debug.Log("Loop");
+    //    yield return null;
+    //    }
+    //}
 }

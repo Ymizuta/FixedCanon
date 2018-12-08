@@ -35,15 +35,14 @@ public class StageMainState : StateBase
         stage_obj_manager_.Params.OnAllTargetDie += OnAllTargetDieCallBack;
         stage_obj_manager_.Params.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
 
-        StartCoroutine(loop());
+        GlobalCoroutine.Go(Move());
     }
-    
-    private IEnumerator loop()
+
+    private IEnumerator Move()
     {
         while (true)
         {
             yield return null;
-            Debug.Log("Loop");
 
             //砲台・砲身の角度調整
             TouchInfo info = UserOperation.GetTouch();
@@ -83,6 +82,7 @@ public class StageMainState : StateBase
         //砲台の水平回転処理
         horizontal_direction_ = new_touch_poz_.x - old_touch_poz_.x;
 
+        //後で削除
         Debug.Log("IDは"+player_.id);
         Debug.Log(player_.CanonMove.CanonBase);
 
