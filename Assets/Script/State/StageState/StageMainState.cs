@@ -34,23 +34,31 @@ public class StageMainState : StateBase
         //コールバック登録
         stage_obj_manager_.Params.OnAllTargetDie += OnAllTargetDieCallBack;
         stage_obj_manager_.Params.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
-    }
 
-    private void Update()
+        StartCoroutine(loop());
+    }
+    
+    private IEnumerator loop()
     {
-        //砲台・砲身の角度調整
-        TouchInfo info = UserOperation.GetTouch();
-        if (info == TouchInfo.Began)
+        while (true)
         {
-            TouchBegan();
-        }
-        else if (info == TouchInfo.Moved)
-        {
-            TouchMoved();
-        }
-        else if (info == TouchInfo.Ended)
-        {
-            //必要な処理があれば追加
+            yield return null;
+            Debug.Log("Loop");
+
+            //砲台・砲身の角度調整
+            TouchInfo info = UserOperation.GetTouch();
+            if (info == TouchInfo.Began)
+            {
+                TouchBegan();
+            }
+            else if (info == TouchInfo.Moved)
+            {
+                TouchMoved();
+            }
+            else if (info == TouchInfo.Ended)
+            {
+                //必要な処理があれば追加
+            }
         }
     }
 
