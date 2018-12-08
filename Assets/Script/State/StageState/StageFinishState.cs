@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
@@ -71,25 +72,54 @@ public class StageFinishState : StateBase {
 
     private void OnPushNextStageButtonCallBack()
     {
-        //プレイヤー初期化
+        /*
+         * ステート切り替えパターン
+         */
+        ////プレイヤー初期化
         //Destroy(((StageScene)scene_).PlyerClone.gameObject);
         //((StageScene)scene_).PlyerClone = null;
         //((StageScene)scene_).Player = null;
 
+        ////1フレーム待機
+        //GlobalCoroutine.Go(DelayMethod(1, () =>
+        //{
+        //    Debug.Log("Delay call");
+        //}));
+
         //((StageScene)scene_).BulletManager = null;
-        Destroy(((StageScene)scene_).StageObjectManager.Params.StageObjClone);
-        ((StageScene)scene_).StageObjectManager.Params.StageObjClone = null;
+        //Destroy(((StageScene)scene_).StageObjectManager.Params.StageObjClone);
+        //((StageScene)scene_).StageObjectManager.Params.StageObjClone = null;
 
         //((StageScene)scene_).StageObjectManager = null;
-        Destroy(((StageScene)scene_).StageUi.gameObject);
-        ((StageScene)scene_).StageUi = null;
-        ((StageScene)scene_).StageInfo = null;
-        ((StageScene)scene_).StageResultUi.RemoveStageResultUi();
-        ((StageScene)scene_).StageResultUi = null;
+        //Destroy(((StageScene)scene_).StageUi.gameObject);
+        //((StageScene)scene_).StageUi = null;
+        //((StageScene)scene_).StageInfo = null;
+        //((StageScene)scene_).StageResultUi.RemoveStageResultUi();
+        //((StageScene)scene_).StageResultUi = null;
+        //((StageScene)scene_).StageId++;
+        //scene_.ChangeState(StateList.StageInitState, null);
 
-        //((StageScene)scene_).ResetScene();
+        /**
+         * ステージ切り替えパターン
+         */
+        ((StageScene)scene_).ResetScene();
+        //1フレーム待機
+        GlobalCoroutine.Go(DelayMethod(1, () =>
+        {
+            Debug.Log("Delay call");
+        }));
         ((StageScene)scene_).StageId++;
-        scene_.ChangeState(StateList.StageInitState, null);
+        ChangeScene(SceneList.StageScene, ((StageScene)scene_).StageId);
+    }
+
+    //１フレーム待機
+    private IEnumerator DelayMethod(int delayFrameCount, Action action)
+    {
+        for (var i = 0; i < delayFrameCount; i++)
+        {
+            yield return null;
+        }
+        action();
     }
 
     private void OnPushStageSelectButtonCallBack()
@@ -97,7 +127,7 @@ public class StageFinishState : StateBase {
         ChangeScene(SceneList.StageSelectScene,null);
         //処理の呼び方・内容については要検討
         ((StageScene)scene_).ResetScene();
-        Destroy(scene_.CurrentState.gameObject);
+        //Destroy(scene_.CurrentState.gameObject);
     }
 
     private void OnPushRetryButtonCallBack()

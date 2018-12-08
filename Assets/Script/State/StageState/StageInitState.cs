@@ -74,9 +74,12 @@ public class StageInitState : StateBase {
     //Bulletマネージャー初期化
     private void SetUpBulletManager(StageScene stage_scene)
     {
+        if (stage_scene.BulletManager == null)
+        {
         stage_scene.BulletManager = stage_scene.GetComponent<BulletManager>();
-        stage_scene.BulletManager.SetUp();
+        }
         //要修正
+        stage_scene.BulletManager.SetUp();
         stage_scene.BulletManager.Params.InitParams(stage_scene.StageInfo);
     }
     
