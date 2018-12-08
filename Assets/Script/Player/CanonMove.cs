@@ -5,7 +5,7 @@ using UnityEngine;
 public class CanonMove : MonoBehaviour {
 
     //砲台の水平角度
-    [SerializeField] GameObject canon_base_ = null;     //砲台オブジェクト（エディターから登録）
+    private GameObject canon_base_ = null;     //砲台オブジェクト（エディターから登録）
     private Vector3 canon_base_angle;                   //砲台の角度
     private float horizon_angle_value;                  //砲台の水平角度の値
     private float add_canon_base_angle = 30f;           //回転の係数(数値変更で回転速度調整)
@@ -24,6 +24,10 @@ public class CanonMove : MonoBehaviour {
     //メインステート初期化時に取得
     public GameObject CanonBase
     {
+        get
+        {
+            return canon_base_;
+        }
         set
         {
             canon_base_ = value;

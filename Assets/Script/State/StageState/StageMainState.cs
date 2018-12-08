@@ -20,7 +20,7 @@ public class StageMainState : StateBase
     private float horizontal_direction_;                    //CanonMoveの水平回転処理の引数
     private float vertical_direction_;                      //CanonMoveの仰角調整処理の引数
 
-    private void Start()
+    public override void SetUp()
     {
         stage_scene_ = ((StageScene)scene_);
         stage_obj_manager_ = stage_scene_.StageObjectManager;
@@ -74,6 +74,10 @@ public class StageMainState : StateBase
         new_touch_poz_.z = 0f;
         //砲台の水平回転処理
         horizontal_direction_ = new_touch_poz_.x - old_touch_poz_.x;
+
+        Debug.Log("IDは"+player_.id);
+        Debug.Log(player_.CanonMove.CanonBase);
+
         player_.CanonMove.HorizontalMove(horizontal_direction_);
         //砲身の仰角調整処理
         vertical_direction_ = -(new_touch_poz_.y - old_touch_poz_.y);

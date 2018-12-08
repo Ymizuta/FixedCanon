@@ -73,13 +73,14 @@ public class StageFinishState : StateBase {
     private void OnPushNextStageButtonCallBack()
     {
         //プレイヤー初期化
-        Destroy(((StageScene)scene_).PlyerClone.gameObject);
-        ((StageScene)scene_).PlyerClone = null;
-        ((StageScene)scene_).Player = null;
+        //Destroy(((StageScene)scene_).PlyerClone.gameObject);
+        //((StageScene)scene_).PlyerClone = null;
+        //((StageScene)scene_).Player = null;
 
         //((StageScene)scene_).BulletManager = null;
         Destroy(((StageScene)scene_).StageObjectManager.Params.StageObjClone);
         ((StageScene)scene_).StageObjectManager.Params.StageObjClone = null;
+
         //((StageScene)scene_).StageObjectManager = null;
         Destroy(((StageScene)scene_).StageUi.gameObject);
         ((StageScene)scene_).StageUi = null;
@@ -90,7 +91,6 @@ public class StageFinishState : StateBase {
         //((StageScene)scene_).ResetScene();
         ((StageScene)scene_).StageId++;
         scene_.ChangeState(StateList.StageInitState, null);
-
     }
 
     private void OnPushStageSelectButtonCallBack()

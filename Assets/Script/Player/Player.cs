@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     private CanonMove canon_move_;
     private Shooter shooter_;
 
+    public int id;
+
     //プレイヤークローンのオブジェクト検索用の文字列
     private readonly string mazzle_ = "Mazzle";
     private readonly string canon_base_ = "CanonBase";
@@ -26,6 +28,10 @@ public class Player : MonoBehaviour {
         get
         {
             return canon_move_;
+        }
+        set
+        {
+            canon_move_ = null;
         }
     }
 
@@ -48,12 +54,5 @@ public class Player : MonoBehaviour {
         shooter_.Muzzle = GameObject.Find(mazzle_);
         canon_move_.CanonBase = GameObject.Find(canon_base_);
         canon_move_.BarrelBase = GameObject.Find(barrel_base_);
-    }
-
-    private void OnDestroy()
-    {
-        params_ = null;
-        canon_move_ = null;
-        shooter_ = null;
     }
 }

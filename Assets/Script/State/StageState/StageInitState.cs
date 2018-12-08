@@ -58,9 +58,16 @@ public class StageInitState : StateBase {
     private void SetUpPlayer(StageScene stage_scene)
     {
         //Playerクラスのメンバ変数に登録
-        stage_scene.PlyerClone = GetPlayerClone();
-        stage_scene.Player = stage_scene.PlyerClone.GetComponent<Player>();
+        if (stage_scene.PlyerClone == null)
+        {
+            stage_scene.PlyerClone = GetPlayerClone();
+            stage_scene.Player = stage_scene.PlyerClone.GetComponent<Player>();
+        }
         stage_scene.Player.SetUp();
+
+        stage_scene.Player.id = stage_scene.StageId;
+        Debug.Log("IDは" + stage_scene.Player.id);
+        Debug.Log(stage_scene.Player.CanonMove.CanonBase);
     }
 
     //Bulletマネージャー初期化
