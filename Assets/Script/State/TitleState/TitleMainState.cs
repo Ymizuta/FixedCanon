@@ -5,8 +5,7 @@ using UnityEngine;
 public class TitleMainState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
+	public override void  SetUp () {
         //スタートボタン押下時にTitleUiクラスからコールバックされる処理を登録
         ((TitleScene)scene_).TitleUi.OnPushStartButton += OnpushStartButtonCallBack;
     }

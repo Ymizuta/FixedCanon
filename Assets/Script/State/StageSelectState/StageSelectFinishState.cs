@@ -5,11 +5,9 @@ using UnityEngine;
 public class StageSelectFinishState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
+	public override void SetUp() {
         RemoveUi();
-        ChangeScene(SceneList.StageScene,((StageSelectScene)scene_).StageSelectUi.StageId);
-        Destroy(scene_.CurrentState.gameObject);
+        ChangeScene(SceneList.StageScene, ((StageSelectScene)scene_).StageSelectUi.StageId);
     }
 
     /**

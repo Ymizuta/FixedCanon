@@ -5,8 +5,7 @@ using UnityEngine;
 public class StageSelectMainState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
+	public override void SetUp() {
         ((StageSelectScene)scene_).StageSelectUi.OnPshuSelectButton += OnPshuSelectButtonCallBack;
     }
 

@@ -46,11 +46,11 @@ public class StageSelectScene : SceneBase {
         ChangeState(StateList.StageSelectInitState,null);
     }
 
-    private void OnDestroy()
-    {
-        stage_select_init_state_ = null;
-        stage_select_main_state_ = null;
-        stage_select_finish_state_ = null;
-        stage_select_ui_ = null;
-    }
+    //private void OnDestroy()
+    //{
+    //    stage_select_init_state_ = null;
+    //    stage_select_main_state_ = null;
+    //    stage_select_finish_state_ = null;
+    //    stage_select_ui_ = null;
+    //}
 }

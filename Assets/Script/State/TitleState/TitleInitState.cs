@@ -7,9 +7,7 @@ using UnityEngine.Events;
 public class TitleInitState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
-        //scene_.ChangeState(StateList.TitleMainState,null);
+	public override void SetUp () {
         TitleScene title_scene = ((TitleScene)scene_);
         GameObject title_ui_prefab = Resources.Load("UI\\TitleUi") as GameObject;
         title_scene.TitleUi.TitleUiObj = Instantiate(title_ui_prefab);

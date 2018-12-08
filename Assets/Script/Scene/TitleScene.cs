@@ -44,5 +44,4 @@ public class TitleScene : SceneBase {
         //初期化ステートへ遷移
         ChangeState(StateList.TitleInitState,null);
     }
-
 }

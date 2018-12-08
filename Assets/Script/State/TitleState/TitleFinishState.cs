@@ -5,11 +5,9 @@ using UnityEngine;
 public class TitleFinishState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
+	public override　void SetUp () {
         RemoveUi();
         ChangeScene(SceneList.StageSelectScene, null);
-        Destroy(scene_.CurrentState.gameObject);
     }
 
     /**

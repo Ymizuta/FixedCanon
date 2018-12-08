@@ -29,14 +29,16 @@ public abstract class SceneBase : MonoBehaviour {
 
     private void AddState(string state_name)
     {
-        current_state_ = Instantiate(state_dictionary_[state_name]);
+        GameObject current_state_obj = Resources.Load("State\\"+state_name) as GameObject;
+        current_state_ = (StateBase)current_state_obj.GetComponent(System.Type.GetType(state_name));
+        //current_state_ = Instantiate(state_dictionary_[state_name]);
     }
 
     private void RemoveState()
     {
         if (current_state_ != null)
         {
-            Destroy(current_state_.gameObject);
+            //Destroy(current_state_.gameObject);
             current_state_ = null;
         }
     }

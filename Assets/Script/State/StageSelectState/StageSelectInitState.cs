@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class StageSelectInitState : StateBase {
 
 	// Use this for initialization
-	void Start () {
-        Init();
+	public override void SetUp () {
         StageSelectScene stage_select_scene = (StageSelectScene)scene_;
         StageSelectUi stage_select_ui = stage_select_scene.StageSelectUi;
         GameObject ui_prefab = Resources.Load("UI\\StageSelectUI") as GameObject;
