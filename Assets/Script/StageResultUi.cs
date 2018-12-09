@@ -76,7 +76,7 @@ public class StageResultUi : MonoBehaviour {
 
     public void PushNextStageButton()
     {
-        Debug.Log("ネクストステージ！");
+        //Debug.Log("ネクストステージ！");
         if (OnpushNextStageButton != null)
         {
             OnpushNextStageButton();

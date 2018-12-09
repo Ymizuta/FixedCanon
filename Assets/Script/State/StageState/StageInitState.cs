@@ -11,7 +11,7 @@ public class StageInitState : StateBase {
 
 	// Use this for initialization
 	public override void SetUp() {
-        Debug.Log("セットアップが呼ばれました");
+        //Debug.Log("セットアップが呼ばれました");
 
         StageScene stage_scene = ((StageScene)scene_);
 

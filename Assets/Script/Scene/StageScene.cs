@@ -14,9 +14,9 @@ public class StageScene : SceneBase {
     /// [finish_state]クリア→次のステージへ　ゲームオーバー→リトライORステージセレクトへ　　
     /// </summary>
 
-    private StateBase stage_init_state_ = null;    
-    private StateBase stage_main_state_ = null;  
-    private StateBase stage_finish_state_ = null;
+    //private StateBase stage_init_state_ = null;    
+    //private StateBase stage_main_state_ = null;  
+    //private StateBase stage_finish_state_ = null;
 
     private Player player_;
     private GameObject player_clone_;
@@ -38,6 +38,14 @@ public class StageScene : SceneBase {
     private readonly string STATE_PATH = "State\\";
     private readonly string JSON_PATH = "Assets\\Json\\stageinfo_";
     //private readonly string STAGE_OBJ_STR = "StageObject";
+    
+    public Dictionary<string,StateBase> StateDictionary
+    {
+        get
+        {
+            return state_dictionary_;
+        }        
+    }
 
     public Player Player
     {
@@ -187,9 +195,10 @@ public class StageScene : SceneBase {
     public override void Init(object scene_params)
     {
         //配下のステートを取得
-        stage_init_state_ = GetState(STATE_PATH, StateList.StageInitState);
-        stage_main_state_ = GetState(STATE_PATH, StateList.StageMainState);
-        stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
+        //この処理が不要なのでは？？
+        //stage_init_state_ = GetState(STATE_PATH, StateList.StageInitState);
+        //stage_main_state_ = GetState(STATE_PATH, StateList.StageMainState);
+        //stage_finish_state_ = GetState(STATE_PATH, StateList.StageFinishState);
 
         //ステージ情報取得
         stage_id_ = (int)scene_params;
@@ -201,9 +210,9 @@ public class StageScene : SceneBase {
 
         //初期化
         Debug.Log("ステージシーンを生成");
-        state_dictionary_[StateList.StageInitState] = stage_init_state_;
-        state_dictionary_[StateList.StageMainState] = stage_main_state_;
-        state_dictionary_[StateList.StageFinishState] = stage_finish_state_;
+        state_dictionary_[StateList.StageInitState] = GetState(STATE_PATH, StateList.StageInitState);
+        state_dictionary_[StateList.StageMainState] = GetState(STATE_PATH, StateList.StageMainState);
+        state_dictionary_[StateList.StageFinishState] = GetState(STATE_PATH, StateList.StageFinishState);
         
         //ゲームリザルトの判定に利用するフラグを設定
         is_game_over_ = false;
@@ -215,9 +224,12 @@ public class StageScene : SceneBase {
 
     public void ResetScene()
     {
-        stage_init_state_ = null;
-        stage_main_state_ = null;
-        stage_finish_state_ = null;
+        //stage_init_state_ = null;
+        //stage_main_state_ = null;
+        //stage_finish_state_ = null;
+        state_dictionary_[StateList.StageInitState] = null;
+        state_dictionary_[StateList.StageMainState] = null;
+        state_dictionary_[StateList.StageFinishState] = null;
         Destroy(player_clone_.gameObject);
         player_clone_ = null;
         player_ = null;

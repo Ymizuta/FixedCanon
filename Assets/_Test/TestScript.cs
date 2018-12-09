@@ -8,9 +8,20 @@ public class TestScript : MonoBehaviour {
 
     //private TestState test_state;
     //private TestComponent test_comp;
+    private TestState a;
+    private TestState b;
 
     // Use this for initialization
     void Start () {
+
+        GameObject test = Resources.Load("TestState") as GameObject;
+        a = test.GetComponent<TestState>();
+        Debug.Log("aの中身は" + a);
+        b = a;
+        Debug.Log("bの中身は" + b);
+        b = null;
+        Debug.Log("aの中身は" + a);
+        Debug.Log("bの中身は" + b);
 
         //Enemy enemy_1 = new Enemy("スライム", 1,new string[]{"体当たり"});
         //Enemy enemy_2 = new Enemy("ゴーレム", 100, new string[] { "ぶん殴る","防御" });
@@ -22,14 +33,14 @@ public class TestScript : MonoBehaviour {
         //string str = JsonUtility.ToJson(test_info_1);
         //Debug.Log(str);
 
-        string json = File.ReadAllText("Assets\\_Test\\testjson.json");
-        TestInfo test_info_1 = new TestInfo();
-        test_info_1.enemy_ = new List<Enemy>();
-        test_info_1 = JsonUtility.FromJson<TestInfo>(json);
-        Debug.Log(test_info_1.enemy_.Count);
-        Debug.Log(test_info_1.enemy_[0].name_);
-        Debug.Log(test_info_1.enemy_[1].name_);
-        Debug.Log(test_info_1.enemy_[2].name_);
+        //string json = File.ReadAllText("Assets\\_Test\\testjson.json");
+        //TestInfo test_info_1 = new TestInfo();
+        //test_info_1.enemy_ = new List<Enemy>();
+        //test_info_1 = JsonUtility.FromJson<TestInfo>(json);
+        //Debug.Log(test_info_1.enemy_.Count);
+        //Debug.Log(test_info_1.enemy_[0].name_);
+        //Debug.Log(test_info_1.enemy_[1].name_);
+        //Debug.Log(test_info_1.enemy_[2].name_);
 
         ////PathからJsonファイルのデータを取得
         //string json = File.ReadAllText("Assets\\_Test\\testjson.json");

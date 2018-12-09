@@ -77,15 +77,11 @@ public class StageFinishState : StateBase {
          */
         ////プレイヤー初期化
         Destroy(((StageScene)scene_).PlyerClone.gameObject);
+        ////Destroyメソッドの実行を待つため一瞬待機
+        Invoke("DelayMethod",0.1f);
         ((StageScene)scene_).PlyerClone = null;
         ((StageScene)scene_).Player = null;
-
-        ////1フレーム待機
-        //GlobalCoroutine.Go(DelayMethod(1, () =>
-        //{
-        //    Debug.Log("Delay call");
-        //}));
-
+        
         ((StageScene)scene_).BulletManager = null;
 
         Destroy(((StageScene)scene_).StageObjectManager.Params.StageObjClone);
@@ -109,11 +105,8 @@ public class StageFinishState : StateBase {
          * ステージ切り替えパターン
          */
         //((StageScene)scene_).ResetScene();
-        //////1フレーム待機
-        ////GlobalCoroutine.Go(DelayMethod(10, () =>
-        ////{
-        ////    Debug.Log("Delay call");
-        ////}));
+        ////Destroyメソッドの実行を待つため一瞬待機
+        //Invoke("DelayMethod", 0.1f);
         //((StageScene)scene_).StageId++;
         //ChangeScene(SceneList.StageScene, ((StageScene)scene_).StageId);
         //scene_.CurrentState = null;
@@ -122,10 +115,14 @@ public class StageFinishState : StateBase {
 
     private void OnPushStageSelectButtonCallBack()
     {
-        ChangeScene(SceneList.StageSelectScene,null);
-        //処理の呼び方・内容については要検討
-        ((StageScene)scene_).ResetScene();
-        scene_ = null;
+        //繰り返し実行されるバグを防止
+        if (scene_ != null)
+        {
+            ChangeScene(SceneList.StageSelectScene,null);
+            //処理の呼び方・内容については要検討
+            ((StageScene)scene_).ResetScene();
+            scene_ = null;
+        }
     }
 
     private void OnPushRetryButtonCallBack()
@@ -133,13 +130,9 @@ public class StageFinishState : StateBase {
 
     }
 
-    //１フレーム待機
-    private IEnumerator DelayMethod(int delayFrameCount, Action action)
+    //Invokeによる処理待ち待機用
+    private void DelayMethod()
     {
-        for (var i = 0; i < delayFrameCount; i++)
-        {
-            yield return null;
-        }
-        action();
+        return;
     }
 }
