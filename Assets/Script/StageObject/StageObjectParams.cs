@@ -50,6 +50,18 @@ public class StageObjectParams : MonoBehaviour {
         {
             return target_object_list_;
         }
+        set
+        {
+            target_object_list_ = value;
+        }
+    }
+
+    public List<NormalObject> NormalObjectList
+    {
+        set
+        {
+            normal_object_list = value;
+        }
     }
 
     //ターゲットオブジェクトの初期化

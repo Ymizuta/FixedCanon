@@ -55,10 +55,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4269005360396568}
-  - component: {fileID: 114692015496196760}
-  - component: {fileID: 114534598993140344}
-  - component: {fileID: 114533869532376036}
-  - component: {fileID: 114232954677392568}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -112,7 +108,7 @@ GameObject:
   - component: {fileID: 23599289311814318}
   - component: {fileID: 65602345206703840}
   m_Layer: 0
-  m_Name: Mazzle
+  m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,53 +429,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114232954677392568
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437926661993746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28fbc9aab35aed14685046a701f3d2ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  muzzle_: {fileID: 0}
---- !u!114 &114533869532376036
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437926661993746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa03bbfc2a7514a45b13fa75bf1b4d05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canon_base_: {fileID: 0}
-  barrel_base_: {fileID: 0}
---- !u!114 &114534598993140344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437926661993746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6624268bd5b2ad4bbf930a93f4ffaf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114692015496196760
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1437926661993746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05200ebc941c232449c1267c4db71626, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &136129584477528170
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -34,6 +34,7 @@ public class StageInitState : StateBase {
 
         //ステート移行
         scene_.ChangeState(StateList.StageMainState,null);
+        scene_ = null;
     }
 
     //StageObjectマネージャー初期化
@@ -61,14 +62,14 @@ public class StageInitState : StateBase {
         if (stage_scene.PlyerClone == null)
         {
             stage_scene.PlyerClone = GetPlayerClone();
-            stage_scene.Player = stage_scene.PlyerClone.GetComponent<Player>();
         }
+        stage_scene.Player = stage_scene.GetComponent<Player>();
         stage_scene.Player.SetUp();
 
-        //後で削除
-        stage_scene.Player.id = stage_scene.StageId;
-        Debug.Log("IDは" + stage_scene.Player.id);
-        Debug.Log(stage_scene.Player.CanonMove.CanonBase);
+        ////後で削除
+        //stage_scene.Player.id = stage_scene.StageId;
+        //Debug.Log("IDは" + stage_scene.Player.id);
+        //Debug.Log(stage_scene.Player.CanonMove.CanonBase);
     }
 
     //Bulletマネージャー初期化

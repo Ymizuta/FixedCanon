@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StageSelectMainState : StateBase {
 
+    private bool flag_;
+
 	// Use this for initialization
 	public override void SetUp() {
         ((StageSelectScene)scene_).StageSelectUi.OnPshuSelectButton += OnPshuSelectButtonCallBack;
@@ -14,6 +16,7 @@ public class StageSelectMainState : StateBase {
      */
     private void OnPshuSelectButtonCallBack()
     {
+        flag_ = true;
         scene_.ChangeState(StateList.StageSelectFinishState, null);
     }
 }

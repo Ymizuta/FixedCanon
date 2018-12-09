@@ -35,6 +35,7 @@ public class StageMainState : StateBase
         stage_obj_manager_.Params.OnAllTargetDie += OnAllTargetDieCallBack;
         stage_obj_manager_.Params.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
 
+        //要修正
         GlobalCoroutine.Go(Move());
     }
 
@@ -43,6 +44,10 @@ public class StageMainState : StateBase
         while (true)
         {
             yield return null;
+
+            //ゲームオブジェクトの有無をチェック
+            if (player_.CanonMove.CanonBase == null){player_.CanonMove.CanonBase = GameObject.Find("CanonBase");}
+            if (player_.CanonMove.BarrelBase == null){player_.CanonMove.BarrelBase = GameObject.Find("BarrelBase");}
 
             //砲台・砲身の角度調整
             TouchInfo info = UserOperation.GetTouch();
@@ -82,10 +87,6 @@ public class StageMainState : StateBase
         //砲台の水平回転処理
         horizontal_direction_ = new_touch_poz_.x - old_touch_poz_.x;
 
-        //後で削除
-        Debug.Log("IDは"+player_.id);
-        Debug.Log(player_.CanonMove.CanonBase);
-
         player_.CanonMove.HorizontalMove(horizontal_direction_);
         //砲身の仰角調整処理
         vertical_direction_ = -(new_touch_poz_.y - old_touch_poz_.y);
@@ -97,6 +98,8 @@ public class StageMainState : StateBase
     //砲弾発射（発射ボタンから呼び出し）
     private void Shoot()
     {
+        //ゲームオブジェクトの有無をチェック
+        if (player_.Shooter.Muzzle == null) { player_.Shooter.Muzzle = GameObject.Find("Muzzle"); }
         if (IsRestOfBullets())
         {
             bullet_clone_ = bullet_manager_.BulletClonMaker.BulletCloneMake(bullet_manager_.Params.LoadedBullet);
@@ -128,29 +131,41 @@ public class StageMainState : StateBase
     private void OnAllTargetDieCallBack()
     {
         Debug.Log("敵全滅しています！");
+        //scene_以外のメンバ変数のメモリ解放
+        OnMainStateFinish();
         scene_.GetComponent<StageScene>().IsGameClear = true;
         scene_.ChangeState(StateList.StageFinishState,null);
-        return;
+        //メンバ変数scene_を解放
+        scene_ = null;
+        stage_scene_ = null;
     }
 
     private void OnNotAllTargetDieCallBack()
     {
         //StageMainStateの有無をチェック(FinishStateに遷移していれば処理中断)    
         if (this == null)return;
-
+        else
         if (!bullet_manager_.BulletCounter.ExistBullets(bullet_manager_.Params))
         {
             Debug.Log("敵全滅せず・弾切れです！");
             scene_.GetComponent<StageScene>().IsGameOver = true;
             scene_.ChangeState(StateList.StageFinishState, null);
+            OnMainStateFinish();
         }
         else
             Debug.Log("続行ッ");
-            return;
     }
 
-    private void OnDestroy()
+    private void OnMainStateFinish()
     {
+        //scene_ = null;
+        //stage_scene_ = null;
+        stage_obj_manager_ = null;
+        player_ = null;
+        bullet_manager_ = null;
         bullet_clone_ = null;
+        GameObject coroutine_obj = GameObject.Find("GlobalCoroutine");
+        Destroy(coroutine_obj);
+        Destroy(stage_scene_.StageUi);
     }
 }

@@ -19,6 +19,10 @@ public class StageObjectManager : MonoBehaviour {
         {
             return params_;
         }
+        set
+        {
+            params_ = value;
+        }
     }
 
     public TargetObjectCounter TargetObjectCounter

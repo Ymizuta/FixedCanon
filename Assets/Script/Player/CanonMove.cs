@@ -5,7 +5,7 @@ using UnityEngine;
 public class CanonMove : MonoBehaviour {
 
     //砲台の水平角度
-    private GameObject canon_base_ = null;     //砲台オブジェクト（エディターから登録）
+    private GameObject canon_base_ = null;              //砲台オブジェクト（エディターから登録）
     private Vector3 canon_base_angle;                   //砲台の角度
     private float horizon_angle_value;                  //砲台の水平角度の値
     private float add_canon_base_angle = 30f;           //回転の係数(数値変更で回転速度調整)
@@ -13,7 +13,7 @@ public class CanonMove : MonoBehaviour {
     private readonly float MIN_HORIZONTAL_ANGLE = -45f; //回転範囲
 
     //砲台の仰角
-    [SerializeField] GameObject barrel_base_ = null;    //砲身オブジェクト（エディターから登録）
+    private GameObject barrel_base_ = null;             //砲身オブジェクト（エディターから登録）
     private Vector3 canon_angle;                        //仰角度
     private float canon_evelation_angle;                //砲身の仰角値
     private float default_canon_evalation_angle;        //砲台の仰角の初期値
@@ -39,20 +39,16 @@ public class CanonMove : MonoBehaviour {
     //メインステート初期化時に取得
     public GameObject BarrelBase
     {
+        get
+        {
+            return barrel_base_;
+        }
         set
         {
             barrel_base_ = value;
             //砲身の初期仰角        
             canon_angle = barrel_base_.transform.rotation.eulerAngles;
         }
-    }
-
-    private void Start()
-    {
-        ////砲台の初期角度
-        //canon_base_angle = canon_base_.transform.rotation.eulerAngles;
-        ////砲身の初期仰角        
-        //canon_angle = barrel_.transform.rotation.eulerAngles;
     }
 
     //砲台の左右回転

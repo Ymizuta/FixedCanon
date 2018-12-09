@@ -224,6 +224,10 @@ public class StageScene : SceneBase {
         bullet_manager_ = null;
         Destroy(stage_obj_manager.Params.StageObjClone);
         stage_obj_manager.Params.StageObjClone = null;
+        stage_obj_manager.Params.StageObject = null;
+        stage_obj_manager.Params.TargetObjectList = null;
+        stage_obj_manager.Params.NormalObjectList = null;
+        stage_obj_manager.Params = null;
         stage_obj_manager = null;
         Destroy(stage_ui_.gameObject);
         stage_ui_ = null;

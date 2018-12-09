@@ -9,6 +9,9 @@ public class Shooter : MonoBehaviour {
 
     public void Shoot(BulletBase bullet_clone)
     {
+        //ゲームオブジェクトの有無をチェック
+        if (muzzle_ == null) { muzzle_ = GameObject.Find("Muzzle"); }
+
         Debug.Log(bullet_clone + "を発射");
         //BulletBase bullet_clone = Instantiate(bullet, muzzle_.transform.position, muzzle_.transform.rotation);
         bullet_clone.GetComponent<Rigidbody>().AddForce(muzzle_.transform.forward * bullet_clone.ShootPower);
@@ -18,6 +21,10 @@ public class Shooter : MonoBehaviour {
     //メインステート初期化時に取得
     public GameObject Muzzle
     {
+        get
+        {
+            return muzzle_;
+        }
         set
         {
             muzzle_ = value;

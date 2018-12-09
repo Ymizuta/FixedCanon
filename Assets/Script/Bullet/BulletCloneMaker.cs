@@ -8,6 +8,9 @@ public class BulletCloneMaker : MonoBehaviour {
 
     public BulletBase BulletCloneMake(BulletBase bullet)
     {
+        //ゲームオブジェクトの有無をチェック
+        if (muzzle_ == null) { muzzle_ = GameObject.Find("Muzzle"); }
+
         //Debug.Log("砲弾を生成");
         BulletBase bullet_clone = Instantiate(bullet, muzzle_.transform.position, muzzle_.transform.rotation);
         return bullet_clone;

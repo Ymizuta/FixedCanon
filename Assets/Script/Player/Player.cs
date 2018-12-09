@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
     public int id;
 
     //プレイヤークローンのオブジェクト検索用の文字列
-    private readonly string mazzle_ = "Mazzle";
+    private readonly string muzzle_ = "Muzzle";
     private readonly string canon_base_ = "CanonBase";
     private readonly string barrel_base_ = "BarrelBase";
 
@@ -20,6 +20,10 @@ public class Player : MonoBehaviour {
         get
         {
             return params_;
+        }
+        set
+        {
+            params_ = value;
         }
     }
 
@@ -41,9 +45,12 @@ public class Player : MonoBehaviour {
         {
             return shooter_;
         }
+        set
+        {
+            shooter_ = value;
+        }
     }
 
-    // Use this for initialization
     public void SetUp () {
         //初期化
         Debug.Log("プレイヤーセットアップ");
@@ -51,7 +58,7 @@ public class Player : MonoBehaviour {
         shooter_ = this.GetComponent<Shooter>();
         canon_move_ = this.GetComponent<CanonMove>();
         //プレイヤーオブジェクトの検索・取得
-        shooter_.Muzzle = GameObject.Find(mazzle_);
+        shooter_.Muzzle = GameObject.Find(muzzle_);
         canon_move_.CanonBase = GameObject.Find(canon_base_);
         canon_move_.BarrelBase = GameObject.Find(barrel_base_);
     }
