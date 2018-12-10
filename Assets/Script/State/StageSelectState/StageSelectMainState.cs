@@ -8,7 +8,7 @@ public class StageSelectMainState : StateBase {
 
 	// Use this for initialization
 	public override void SetUp() {
-        ((StageSelectScene)scene_).StageSelectUi.OnPshuSelectButton += OnPshuSelectButtonCallBack;
+        ((StageSelectScene)scene_).StageSelectUi.OnPshuSelectButton = OnPshuSelectButtonCallBack;
     }
 
     /**
@@ -16,19 +16,18 @@ public class StageSelectMainState : StateBase {
      */
     private void OnPshuSelectButtonCallBack()
     {         
-        if (IsMainState())
-        {
+        //if (IsMainState())
+        //{
             scene_.ChangeState(StateList.StageSelectFinishState, null);
-        }
+        //}
     }
 
-    /**
-     * @ brief  現在のステート(CurrentState)がMainStateかを判定
-     * @ detail バグにより、処理が繰り返し実行されることを防止
-    */
-    private bool IsMainState()
-    {
-        return ((StageSelectScene)scene_).CurrentState == ((StageSelectScene)scene_).StateDictionary[StateList.StageSelectMainState];
-    }
-
+    ///**
+    // * @ brief  現在のステート(CurrentState)がMainStateかを判定
+    // * @ detail バグにより、処理が繰り返し実行されることを防止
+    //*/
+    //private bool IsMainState()
+    //{
+    //    return ((StageSelectScene)scene_).CurrentState == ((StageSelectScene)scene_).StateDictionary[StateList.StageSelectMainState];
+    //}
 }

@@ -32,8 +32,8 @@ public class StageMainState : StateBase
         ((StageScene)scene_).ChangeButton.GetComponent<Button>().onClick.AddListener(this.ChangeBullet);
 
         //コールバック登録
-        ((StageScene)scene_).StageObjectManager.Params.OnAllTargetDie += OnAllTargetDieCallBack;
-        ((StageScene)scene_).StageObjectManager.Params.OnNotAllTargetDie += OnNotAllTargetDieCallBack;
+        ((StageScene)scene_).StageObjectManager.Params.OnAllTargetDie = OnAllTargetDieCallBack;
+        ((StageScene)scene_).StageObjectManager.Params.OnNotAllTargetDie = OnNotAllTargetDieCallBack;
 
         //要修正
         GlobalCoroutine.Go(Move());
@@ -132,8 +132,8 @@ public class StageMainState : StateBase
     
     private void OnAllTargetDieCallBack()
     {
-        if (ExactScene() && IsMainState())
-        {
+        //if (ExactScene() && IsMainState())
+        //{
             Debug.Log("敵全滅しています！");
             //scene_以外のメンバ変数のメモリ解放
             OnMainStateFinish();
@@ -142,13 +142,13 @@ public class StageMainState : StateBase
             //メンバ変数scene_を解放
             scene_ = null;
             //stage_scene_ = null;
-        }
+        //}
     }
 
     private void OnNotAllTargetDieCallBack()
     {
-        if (ExactScene() && IsMainState())
-        { 
+        //if (ExactScene() && IsMainState())
+        //{ 
             if (!((StageScene)scene_).BulletManager.BulletCounter.ExistBullets(((StageScene)scene_).BulletManager.Params))
             {
                 Debug.Log("敵全滅せず・弾切れです！");
@@ -158,7 +158,7 @@ public class StageMainState : StateBase
             }
             else
                 Debug.Log("続行ッ");
-        }
+        //}
     }
 
     private void OnMainStateFinish()
@@ -179,12 +179,12 @@ public class StageMainState : StateBase
         return scene_ != null;
     }
 
-    /**
-     * @ brief  現在のステート(CurrentState)がMainStateかを判定
-     * @ detail バグにより、処理が繰り返し実行されることを防止
-    */
-    private bool IsMainState()
-    {
-        return scene_.CurrentState == ((StageScene)scene_).StateDictionary[StateList.StageMainState];
-    }
+    ///**
+    // * @ brief  現在のステート(CurrentState)がMainStateかを判定
+    // * @ detail バグにより、処理が繰り返し実行されることを防止
+    //*/
+    //private bool IsMainState()
+    //{
+    //    return scene_.CurrentState == ((StageScene)scene_).StateDictionary[StateList.StageMainState];
+    //}
 }
