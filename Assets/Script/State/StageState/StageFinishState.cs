@@ -43,7 +43,7 @@ public class StageFinishState : StateBase {
         //コールバック関数を登録
         ((StageScene)scene_).StageResultUi.OnpushNextStageButton = OnPushNextStageButtonCallBack;
         ((StageScene)scene_).StageResultUi.OnPushStageSelectButton = OnPushStageSelectButtonCallBack;
-        //((StageScene)scene_).StageResultUi.OnpushNextStageButton
+        ((StageScene)scene_).StageResultUi.OnpushRetryButton = OnPushRetryButtonCallBack;
     }
 
     /**
@@ -52,12 +52,15 @@ public class StageFinishState : StateBase {
     private void CreateGameOverUi()
     {
         //ステージUIのゲームオブジェクトを取得
-        ((StageScene)scene_).StageResultUi. GameOverUiObj = GetResouceInstance("UI/GameOverUi");
+        ((StageScene)scene_).StageResultUi.GameOverUiObj = GetResouceInstance("UI/GameOverUi");
         ((StageScene)scene_).StageResultUi.ToStageSelectButton = GameObject.Find("ToStageSelectButton");
         ((StageScene)scene_).StageResultUi.RetryButton = GameObject.Find("RetryButton");
         //UIボタンに関数を登録
         ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
         ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
+        //コールバック関数を登録
+        ((StageScene)scene_).StageResultUi.OnPushStageSelectButton = OnPushStageSelectButtonCallBack;
+        ((StageScene)scene_).StageResultUi.OnpushRetryButton = OnPushRetryButtonCallBack;
     }
 
     /**
@@ -76,27 +79,7 @@ public class StageFinishState : StateBase {
          * ステート切り替えパターン
          */
         ////プレイヤー初期化
-        Destroy(((StageScene)scene_).PlyerClone.gameObject);
-        ////Destroyメソッドの実行を待つため一瞬待機
-        Invoke("DelayMethod",0.1f);
-        ((StageScene)scene_).PlyerClone = null;
-        ((StageScene)scene_).Player = null;
-        
-        ((StageScene)scene_).BulletManager = null;
-
-        Destroy(((StageScene)scene_).StageObjectManager.Params.StageObjClone);
-        ((StageScene)scene_).StageObjectManager.Params.StageObjClone = null;
-        ((StageScene)scene_).StageObjectManager.Params.StageObject = null;
-        ((StageScene)scene_).StageObjectManager.Params.TargetObjectList = null;
-        ((StageScene)scene_).StageObjectManager.Params.NormalObjectList = null;
-        ((StageScene)scene_).StageObjectManager.Params = null;
-        ((StageScene)scene_).StageObjectManager = null;
-
-        Destroy(((StageScene)scene_).StageUi.gameObject);
-        ((StageScene)scene_).StageUi = null;
-        ((StageScene)scene_).StageInfo = null;
-        ((StageScene)scene_).StageResultUi.RemoveStageResultUi();
-        ((StageScene)scene_).StageResultUi = null;
+        ResetStageScene();
         ((StageScene)scene_).StageId++;
         scene_.ChangeState(StateList.StageInitState, null);
         scene_ = null;
@@ -115,19 +98,46 @@ public class StageFinishState : StateBase {
 
     private void OnPushStageSelectButtonCallBack()
     {
-        //繰り返し実行されるバグを防止
-        if (scene_ != null)
-        {
+        ////繰り返し実行されるバグを防止
+        //if (scene_ != null)
+        //{
             ChangeScene(SceneList.StageSelectScene,null);
             //処理の呼び方・内容については要検討
             ((StageScene)scene_).ResetScene();
             scene_ = null;
-        }
+        //}
     }
 
     private void OnPushRetryButtonCallBack()
     {
+        ResetStageScene();
+        scene_.ChangeState(StateList.StageInitState, null);
+        scene_ = null;
+    }
 
+    private void ResetStageScene()
+    {
+        Destroy(((StageScene)scene_).PlyerClone.gameObject);
+        //Destroyメソッドの実行を待つため一瞬待機
+        Invoke("DelayMethod", 0.1f);
+        ((StageScene)scene_).PlyerClone = null;
+        ((StageScene)scene_).Player = null;
+
+        ((StageScene)scene_).BulletManager = null;
+
+        Destroy(((StageScene)scene_).StageObjectManager.Params.StageObjClone);
+        ((StageScene)scene_).StageObjectManager.Params.StageObjClone = null;
+        ((StageScene)scene_).StageObjectManager.Params.StageObject = null;
+        ((StageScene)scene_).StageObjectManager.Params.TargetObjectList = null;
+        ((StageScene)scene_).StageObjectManager.Params.NormalObjectList = null;
+        ((StageScene)scene_).StageObjectManager.Params = null;
+        ((StageScene)scene_).StageObjectManager = null;
+
+        Destroy(((StageScene)scene_).StageUi.gameObject);
+        ((StageScene)scene_).StageUi = null;
+        ((StageScene)scene_).StageInfo = null;
+        ((StageScene)scene_).StageResultUi.RemoveStageResultUi();
+        ((StageScene)scene_).StageResultUi = null;
     }
 
     //Invokeによる処理待ち待機用

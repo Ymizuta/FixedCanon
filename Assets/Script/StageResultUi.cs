@@ -102,7 +102,7 @@ public class StageResultUi : MonoBehaviour {
 
     public void RemoveStageResultUi()
     {
-        if(clear_ui_obj_.gameObject != null)Destroy(clear_ui_obj_.gameObject);
+        if(clear_ui_obj_ != null)Destroy(clear_ui_obj_.gameObject);
         clear_ui_obj_ = null;
         if(game_over_ui_obj_ != null)Destroy(game_over_ui_obj_.gameObject);
         game_over_ui_obj_ = null;
