@@ -146,33 +146,31 @@ public class StageMainState : StateBase
     
     private void OnAllTargetDieCallBack()
     {
-        //if (ExactScene() && IsMainState())
-        //{
-            Debug.Log("敵全滅しています！");
-            //scene_以外のメンバ変数のメモリ解放
-            OnMainStateFinish();
-            scene_.GetComponent<StageScene>().IsGameClear = true;
-            scene_.ChangeState(StateList.StageFinishState, null);
-            //メンバ変数scene_を解放
-            scene_ = null;
-            //stage_scene_ = null;
-        //}
+        Debug.Log("敵全滅しています！");
+        //scene_以外のメンバ変数のメモリ解放
+        OnMainStateFinish();
+        scene_.GetComponent<StageScene>().IsGameClear = true;
+        scene_.ChangeState(StateList.StageFinishState, null);
+        //メンバ変数scene_を解放
+        scene_ = null;
     }
 
     private void OnNotAllTargetDieCallBack()
     {
-        //if (ExactScene() && IsMainState())
-        //{ 
-            if (!((StageScene)scene_).BulletManager.BulletCounter.ExistBullets(((StageScene)scene_).BulletManager.Params))
-            {
-                Debug.Log("敵全滅せず・弾切れです！");
-                scene_.GetComponent<StageScene>().IsGameOver = true;
-                scene_.ChangeState(StateList.StageFinishState, null);
-                OnMainStateFinish();
-            }
-            else
-                Debug.Log("続行ッ");
-        //}
+        //sceneがnullなら処理を中断
+        if (!(ExistScene())) return;
+
+        if (!((StageScene)scene_).BulletManager.BulletCounter.ExistBullets(((StageScene)scene_).BulletManager.Params))
+        {
+            Debug.Log("敵全滅せず・弾切れです！");
+            scene_.GetComponent<StageScene>().IsGameOver = true;
+            scene_.ChangeState(StateList.StageFinishState, null);
+            OnMainStateFinish();
+            scene_ = null;
+        }
+        else
+            Debug.Log("続行ッ");
+            return;
     }
 
     private void OnMainStateFinish()
@@ -188,7 +186,13 @@ public class StageMainState : StateBase
         Destroy(((StageScene)scene_).StageUi);
     }
 
-    private bool ExactScene()
+    /*
+     * @ brief  scene_がnullでなければtrueを返す 
+     * @ detail ターゲット全滅後に滞空中の砲弾がStageObjectに着弾することによるエラーを防止する。
+     *          (ターゲット全滅のコールバック後に再度コールバック処理を実施しようとするとStageMainStateのメンバ変数を開放しているためNullReferenceExceptionが発生してしまう)
+     *          対処として、ターゲット全滅によるコールバック処理でscene_がnullされていれば処理を中断させる.
+     */ 
+    private bool ExistScene()
     {
         return scene_ != null;
     }
@@ -199,6 +203,6 @@ public class StageMainState : StateBase
     //*/
     //private bool IsMainState()
     //{
-    //    return scene_.CurrentState == ((StageScene)scene_).StateDictionary[StateList.StageMainState];
+    //    return (scene_.CurrentState == ((StageScene)scene_).StateDictionary[StateList.StageMainState]);
     //}
 }
