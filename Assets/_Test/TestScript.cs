@@ -10,9 +10,13 @@ public class TestScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        SampleDeligate += AMethod;
-        SampleDeligate += AMethod;
-        SampleDeligate += BMethod;
+        //SampleDeligate += AMethod;
+        //SampleDeligate += AMethod;
+        //SampleDeligate += BMethod;
+
+        SampleDeligate = AMethod;
+        SampleDeligate = AMethod;
+        SampleDeligate = BMethod;
         SampleDeligate();
     }
 

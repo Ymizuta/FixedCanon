@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 using System;
 using System.Text;
@@ -25,6 +26,9 @@ public class StageScene : SceneBase {
     private GameObject stage_ui_;                   //ステージシーンのUIオブジェクトを持つ空オブジェクト
     private GameObject fire_button_;                //発射ボタンオブジェクト
     private GameObject change_button_;              //砲弾変更ボタンオブジェクト
+    private Text number_of_bullets_text_;
+
+    private GameObject stage_name_ui_;
     private bool is_game_clear_;                    //StageFinishStateでリザルトを判定するフラグ
     private bool is_game_over_;                     //StageFinishStateでリザルトを判定するフラグ
 
@@ -131,6 +135,30 @@ public class StageScene : SceneBase {
         }
     }
 
+    public Text NumberOfBulletsText
+    {
+        get
+        {
+            return number_of_bullets_text_;
+        }
+        set
+        {
+            number_of_bullets_text_ = value;
+        }
+    }
+
+    public GameObject StageNameUi
+    {
+        get
+        {
+            return stage_name_ui_;
+        }
+        set
+        {
+            stage_name_ui_ = value;
+        }
+    }
+
     //ゲームクリアーフラグ（StageFinishStateに渡す）
     public bool IsGameClear
     {
@@ -143,6 +171,7 @@ public class StageScene : SceneBase {
             is_game_clear_ = value;
         }
     }
+
     //ゲームオーバーフラグ（StageFinishStateに渡す）
     public bool IsGameOver
     {

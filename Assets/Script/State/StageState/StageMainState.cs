@@ -39,13 +39,20 @@ public class StageMainState : StateBase
         GlobalCoroutine.Go(Move());
     }
 
+    /*
+     * @ brief  プレイヤーの砲台、砲身の角度を変更する処理
+     * @ detail コルーチン処理により毎フレーム呼び出し、ユーザ操作を検知する
+     */
     private IEnumerator Move()
     {
         while (true)
         {
             yield return null;
 
-            //ゲームオブジェクトの有無をチェック
+            /*
+             *@ brief   GameObjectがnullの場合にオブジェクトを取得する処理 
+             *@ detail  ステージ/ステート切り替え時に初期化したGameObjectがnullになるバグを防止
+             */
             if (((StageScene)scene_).Player.CanonMove.CanonBase == null)
             { ((StageScene)scene_).Player.CanonMove.CanonBase = GameObject.Find("CanonBase");}
             if (((StageScene)scene_).Player.CanonMove.BarrelBase == null)
@@ -109,8 +116,7 @@ public class StageMainState : StateBase
             //弾数減少
             ((StageScene)scene_).BulletManager.Params.ReduceBullet();
             //弾数カウント（UIへの反映）
-            //Debug.Log(player_params_.Bullets[player_params_.BulletIndex] + "の弾数は"
-            //+ player_params_.NumberOfBullets[player_params_.BulletIndex] + "発");
+            UpdateNumberOfBulletsUi();
         }
     }
 
@@ -118,6 +124,14 @@ public class StageMainState : StateBase
     private void ChangeBullet()
     {
         ((StageScene)scene_).BulletManager.BulletChanger.ChangeBullet(((StageScene)scene_).BulletManager.Params);
+        //弾数カウント（UIへの反映）
+        UpdateNumberOfBulletsUi();
+    }
+
+    private void UpdateNumberOfBulletsUi()
+    {
+        ((StageScene)scene_).NumberOfBulletsText.text
+            = "BULLETS:" + ((StageScene)scene_).BulletManager.Params.NumberOfBullets[((StageScene)scene_).BulletManager.Params.BulletIndex].ToString("00");
     }
 
     //残りの砲弾の有無を判定(発射できるかできないかの判定)

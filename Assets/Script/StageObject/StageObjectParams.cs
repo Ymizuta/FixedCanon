@@ -116,7 +116,7 @@ public class StageObjectParams : MonoBehaviour {
         target_object_list_.Remove(target_obj);
         if (!target_obj_counter.ExistTargetObjects(TargetObjectList))
         {
-            Debug.Log("ターゲットが全滅");
+            //Debug.Log("ターゲットが全滅");
             if (OnAllTargetDie != null)
             {
                 //ターゲットが全滅している場合のコールバック
@@ -125,7 +125,7 @@ public class StageObjectParams : MonoBehaviour {
             }
         }
         else
-        Debug.Log("ターゲットはまだ存在する");
+        //Debug.Log("ターゲットはまだ存在する");
         if (OnNotAllTargetDie != null)
         {
             //ターゲットが生き残っている場合のコールバック
@@ -135,7 +135,7 @@ public class StageObjectParams : MonoBehaviour {
 
     private void OnHitoNormalObjCallBack()
     {
-        Debug.Log("ノーマルオブジェクトにヒット");
+        //Debug.Log("ノーマルオブジェクトにヒット");
         if (OnNotAllTargetDie != null)
         {
             //ターゲットが生き残っている場合のコールバック

@@ -32,6 +32,13 @@ public class StageInitState : StateBase {
         stage_scene.FireButton = GameObject.Find(UiList.FireButton).gameObject;
         stage_scene.ChangeButton = GameObject.Find(UiList.ChangeButton).gameObject;
 
+        GameObject stage_name_ui = GameObject.Find(UiList.StageName).gameObject;
+        stage_name_ui.GetComponent<Text>().text = "STAGE:" + stage_scene.StageId.ToString("00");
+
+        stage_scene.NumberOfBulletsText = GameObject.Find(UiList.NumberOfBulletsText).gameObject.GetComponent<Text>();
+        stage_scene.NumberOfBulletsText.text
+            = "BULLETS:" + stage_scene.BulletManager.Params.NumberOfBullets[stage_scene.BulletManager.Params.BulletIndex].ToString("00");
+
         //ステート移行
         scene_.ChangeState(StateList.StageMainState,null);
         scene_ = null;

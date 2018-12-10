@@ -41,8 +41,8 @@ public class StageFinishState : StateBase {
         ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
         ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
         //コールバック関数を登録
-        ((StageScene)scene_).StageResultUi.OnpushNextStageButton += OnPushNextStageButtonCallBack;
-        ((StageScene)scene_).StageResultUi.OnPushStageSelectButton += OnPushStageSelectButtonCallBack;
+        ((StageScene)scene_).StageResultUi.OnpushNextStageButton = OnPushNextStageButtonCallBack;
+        ((StageScene)scene_).StageResultUi.OnPushStageSelectButton = OnPushStageSelectButtonCallBack;
         //((StageScene)scene_).StageResultUi.OnpushNextStageButton
     }
 

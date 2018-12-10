@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TitleScene : SceneBase {
 
-    private StateBase title_init_state_ = null;
-    private StateBase title_main_state_ = null;
-    private StateBase title_finish_state_ = null;
+    //private StateBase title_init_state_ = null;
+    //private StateBase title_main_state_ = null;
+    //private StateBase title_finish_state_ = null;
     private TitleUi title_ui_;
 
     //文字列
@@ -32,13 +32,13 @@ public class TitleScene : SceneBase {
         Debug.Log("タイトルシーン生成");
 
         //配下のステートを取得
-        title_init_state_ = GetState(STATE_PATH, StateList.TitleInitState);
-        title_main_state_ = GetState(STATE_PATH, StateList.TitleMainState);
-        title_finish_state_ = GetState(STATE_PATH, StateList.TitleFinishState);
+        //title_init_state_ = GetState(STATE_PATH, StateList.TitleInitState);
+        //title_main_state_ = GetState(STATE_PATH, StateList.TitleMainState);
+        //title_finish_state_ = GetState(STATE_PATH, StateList.TitleFinishState);
         //ディクショナリ登録
-        state_dictionary_[StateList.TitleInitState] = title_init_state_;
-        state_dictionary_[StateList.TitleMainState] = title_main_state_;
-        state_dictionary_[StateList.TitleFinishState] = title_finish_state_;
+        state_dictionary_[StateList.TitleInitState] = GetState(STATE_PATH, StateList.TitleInitState);
+        state_dictionary_[StateList.TitleMainState] = GetState(STATE_PATH, StateList.TitleMainState);
+        state_dictionary_[StateList.TitleFinishState] = GetState(STATE_PATH, StateList.TitleFinishState);
         //TitleUiクラスを取得
         title_ui_ = this.GetComponent<TitleUi>();
         //初期化ステートへ遷移
