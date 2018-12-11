@@ -14,6 +14,7 @@ public class StageFinishState : StateBase {
         if (scene_.GetComponent<StageScene>().IsGameClear)
         {
             Debug.Log("フィニッシュ：ゲームクリア！");
+            UpdateSaveData();
             CreateClearUi();
         }
         else
@@ -138,6 +139,19 @@ public class StageFinishState : StateBase {
         ((StageScene)scene_).StageInfo = null;
         ((StageScene)scene_).StageResultUi.RemoveStageResultUi();
         ((StageScene)scene_).StageResultUi = null;
+    }
+
+    /*
+     * @ brief  セーブデータを更新し、ステージセレクトシーンで新たなステージを選択できるようにする
+     * @ detail セーブデータを確認し、次ステージのIDがセーブされているよりステージIDより大きければセーブデータを更新
+     */
+    private void UpdateSaveData()
+    {
+        int next_stage_id = ((StageScene)scene_).StageId + 1;
+        if (PlayerPrefs.GetInt(GameConfig.SAVE_DATA) < next_stage_id)
+        {
+            PlayerPrefs.SetInt(GameConfig.SAVE_DATA,next_stage_id);
+        }
     }
 
     //Invokeによる処理待ち待機用

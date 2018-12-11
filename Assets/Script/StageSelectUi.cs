@@ -13,6 +13,7 @@ public class StageSelectUi : MonoBehaviour {
     private Text select_button_text_;
     private int default_stage_id_ = 1;
     private int stage_id_;
+    private int saved_stage_id_;
     public System.Action OnPshuSelectButton;
     public static readonly string SelectButtonStr = "STAGE:";
 
@@ -135,18 +136,32 @@ public class StageSelectUi : MonoBehaviour {
     }
 
     /**
+     * @brief   セーブデータから最新のクリア済みステージIDを格納する。
+     */
+    public int SavedStageId
+    {
+        get
+        {
+            return saved_stage_id_;
+        }
+        set
+        {
+            saved_stage_id_ = value;
+        }
+    }
+
+    /**
      * @brief   NEXTボタン押下時の処理実行。一つ次ステージを表示。
      */
     public void PushNextButton()
     {
-        //後ほど修正。（ゲームの進捗に応じて選べるステージが増える仕様に）
-        if (stage_id_ < 5)
+        if (stage_id_ < saved_stage_id_)
         {
             stage_id_++;
             select_button_text_.text = SelectButtonStr + stage_id_.ToString("00");
             return;
         }
-        else if (stage_id_ >= 5)
+        else if (stage_id_ >= saved_stage_id_)
         {
             stage_id_ = default_stage_id_;
             select_button_text_.text = SelectButtonStr + default_stage_id_.ToString("00");
