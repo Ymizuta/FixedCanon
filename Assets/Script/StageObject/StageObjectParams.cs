@@ -93,13 +93,22 @@ public class StageObjectParams : MonoBehaviour {
         //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
         foreach (Transform child in stage_object_clone_.transform)
         {
+            NormalObject normal_obj_component;
             if (child.tag == "Untagged") { Debug.LogWarning("タグのないオブジェクトが存在します：" + child); }
             //NormalObjectのタグが付いているものだけ取得
             if (child.tag == StageObjectList.NormalObject)
             {
-                NormalObject normal_obj_component = child.GetComponent<NormalObject>();
+                normal_obj_component = child.GetComponent<NormalObject>();
                 if (normal_obj_component == null) { Debug.LogWarning("コンポーネントがアタッチされていません：" + child); }
                 normal_object_list.Add(normal_obj_component);
+                //孫オブジェクトを取得
+                foreach(Transform obj in child)
+                {
+                    if (obj.tag == "Untagged") { Debug.LogWarning("タグのないオブジェクトが存在します：" + child); }
+                    normal_obj_component = obj.GetComponent<NormalObject>();
+                    if (normal_obj_component == null) { Debug.LogWarning("コンポーネントがアタッチされていません：" + obj); }
+                    normal_object_list.Add(normal_obj_component);
+                }
             }
         }
         //ノーマルオブジェクトにコールバック関数を登録
