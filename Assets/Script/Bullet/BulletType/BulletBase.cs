@@ -17,7 +17,7 @@ public abstract class BulletBase : MonoBehaviour {
     {
         if (other.tag == StageObjectList.NormalObject)
         {
-            Destroy(this.gameObject,destroy_interval_time_);
+            Destroy(this.gameObject);
         }
         if (other.tag == StageObjectList.TargetObject)
         {
@@ -29,7 +29,8 @@ public abstract class BulletBase : MonoBehaviour {
         {
         if (collision.gameObject.tag == StageObjectList.NormalObject)
         {
-            Destroy(this.gameObject, destroy_interval_time_);
+            Destroy(this.gameObject);
+            //Destroy(this.gameObject, destroy_interval_time_);
         }
         if (collision.gameObject.tag == StageObjectList.TargetObject)
         {
