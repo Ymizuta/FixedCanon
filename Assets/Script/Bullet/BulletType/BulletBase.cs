@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class BulletBase : MonoBehaviour {
     protected float damage_;
     protected float shoot_power_ = 1000.0f;
+    protected float destroy_interval_time_ = 2.0f;
     //public System.Action OnBulletDie;
 
     public void Init()
@@ -16,13 +17,26 @@ public abstract class BulletBase : MonoBehaviour {
     {
         if (other.tag == StageObjectList.NormalObject)
         {
-            Destroy(this.gameObject);
+            Destroy(this.gameObject,destroy_interval_time_);
         }
         if (other.tag == StageObjectList.TargetObject)
         {
             Destroy(this.gameObject);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+        {
+        if (collision.gameObject.tag == StageObjectList.NormalObject)
+        {
+            Destroy(this.gameObject, destroy_interval_time_);
+        }
+        if (collision.gameObject.tag == StageObjectList.TargetObject)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
 
     //private void OnDestroy()
     //{
