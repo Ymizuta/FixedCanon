@@ -12,6 +12,11 @@ public class BulletParams : MonoBehaviour {
     private int default_bullet_index_ = 0;              //初期のインデックス
     private readonly string BULLET_PATH = "Bullet/";    //Resourcesフォルダ以下のパス
 
+    public void AddBullet(int bullet_index)
+    {
+        { number_of_bullet_[bullet_index] += 3; }
+    }
+
     //装備中の砲弾の弾数を減少
     public void ReduceBullet()
     {

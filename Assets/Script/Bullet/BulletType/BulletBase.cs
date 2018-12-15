@@ -13,26 +13,32 @@ public abstract class BulletBase : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == StageObjectList.NormalObject)
-        {
-            Destroy(this.gameObject);
-        }
-        if (other.tag == StageObjectList.TargetObject)
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == StageObjectList.NormalObject)
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //    if (other.tag == StageObjectList.TargetObject)
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
-        {
+    {
         if (collision.gameObject.tag == StageObjectList.NormalObject)
         {
             Destroy(this.gameObject);
             //Destroy(this.gameObject, destroy_interval_time_);
         }
+        else
         if (collision.gameObject.tag == StageObjectList.TargetObject)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        if (collision.gameObject.tag == StageObjectList.RecoveryObject)
         {
             Destroy(this.gameObject);
         }

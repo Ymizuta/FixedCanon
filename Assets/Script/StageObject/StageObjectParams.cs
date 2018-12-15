@@ -12,6 +12,7 @@ public class StageObjectParams : MonoBehaviour {
     private List<BulletRecoveryObject> recovery_object_list_;
     public System.Action OnAllTargetDie = null;             //ターゲット全滅時にコールバック
     public System.Action OnNotAllTargetDie = null;          //ターゲット全滅していないときにコールバック
+    public System.Action OnRecovery = null;
 
     public void Init(GameObject stage_object_clone)
     {
@@ -131,11 +132,11 @@ public class StageObjectParams : MonoBehaviour {
     private void InitRecoveryObj()
     {
         recovery_object_list_ = new List<BulletRecoveryObject>();
-        //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
+        //ステージオブジェクトの子オブジェクトの中からリカバリーオブジェクトのみ取得
         foreach (Transform child in stage_object_clone_.transform)
         {
             if (child.tag == "Untagged") { Debug.LogWarning("タグのないオブジェクトが存在します：" + child); }
-            //TargetObjectのタグが付いているものだけ取得
+            //対象タグが付いているものだけ取得
             if (child.tag == StageObjectList.RecoveryObject)
             {
                 BulletRecoveryObject recovery_obj_compenent = child.GetComponent<BulletRecoveryObject>();
@@ -143,7 +144,7 @@ public class StageObjectParams : MonoBehaviour {
                 recovery_object_list_.Add(recovery_obj_compenent);
             }
         }
-        //ターゲットオブジェクトにコールバック関数を登録
+        //対象オブジェクトにコールバック関数を登録
         for (int i = 0; i < recovery_object_list_.Count; i++)
         {
             recovery_object_list_[i].OnHitRecoveryObject += OnHitRecoveryObjCallBack;
@@ -186,7 +187,12 @@ public class StageObjectParams : MonoBehaviour {
 
     private void OnHitRecoveryObjCallBack()
     {
-        Debug.Log("リカバリーオブジェクトにヒット");
+        //Debug.Log("リカバリーオブジェクトにヒット");
+        if (OnRecovery != null)
+        {
+            //砲弾リカバリー処理のコールバック
+            OnRecovery();
+        }
     }
 
 }

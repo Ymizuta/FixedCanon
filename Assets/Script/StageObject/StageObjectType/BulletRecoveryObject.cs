@@ -22,6 +22,6 @@ public class BulletRecoveryObject : StageObject {
         {
             OnHitRecoveryObject();
         }
-        return;
+        Destroy(this.gameObject);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -34,6 +35,8 @@ public class StageMainState : StateBase
         //コールバック登録
         ((StageScene)scene_).StageObjectManager.Params.OnAllTargetDie = OnAllTargetDieCallBack;
         ((StageScene)scene_).StageObjectManager.Params.OnNotAllTargetDie = OnNotAllTargetDieCallBack;
+        ((StageScene)scene_).StageObjectManager.Params.OnRecovery = OnRecoveryCallBack;
+
 
         //要修正
         GlobalCoroutine.Go(Move());
@@ -171,6 +174,13 @@ public class StageMainState : StateBase
         else
             Debug.Log("続行ッ");
             return;
+    }
+
+    private void OnRecoveryCallBack()
+    {
+        ((StageScene)scene_).BulletManager.Params.AddBullet(0);
+        //弾数カウント（UIへの反映）
+        UpdateNumberOfBulletsUi();
     }
 
     private void OnMainStateFinish()
