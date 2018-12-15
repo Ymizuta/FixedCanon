@@ -6,4 +6,5 @@ public class StageObjectList : MonoBehaviour {
 
     public static readonly string NormalObject = "NormalObject";
     public static readonly string TargetObject = "TargetObject";
+    public static readonly string RecoveryObject = "RecoveryObject";
 }

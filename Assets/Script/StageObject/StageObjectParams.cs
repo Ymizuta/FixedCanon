@@ -8,7 +8,8 @@ public class StageObjectParams : MonoBehaviour {
     [SerializeField] GameObject stage_object_ = null;       //
     private GameObject stage_object_clone_ = null;          //
     private List<TargetObject> target_object_list_;         //
-    private List<NormalObject> normal_object_list;          //
+    private List<NormalObject> normal_object_list_;          //
+    private List<BulletRecoveryObject> recovery_object_list_;
     public System.Action OnAllTargetDie = null;             //ターゲット全滅時にコールバック
     public System.Action OnNotAllTargetDie = null;          //ターゲット全滅していないときにコールバック
 
@@ -18,6 +19,7 @@ public class StageObjectParams : MonoBehaviour {
         stage_object_clone_ = stage_object_clone;
         InitTargetObj();
         InitNormalObj();
+        InitRecoveryObj();
     }
 
     public GameObject StageObjClone
@@ -60,7 +62,15 @@ public class StageObjectParams : MonoBehaviour {
     {
         set
         {
-            normal_object_list = value;
+            normal_object_list_ = value;
+        }
+    }
+
+    public List<BulletRecoveryObject> RecoveryObjectList
+    {
+        set
+        {
+            recovery_object_list_ = value;
         }
     }
 
@@ -89,7 +99,7 @@ public class StageObjectParams : MonoBehaviour {
 
     private void InitNormalObj()
     {
-        normal_object_list = new List<NormalObject>();
+        normal_object_list_ = new List<NormalObject>();
         //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
         foreach (Transform child in stage_object_clone_.transform)
         {
@@ -100,21 +110,43 @@ public class StageObjectParams : MonoBehaviour {
             {
                 normal_obj_component = child.GetComponent<NormalObject>();
                 if (normal_obj_component == null) { Debug.LogWarning("コンポーネントがアタッチされていません：" + child); }
-                normal_object_list.Add(normal_obj_component);
+                normal_object_list_.Add(normal_obj_component);
                 //孫オブジェクトを取得
                 foreach(Transform obj in child)
                 {
                     if (obj.tag == "Untagged") { Debug.LogWarning("タグのないオブジェクトが存在します：" + child); }
                     normal_obj_component = obj.GetComponent<NormalObject>();
                     if (normal_obj_component == null) { Debug.LogWarning("コンポーネントがアタッチされていません：" + obj); }
-                    normal_object_list.Add(normal_obj_component);
+                    normal_object_list_.Add(normal_obj_component);
                 }
             }
         }
         //ノーマルオブジェクトにコールバック関数を登録
-        for (int i = 0; i < normal_object_list.Count; i++)
+        for (int i = 0; i < normal_object_list_.Count; i++)
         {
-            normal_object_list[i].OnHitNormalObject += OnHitoNormalObjCallBack;
+            normal_object_list_[i].OnHitNormalObject += OnHitoNormalObjCallBack;
+        }
+    }
+
+    private void InitRecoveryObj()
+    {
+        recovery_object_list_ = new List<BulletRecoveryObject>();
+        //ステージオブジェクトの子オブジェクトの中からターゲットオブジェクトのみ取得
+        foreach (Transform child in stage_object_clone_.transform)
+        {
+            if (child.tag == "Untagged") { Debug.LogWarning("タグのないオブジェクトが存在します：" + child); }
+            //TargetObjectのタグが付いているものだけ取得
+            if (child.tag == StageObjectList.RecoveryObject)
+            {
+                BulletRecoveryObject recovery_obj_compenent = child.GetComponent<BulletRecoveryObject>();
+                if (recovery_obj_compenent == null) { Debug.LogWarning("コンポーネントがアタッチされてません：" + child); }
+                recovery_object_list_.Add(recovery_obj_compenent);
+            }
+        }
+        //ターゲットオブジェクトにコールバック関数を登録
+        for (int i = 0; i < recovery_object_list_.Count; i++)
+        {
+            recovery_object_list_[i].OnHitRecoveryObject += OnHitRecoveryObjCallBack;
         }
     }
 
@@ -151,4 +183,10 @@ public class StageObjectParams : MonoBehaviour {
             OnNotAllTargetDie();
         }
     }
+
+    private void OnHitRecoveryObjCallBack()
+    {
+        Debug.Log("リカバリーオブジェクトにヒット");
+    }
+
 }
