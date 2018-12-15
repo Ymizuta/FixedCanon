@@ -12,7 +12,7 @@ public class StageObjectParams : MonoBehaviour {
     private List<BulletRecoveryObject> recovery_object_list_;
     public System.Action OnAllTargetDie = null;             //ターゲット全滅時にコールバック
     public System.Action OnNotAllTargetDie = null;          //ターゲット全滅していないときにコールバック
-    public System.Action OnRecovery = null;
+    public System.Action<int> OnRecovery = null;
 
     public void Init(GameObject stage_object_clone)
     {
@@ -185,13 +185,13 @@ public class StageObjectParams : MonoBehaviour {
         }
     }
 
-    private void OnHitRecoveryObjCallBack()
+    private void OnHitRecoveryObjCallBack(int recovery_number)
     {
         //Debug.Log("リカバリーオブジェクトにヒット");
         if (OnRecovery != null)
         {
             //砲弾リカバリー処理のコールバック
-            OnRecovery();
+            OnRecovery(recovery_number);
         }
     }
 

@@ -176,9 +176,9 @@ public class StageMainState : StateBase
             return;
     }
 
-    private void OnRecoveryCallBack()
+    private void OnRecoveryCallBack(int recovery_number)
     {
-        ((StageScene)scene_).BulletManager.Params.AddBullet(0);
+        ((StageScene)scene_).BulletManager.Params.AddBullet(0,recovery_number);
         //弾数カウント（UIへの反映）
         UpdateNumberOfBulletsUi();
     }

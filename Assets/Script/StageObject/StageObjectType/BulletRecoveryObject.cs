@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BulletRecoveryObject : StageObject {
 
-    public System.Action OnHitRecoveryObject;
+    [SerializeField] int recovery_number_of_bullet = 3;
+    public System.Action<int> OnHitRecoveryObject;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -12,16 +13,19 @@ public class BulletRecoveryObject : StageObject {
         {
             GameObject collider_object = collision.gameObject;
             BulletBase bullet_class = collider_object.GetComponent<BulletBase>();
-            HitReaction(bullet_class.Damage);
+            HitReaction(recovery_number_of_bullet);
         }
     }
 
-    protected override void HitReaction(float damage)
+    private void HitReaction(int recovery_number)
     {
         if (OnHitRecoveryObject != null)
         {
-            OnHitRecoveryObject();
+            OnHitRecoveryObject(recovery_number);
         }
         Destroy(this.gameObject);
     }
+
+    protected override void HitReaction(float damage_){}
+
 }
