@@ -9,7 +9,7 @@ public class User : MonoBehaviour {
 	// Update is called once per frame
 	void Start () {
         //試験用：リリース時に削除すること
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         //最初のシーン生成をキックする
         SceneManager.getInstance().NextScene(SceneList.TitleScene, null);
         Destroy(this);

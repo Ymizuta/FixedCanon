@@ -25,6 +25,10 @@ public class StageFinishState : StateBase {
         }
         else
         Debug.LogError("フラグが登録されていません。");
+
+        //フラグのリセット
+        ((StageScene)scene_).IsGameClear = false;
+        ((StageScene)scene_).IsGameOver = false;
     }
 
     /**
