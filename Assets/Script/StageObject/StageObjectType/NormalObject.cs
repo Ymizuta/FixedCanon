@@ -20,7 +20,7 @@ public class NormalObject : StageObject {
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            GameObject collider_object = collision.gameObject.gameObject;
+            GameObject collider_object = collision.gameObject;
             BulletBase bullet_class = collider_object.GetComponent<BulletBase>();
             HitReaction(bullet_class.Damage);
         }

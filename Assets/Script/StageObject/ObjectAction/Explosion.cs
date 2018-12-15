@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour {
 
-    private float serch_radius_ = 10.0f;
-    private float explosion_force_ = 1000.0f;
-    private float explosion_radius_ = 10.0f;
-    private float up_wards_modifire = 5f;
+    [SerializeField]private float explosion_force_ = 1000.0f;
+    [SerializeField]private float explosion_radius_ = 10.0f;
+    [SerializeField]private float up_wards_modifire = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,7 +19,7 @@ public class Explosion : MonoBehaviour {
     public void ExplodeObject()
     {
         {
-            Collider[] cols = Physics.OverlapSphere(this.gameObject.transform.position, serch_radius_);
+            Collider[] cols = Physics.OverlapSphere(this.gameObject.transform.position, explosion_radius_);
             foreach (Collider target in cols)
             {
                 if (target.GetComponent<Rigidbody>() != null)
