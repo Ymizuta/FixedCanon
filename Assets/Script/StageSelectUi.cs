@@ -182,8 +182,7 @@ public class StageSelectUi : MonoBehaviour {
         }
         else if (stage_id_ == default_stage_id_)
         {
-            //後ほど修正
-            stage_id_ = 5;
+            stage_id_ = saved_stage_id_;
             select_button_text_.text = SelectButtonStr + stage_id_.ToString("00");
             return;
         }
