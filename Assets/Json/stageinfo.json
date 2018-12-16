@@ -27,6 +27,18 @@
 		{"stage_id_":7,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],
 		 "number_of_bullets_":[4,4]
+		 },
+		 {"stage_id_":8,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
+		 },
+		 {"stage_id_":9,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
+		 },
+		 {"stage_id_":10,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
 		 }
 	]
 }
