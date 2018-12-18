@@ -52,14 +52,14 @@ public class StageMainState : StateBase
         {
             yield return null;
 
-            /*
-             *@ brief   GameObjectがnullの場合にオブジェクトを取得する処理 
-             *@ detail  ステージ/ステート切り替え時に初期化したGameObjectがnullになるバグを防止
-             */
-            if (((StageScene)scene_).Player.CanonMove.CanonBase == null)
-            { ((StageScene)scene_).Player.CanonMove.CanonBase = GameObject.Find("CanonBase");}
-            if (((StageScene)scene_).Player.CanonMove.BarrelBase == null)
-            { ((StageScene)scene_).Player.CanonMove.BarrelBase = GameObject.Find("BarrelBase");}
+            ///*
+            // *@ brief   GameObjectがnullの場合にオブジェクトを取得する処理 
+            // *@ detail  ステージ/ステート切り替え時に初期化したGameObjectがnullになるバグを防止
+            // */
+            //if (((StageScene)scene_).Player.CanonMove.CanonBase == null)
+            //{ ((StageScene)scene_).Player.CanonMove.CanonBase = GameObject.Find("CanonBase"); }
+            //if (((StageScene)scene_).Player.CanonMove.BarrelBase == null)
+            //{ ((StageScene)scene_).Player.CanonMove.BarrelBase = GameObject.Find("BarrelBase"); }
 
             //砲台・砲身の角度調整
             TouchInfo info = UserOperation.GetTouch();
@@ -110,8 +110,8 @@ public class StageMainState : StateBase
     //砲弾発射（発射ボタンから呼び出し）
     private void Shoot()
     {
-        //ゲームオブジェクトの有無をチェック
-        if (((StageScene)scene_).Player.Shooter.Muzzle == null) { ((StageScene)scene_).Player.Shooter.Muzzle = GameObject.Find("Muzzle"); }
+        ////ゲームオブジェクトの有無をチェック
+        //if (((StageScene)scene_).Player.Shooter.Muzzle == null) { ((StageScene)scene_).Player.Shooter.Muzzle = GameObject.Find("Muzzle"); }
         if (IsRestOfBullets())
         {
             bullet_clone_ = ((StageScene)scene_).BulletManager.BulletClonMaker.BulletCloneMake(((StageScene)scene_).BulletManager.Params.LoadedBullet);

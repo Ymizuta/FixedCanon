@@ -123,8 +123,8 @@ public class StageFinishState : StateBase {
     private void ResetStageScene()
     {
         Destroy(((StageScene)scene_).PlyerClone.gameObject);
-        //Destroyメソッドの実行を待つため一瞬待機
-        Invoke("DelayMethod", 0.1f);
+        ////Destroyメソッドの実行を待つため一瞬待機
+        //Invoke("DelayMethod", 0.1f);
         ((StageScene)scene_).PlyerClone = null;
         ((StageScene)scene_).Player = null;
 
@@ -158,9 +158,9 @@ public class StageFinishState : StateBase {
         }
     }
 
-    //Invokeによる処理待ち待機用
-    private void DelayMethod()
-    {
-        return;
-    }
+    ////Invokeによる処理待ち待機用
+    //private void DelayMethod()
+    //{
+    //    return;
+    //}
 }

@@ -10,6 +10,14 @@ public class SceneManager{
     private SceneBase current_scene_;                       //現在のシーン（シーン移行時に利用）
     private static SceneManager instance_;                  //Singleton用のインスタンス
 
+    public SceneBase CurrentScene
+    {
+        get
+        {
+            return current_scene_;
+        }
+    }
+
     //Singleton
     public static SceneManager getInstance()
     {
