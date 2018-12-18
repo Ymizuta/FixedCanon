@@ -8,5 +8,4 @@ public class SpecialBullet : BulletBase {
     {
         damage_ = 3;
     }
-
 }

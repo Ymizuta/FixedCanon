@@ -12,7 +12,7 @@ public class BulletRecoveryObject : StageObject {
         if (collision.gameObject.tag == "Bullet")
         {
             GameObject collider_object = collision.gameObject;
-            BulletBase bullet_class = collider_object.GetComponent<BulletBase>();
+            //BulletBase bullet_class = collider_object.GetComponent<BulletBase>();
             HitReaction(recovery_number_of_bullet);
         }
     }
