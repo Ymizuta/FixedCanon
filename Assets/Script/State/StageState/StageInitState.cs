@@ -35,9 +35,20 @@ public class StageInitState : StateBase {
         GameObject stage_name_ui = GameObject.Find(UiList.StageName).gameObject;
         stage_name_ui.GetComponent<Text>().text = "STAGE:" + stage_scene.StageId.ToString("00");
 
+        //弾数表示UIの初期化
+        string bullet_name = null;
+        if (((StageScene)scene_).BulletManager.Params.LoadedBullet.name == "NormalBullet")
+        {
+            bullet_name = "Normal";
+        }
+        else
+        if (((StageScene)scene_).BulletManager.Params.LoadedBullet.name == "SpecialBullet")
+        {
+            bullet_name = "Bomb";
+        }
         stage_scene.NumberOfBulletsText = GameObject.Find(UiList.NumberOfBulletsText).gameObject.GetComponent<Text>();
         stage_scene.NumberOfBulletsText.text
-            = "BULLETS:" + stage_scene.BulletManager.Params.NumberOfBullets[stage_scene.BulletManager.Params.BulletIndex].ToString("00");
+            = bullet_name + " X " + stage_scene.BulletManager.Params.NumberOfBullets[stage_scene.BulletManager.Params.BulletIndex].ToString("00");
 
         //ステート移行
         scene_.ChangeState(StateList.StageMainState,null);
@@ -72,11 +83,6 @@ public class StageInitState : StateBase {
         }
         stage_scene.Player = stage_scene.GetComponent<Player>();
         stage_scene.Player.SetUp();
-
-        ////後で削除
-        //stage_scene.Player.id = stage_scene.StageId;
-        //Debug.Log("IDは" + stage_scene.Player.id);
-        //Debug.Log(stage_scene.Player.CanonMove.CanonBase);
     }
 
     //Bulletマネージャー初期化

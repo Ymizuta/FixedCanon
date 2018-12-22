@@ -133,8 +133,17 @@ public class StageMainState : StateBase
 
     private void UpdateNumberOfBulletsUi()
     {
+        string bullet_name = null;
+        if (((StageScene)scene_).BulletManager.Params.LoadedBullet.name == "NormalBullet")
+        {
+            bullet_name = "Normal";
+        }else
+        if (((StageScene)scene_).BulletManager.Params.LoadedBullet.name == "SpecialBullet")
+        {
+            bullet_name = "Bomb";
+        }
         ((StageScene)scene_).NumberOfBulletsText.text
-            = "BULLETS:" + ((StageScene)scene_).BulletManager.Params.NumberOfBullets[((StageScene)scene_).BulletManager.Params.BulletIndex].ToString("00");
+            = bullet_name + " X " + ((StageScene)scene_).BulletManager.Params.NumberOfBullets[((StageScene)scene_).BulletManager.Params.BulletIndex].ToString("00");
     }
 
     //残りの砲弾の有無を判定(発射できるかできないかの判定)
