@@ -31,11 +31,13 @@ public abstract class BulletBase : MonoBehaviour {
         {
             Destroy(this.gameObject);
             //Destroy(this.gameObject, destroy_interval_time_);
+            InstantiateEffect();
         }
         else
         if (collision.gameObject.tag == StageObjectList.TargetObject)
         {
             Destroy(this.gameObject);
+            InstantiateEffect();
         }
         else
         if (collision.gameObject.tag == StageObjectList.RecoveryObject)
@@ -44,7 +46,6 @@ public abstract class BulletBase : MonoBehaviour {
         }
     }
 
-
     //private void OnDestroy()
     //{
     //    if (OnBulletDie != null)
@@ -52,6 +53,8 @@ public abstract class BulletBase : MonoBehaviour {
     //        OnBulletDie();
     //    }
     //}
+
+    protected abstract void InstantiateEffect();
 
     public float Damage
     {
