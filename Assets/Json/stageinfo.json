@@ -1,8 +1,8 @@
 {
 "stage_info_list_":[
 		{"stage_id_":1,
-		 "usable_bullets_":["NormalBullet"],
-		 "number_of_bullets_":[20]
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[20,5]
 		 },
 		{"stage_id_":2,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],

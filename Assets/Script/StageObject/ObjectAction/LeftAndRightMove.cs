@@ -25,7 +25,7 @@ public class LeftAndRightMove : MonoBehaviour {
             obj_position_x += move_speed_ * Time.deltaTime;
             obj_position.x = obj_position_x;
             this.gameObject.transform.position = obj_position;
-            if( this.gameObject.transform.position.x > first_position_x + MAX_DISTANCE)
+            if((IsOverMaxDistance()))
             {
                 obj_position = this.gameObject.transform.position;
                 obj_position.x = first_position_x + MAX_DISTANCE;
@@ -40,7 +40,7 @@ public class LeftAndRightMove : MonoBehaviour {
             obj_position_x -= move_speed_ * Time.deltaTime;
             obj_position.x = obj_position_x;
             this.gameObject.transform.position = obj_position;
-            if (this.gameObject.transform.position.x < first_position_x + MIN_DISTANCE)
+            if ((IsUnderMinDistance()))
             {
                 obj_position = this.gameObject.transform.position;
                 obj_position.x = first_position_x + MIN_DISTANCE;
@@ -49,4 +49,15 @@ public class LeftAndRightMove : MonoBehaviour {
             }
         }
     }
+
+    private bool IsOverMaxDistance()
+    {
+        return (this.gameObject.transform.position.x > first_position_x + MAX_DISTANCE);
+    }
+
+    private bool IsUnderMinDistance()
+    {
+        return (this.gameObject.transform.position.x < first_position_x + MIN_DISTANCE);
+    }
+
 }
