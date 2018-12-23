@@ -12,6 +12,7 @@ public class StageSelectInitState : StateBase {
         StageSelectUi stage_select_ui = stage_select_scene.StageSelectUi;
         GameObject ui_prefab = Resources.Load("UI\\StageSelectUI") as GameObject;
 
+        SaveDataInit();
         GetSaveData();
 
         //UIのプレハブ生成/各種ボタンオブジェクト取得/パラメータ初期化
@@ -54,4 +55,17 @@ public class StageSelectInitState : StateBase {
     {
          ((StageSelectScene)scene_).StageSelectUi.SavedStageId = PlayerPrefs.GetInt(GameConfig.SAVE_DATA);
     }
+
+    /*
+     * @ brief  初回プレイの場合セーブデータ作成する（セーブデータのステージIDに01を登録）
+     * @ detail 初回プレイ時はセーブデータが存在しないため初期化しないとステージ00が選択できてしまうバグが生じるため
+     */
+    private void SaveDataInit()
+    {
+        if (PlayerPrefs.GetInt(GameConfig.SAVE_DATA) == 0)
+        {
+            PlayerPrefs.SetInt(GameConfig.SAVE_DATA, 01);
+        }
+    }
+
 }

@@ -90,7 +90,7 @@ public class StageInitState : StateBase {
     {
         if (stage_scene.BulletManager == null)
         {
-        stage_scene.BulletManager = stage_scene.GetComponent<BulletManager>();
+           stage_scene.BulletManager = stage_scene.GetComponent<BulletManager>();
         }
         //要修正
         stage_scene.BulletManager.SetUp();
