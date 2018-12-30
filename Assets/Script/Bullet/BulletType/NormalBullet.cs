@@ -12,7 +12,7 @@ public class NormalBullet : BulletBase {
     protected override void InstantiateEffect()
     {
         Transform instantiate_transform = this.gameObject.transform;
-        GameObject effect = Instantiate(Resources.Load("Effect\\InpactEffect"), instantiate_transform.position, instantiate_transform.rotation) as GameObject;
+        GameObject effect = Instantiate(Resources.Load("Effect/InpactEffect"), instantiate_transform.position, instantiate_transform.rotation) as GameObject;
         Destroy(effect, 2.0f);
     }
 }

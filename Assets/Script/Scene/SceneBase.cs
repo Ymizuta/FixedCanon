@@ -45,7 +45,7 @@ public abstract class SceneBase : MonoBehaviour {
 
     private void AddState()
     {
-        GameObject current_state_obj = Resources.Load("State\\" + state_name_) as GameObject;
+        GameObject current_state_obj = Resources.Load("State/" + state_name_) as GameObject;
         current_state_ = (StateBase)current_state_obj.GetComponent(System.Type.GetType(state_name_));
         //current_state_ = Instantiate(state_dictionary_[state_name]);
         //current_state_.scene_ = this;
