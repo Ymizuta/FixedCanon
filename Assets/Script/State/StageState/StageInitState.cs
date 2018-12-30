@@ -16,7 +16,15 @@ public class StageInitState : StateBase {
         StageScene stage_scene = ((StageScene)scene_);
 
         //ステージ情報取得
-        string json = File.ReadAllText("Assets\\Json\\stageinfo.json");
+        //StreamReader sr = new StreamReader("C:/workspace/FixedCanon/Assets/Json/stageinfo.json");
+        //string json = sr.ReadToEnd();
+        //string json = File.ReadAllText("Assets/Json/stageinfo.json");
+
+        //string file_path = System.IO.Path.Combine(Application.streamingAssetsPath,"Json/stageinfo.json");
+        //string json = File.ReadAllText(file_path);
+
+        string json = Resources.Load<TextAsset>("Json/stageinfo").ToString();
+
         StageInfoTable stage_info_table = new StageInfoTable();
         stage_info_table.stage_info_list_ = new List<StageInfo>();
         stage_info_table = JsonUtility.FromJson<StageInfoTable>(json);
