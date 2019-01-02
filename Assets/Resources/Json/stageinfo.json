@@ -39,6 +39,26 @@
 		 {"stage_id_":10,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],
 		 "number_of_bullets_":[4,4]
-		 }
-	]
+		 },
+		 {"stage_id_":11,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
+		 },
+		 {"stage_id_":12,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
+		 },
+		 {"stage_id_":13,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
+		 },
+		 {"stage_id_":14,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
+		 },
+		 {"stage_id_":15,
+		 "usable_bullets_":["NormalBullet","SpecialBullet"],
+		 "number_of_bullets_":[4,4]
+		 }	
+		 ]
 }
