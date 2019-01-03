@@ -54,7 +54,7 @@
 		 },
 		 {"stage_id_":14,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "number_of_bullets_":[15,4]
 		 },
 		 {"stage_id_":15,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],
