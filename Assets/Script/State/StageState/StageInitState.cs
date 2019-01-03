@@ -71,7 +71,7 @@ public class StageInitState : StateBase {
         stage_scene.StageObjectManager.Setup();
 
         //初期化処理：要修正
-        string STAGE_OBJ_STR = "StageObject";
+        string STAGE_OBJ_STR = "Stage/StageObject";
         stage_scene.StageObjectManager.Params.StageObject
             = Resources.Load(STAGE_OBJ_STR + stage_scene.StageInfo.StageID.ToString("00")) as GameObject;
  
