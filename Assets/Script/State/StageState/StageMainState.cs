@@ -120,6 +120,7 @@ public class StageMainState : StateBase
             ((StageScene)scene_).BulletManager.Params.ReduceBullet();
             //弾数カウント（UIへの反映）
             UpdateNumberOfBulletsUi();
+            PlaySound("ShootSound");
         }
     }
 
@@ -158,6 +159,8 @@ public class StageMainState : StateBase
     
     private void OnAllTargetDieCallBack()
     {
+        PlaySound("ExplosionSound");
+
         Debug.Log("敵全滅しています！");
         //scene_以外のメンバ変数のメモリ解放
         OnMainStateFinish();
@@ -169,6 +172,8 @@ public class StageMainState : StateBase
 
     private void OnNotAllTargetDieCallBack()
     {
+        PlaySound("ExplosionSound");
+
         //sceneがnullなら処理を中断
         if (!(ExistScene())) return;
 
@@ -187,6 +192,8 @@ public class StageMainState : StateBase
 
     private void OnRecoveryCallBack(int recovery_number)
     {
+        PlaySound("ExplosionSound");
+
         ((StageScene)scene_).BulletManager.Params.AddBullet(0,recovery_number);
         //弾数カウント（UIへの反映）
         UpdateNumberOfBulletsUi();
@@ -214,6 +221,12 @@ public class StageMainState : StateBase
     private bool ExistScene()
     {
         return scene_ != null;
+    }
+
+    private void PlaySound(string audio_clip_name)
+    {
+        AudioClip audio_clip = (AudioClip)Resources.Load("Sounds/"+ audio_clip_name);
+        ((StageScene)scene_).PlyerClone.GetComponent<AudioSource>().PlayOneShot(audio_clip);
     }
 
     ///**
