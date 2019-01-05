@@ -13,9 +13,16 @@ public class StageFinishState : StateBase {
 
         if (scene_.GetComponent<StageScene>().IsGameClear)
         {
+            if (IsAllStageClear())
+            {
+                Debug.Log("フィニッシュ：全ステージクリア！");
+                CreateAllClearUi();
+                return;
+            }
+            else
             Debug.Log("フィニッシュ：ゲームクリア！");
-            UpdateSaveData();
             CreateClearUi();
+            UpdateSaveData();
         }
         else
         if (scene_.GetComponent<StageScene>().IsGameOver)
@@ -47,6 +54,20 @@ public class StageFinishState : StateBase {
         ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
         //コールバック関数を登録
         ((StageScene)scene_).StageResultUi.OnpushNextStageButton = OnPushNextStageButtonCallBack;
+        ((StageScene)scene_).StageResultUi.OnPushStageSelectButton = OnPushStageSelectButtonCallBack;
+        ((StageScene)scene_).StageResultUi.OnpushRetryButton = OnPushRetryButtonCallBack;
+    }
+
+    private void CreateAllClearUi()
+    {
+        //ステージUIのゲームオブジェクトを取得
+        ((StageScene)scene_).StageResultUi.ClearUiObj = GetResouceInstance("UI/AllClearUi");
+        ((StageScene)scene_).StageResultUi.ToStageSelectButton = GameObject.Find("ToStageSelectButton");
+        ((StageScene)scene_).StageResultUi.RetryButton = GameObject.Find("RetryButton");
+        //UIボタンに関数を登録
+        ((StageScene)scene_).StageResultUi.ToStageSelectButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushToStageSelectButton);
+        ((StageScene)scene_).StageResultUi.RetryButton.GetComponent<Button>().onClick.AddListener(((StageScene)scene_).StageResultUi.PushRetryButton);
+        //コールバック関数を登録
         ((StageScene)scene_).StageResultUi.OnPushStageSelectButton = OnPushStageSelectButtonCallBack;
         ((StageScene)scene_).StageResultUi.OnpushRetryButton = OnPushRetryButtonCallBack;
     }
@@ -156,6 +177,11 @@ public class StageFinishState : StateBase {
         {
             PlayerPrefs.SetInt(GameConfig.SAVE_DATA,next_stage_id);
         }
+    }
+
+    private bool IsAllStageClear()
+    {
+        return (((StageScene)scene_).StageId == ((StageScene)scene_).StageInfoTable.stage_info_list_.Count);
     }
 
     ////Invokeによる処理待ち待機用
