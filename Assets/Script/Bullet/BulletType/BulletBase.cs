@@ -79,4 +79,5 @@ public abstract class BulletBase : MonoBehaviour {
             shoot_power_ = value;
         }
     }
+
 }
