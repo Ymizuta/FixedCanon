@@ -16,6 +16,7 @@ public class Shooter : MonoBehaviour {
         //BulletBase bullet_clone = Instantiate(bullet, muzzle_.transform.position, muzzle_.transform.rotation);
         bullet_clone.GetComponent<Rigidbody>().AddForce(muzzle_.transform.forward * bullet_clone.ShootPower);
         //Object.Destroy(bullet_clone.gameObject, 2.0f);
+        InstantiateEffect();
     }
 
     //メインステート初期化時に取得
@@ -29,6 +30,12 @@ public class Shooter : MonoBehaviour {
         {
             muzzle_ = value;
         }
+    }
+
+    private void InstantiateEffect()
+    {
+        GameObject effect = Instantiate(Resources.Load("Effect/ShootEffect"),muzzle_.transform.position,muzzle_.transform.rotation) as GameObject;
+        Destroy(effect, 2.0f);
     }
 
     private void OnDestroy()
