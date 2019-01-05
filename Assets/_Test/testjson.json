@@ -1,7 +1,0 @@
-{
-	"enemy_":[
-		{"name_":"","hp_":0,"skills":[""]},
-		{"name_":"Rat","hp_":10,"skills_":["scratch"]},
-		{"name_":"Wolf","hp_":100,"skills_":["howling","biting"]}
-	]
-}

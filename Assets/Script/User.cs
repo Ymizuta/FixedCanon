@@ -10,6 +10,7 @@ public class User : MonoBehaviour {
 	void Start () {
         //試験用：リリース時に削除すること
         //PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt(GameConfig.SAVE_DATA, 15);
         //最初のシーン生成をキックする
         SceneManager.getInstance().NextScene(SceneList.TitleScene, null);
         Destroy(this);

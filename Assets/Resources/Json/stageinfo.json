@@ -1,64 +1,64 @@
 {
 "stage_info_list_":[
 		{"stage_id_":1,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[20,5]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[10]
 		 },
 		{"stage_id_":2,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[5,2]
+		 "number_of_bullets_":[5,3]
 		 },
 		{"stage_id_":3,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[3,1]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[5]
 		 },
 		{"stage_id_":4,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,2]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[4]
 		 },
 		{"stage_id_":5,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[5,2]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[10]
 		 },
 		{"stage_id_":6,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[6,3]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[15]
 		 },
 		{"stage_id_":7,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[15]
 		 },
 		 {"stage_id_":8,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[15]
 		 },
 		 {"stage_id_":9,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "number_of_bullets_":[10,5]
 		 },
 		 {"stage_id_":10,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[15]
 		 },
 		 {"stage_id_":11,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[10]
 		 },
 		 {"stage_id_":12,
 		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "number_of_bullets_":[15,5]
 		 },
 		 {"stage_id_":13,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[5]
 		 },
 		 {"stage_id_":14,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[15,4]
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[10]
 		 },
 		 {"stage_id_":15,
-		 "usable_bullets_":["NormalBullet","SpecialBullet"],
-		 "number_of_bullets_":[4,4]
-		 }	
+		 "usable_bullets_":["NormalBullet"],
+		 "number_of_bullets_":[15]
+		 }
 		 ]
 }

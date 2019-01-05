@@ -24,11 +24,10 @@ public class StageInitState : StateBase {
         //string json = File.ReadAllText(file_path);
 
         string json = Resources.Load<TextAsset>("Json/stageinfo").ToString();
-
-        StageInfoTable stage_info_table = new StageInfoTable();
-        stage_info_table.stage_info_list_ = new List<StageInfo>();
-        stage_info_table = JsonUtility.FromJson<StageInfoTable>(json);
-        ((StageScene)scene_).StageInfo = stage_info_table.stage_info_list_[((StageScene)scene_).StageId - 1];     //後ほど処理を見直し
+        ((StageScene)scene_).StageInfoTable = new StageInfoTable();
+        ((StageScene)scene_).StageInfoTable.stage_info_list_ = new List<StageInfo>();
+        ((StageScene)scene_).StageInfoTable = JsonUtility.FromJson<StageInfoTable>(json);
+        ((StageScene)scene_).StageInfo = ((StageScene)scene_).StageInfoTable.stage_info_list_[((StageScene)scene_).StageId - 1];     //後ほど処理を見直し
 
         //StageScene配下のクラスを初期化
         SetUpStageObjectManager(stage_scene);
