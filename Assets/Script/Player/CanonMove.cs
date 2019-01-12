@@ -21,7 +21,10 @@ public class CanonMove : MonoBehaviour {
     private readonly float MIN_ELEVATION_ANGLE = 180f;  //仰角範囲
     private readonly float MAX_ELEVATION_ANGLE = 315f;  //仰角範囲
 
-    //メインステート初期化時に取得
+    /*
+     * @ brief  プレイヤー（砲台）の水平回転パーツ
+     * @ detail StageInitStateでのPlayer初期化時に取得される
+     */
     public GameObject CanonBase
     {
         get
@@ -31,12 +34,15 @@ public class CanonMove : MonoBehaviour {
         set
         {
             canon_base_ = value;
-            //砲台の初期角度
+            //砲台の水平角度の初期化用の角度
             canon_base_angle = canon_base_.transform.rotation.eulerAngles;
         }
     }
 
-    //メインステート初期化時に取得
+    /*
+     * @ brief  プレイヤー（砲台）の砲身パーツ
+     * @ detail StageInitStateでのPlayer初期化時に取得される
+     */
     public GameObject BarrelBase
     {
         get
@@ -46,12 +52,14 @@ public class CanonMove : MonoBehaviour {
         set
         {
             barrel_base_ = value;
-            //砲身の初期仰角        
+            //砲身の仰角の初期化用の角度
             canon_angle = barrel_base_.transform.rotation.eulerAngles;
         }
     }
 
-    //砲台の左右回転
+    /*
+     * @ brief  Playerの水平回転
+     */
     public void HorizontalMove(float horizontal_direction)
     {
         horizon_angle_value = canon_base_angle.y + (add_canon_base_angle * horizontal_direction);
@@ -73,7 +81,9 @@ public class CanonMove : MonoBehaviour {
         canon_base_.transform.rotation = Quaternion.Euler(canon_base_angle);
     }
 
-    //砲身の仰角調整
+    /*
+     * @ brief  Playerの砲身の仰角調整
+     */
     public void VerticalMove(float vertical_direction)
     {
         canon_angle = barrel_base_.transform.rotation.eulerAngles;
