@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    private PlayerParams params_;
-    private CanonMove canon_move_;
-    private Shooter shooter_;
+    /// <summary>
+    /// ・StageSceneが保持する
+    /// ・プレイヤーオブジェクト（砲台）の動作に必要なParams、Shooter、CanonMoveクラスを管理するクラス
+    /// </summary>
 
-    public int id;
+    private PlayerParams params_;                           //プレイヤーパラメータを管理するクラス
+    private CanonMove canon_move_;                          //プレイヤーの砲撃以外の動作を行うクラス
+    private Shooter shooter_;                               //プレイヤーの砲撃を行うクラス
+    private readonly string muzzle_ = "Muzzle";             //砲身の発射口取得用の文字列
+    private readonly string canon_base_ = "CanonBase";      //砲台の土台取得用の文字列
+    private readonly string barrel_base_ = "BarrelBase";    //砲身の可動パーツ取得用の文字列
 
-    //プレイヤークローンのオブジェクト検索用の文字列
-    private readonly string muzzle_ = "Muzzle";
-    private readonly string canon_base_ = "CanonBase";
-    private readonly string barrel_base_ = "BarrelBase";
-
+    /*
+     * @ brief  プレイヤーのパラメータ管理用クラス
+    */
     public PlayerParams Params
     {
         get
@@ -27,6 +31,10 @@ public class Player : MonoBehaviour {
         }
     }
 
+    /*
+     * @ brief  プレイヤー（砲台）の砲撃以外の動作を行うクラス
+     * @ detail StageInitStateでの初期化時にアクセスされる
+     */
     public CanonMove CanonMove
     {
         get
@@ -39,6 +47,10 @@ public class Player : MonoBehaviour {
         }
     }
 
+    /*
+     * @ brief  プレイヤー（砲台）の砲撃の動作を行うクラス
+     * @ detail StageInitStateでの初期化時にアクセスされる
+     */
     public Shooter Shooter
     {
         get
@@ -51,14 +63,19 @@ public class Player : MonoBehaviour {
         }
     }
 
+    /*
+     * @ brief  StageInitStateから実行されるPlayer初期化処理
+     */
     public void SetUp () {
-        //初期化
+        //Playerの動作に必要な処理を行うクラスを取得する
         params_ = this.GetComponent<PlayerParams>();
         shooter_ = this.GetComponent<Shooter>();
         canon_move_ = this.GetComponent<CanonMove>();
-        //プレイヤーオブジェクトの検索・取得
+        //Shooterクラスによる砲弾発射時に砲弾を生成する起点となるオブジェクトを取得
         shooter_.Muzzle = GameObject.Find(muzzle_);
+        //CanonMoveクラスによる水平回転動作をさせるオブジェクトを取得
         canon_move_.CanonBase = GameObject.Find(canon_base_);
+        //CanonMoveクラスによる仰角調整動作をさせるオブジェクトを取得（砲身の根本の空オブジェクト）
         canon_move_.BarrelBase = GameObject.Find(barrel_base_);
     }
 }
